@@ -1,0 +1,2799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI设计风格集锦 | Design Style Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== CSS Variables ==================== */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-tertiary: #94a3b8;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==================== Reset & Base ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ==================== Header ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--bg-tertiary);
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--bg-secondary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.875rem;
+            opacity: 0.5;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* ==================== Main Layout ==================== */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        /* ==================== Sidebar ==================== */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .filter-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-group-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0.875rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .filter-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .filter-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .filter-item input {
+            display: none;
+        }
+
+        .filter-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .filter-item.active .filter-checkbox {
+            background: white;
+            border-color: white;
+        }
+
+        .filter-item.active .filter-checkbox::after {
+            content: "✓";
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .filter-count {
+            margin-left: auto;
+            font-size: 0.75rem;
+            background: var(--bg-tertiary);
+            padding: 0.125rem 0.5rem;
+            border-radius: 999px;
+            color: var(--text-tertiary);
+        }
+
+        .filter-item.active .filter-count {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            color: white;
+            margin-top: 1.5rem;
+        }
+
+        .stats-card h4 {
+            font-size: 0.875rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stats-card p {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* ==================== Content Area ==================== */
+        .content-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-info {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .results-info strong {
+            color: var(--text-primary);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-tertiary);
+        }
+
+        .view-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* ==================== Style Cards Grid ==================== */
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .style-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .style-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .style-card.hidden {
+            display: none;
+        }
+
+        .card-preview {
+            padding: 1.5rem;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.25rem 0.625rem;
+            border-radius: 999px;
+            font-size: 0.625rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tag-mainstream {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        .tag-industry {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-features {
+            margin-bottom: 1.25rem;
+        }
+
+        .card-features h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .feature-item::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background: var(--bg-tertiary);
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .copy-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+        }
+
+        .expand-btn {
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-secondary);
+        }
+
+        .expand-btn:hover {
+            background: var(--border);
+        }
+
+        /* ==================== Visual Examples ==================== */
+        /* Apple/iOS Style */
+        .preview-apple {
+            background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+        }
+
+        .apple-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            width: 100%;
+        }
+
+        .apple-nav-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .apple-nav-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .apple-nav-icon {
+            width: 28px;
+            height: 28px;
+            background: #007aff;
+            border-radius: 8px;
+        }
+
+        .apple-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            width: 85%;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .apple-card-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 0.5rem;
+        }
+
+        .apple-card-text {
+            font-size: 0.75rem;
+            color: #86868b;
+        }
+
+        .apple-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .apple-btn-primary {
+            background: #007aff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .apple-btn-secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #007aff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Material Design */
+        .preview-material {
+            background: #fafafa;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 0.75rem;
+        }
+
+        .material-app-bar {
+            background: #6200ee;
+            padding: 1rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .material-menu {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.88);
+            border-radius: 50%;
+        }
+
+        .material-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .material-cards {
+            display: flex;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .material-card {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+        }
+
+        .material-card-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #1d1d1f;
+        }
+
+        .material-card-text {
+            font-size: 0.625rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .material-fab {
+            width: 40px;
+            height: 40px;
+            background: #03dac6;
+            border-radius: 16px;
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Fluent Design */
+        .preview-fluent {
+            background: #f3f3f3;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fluent-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 85%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .fluent-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .fluent-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0078d4, #50e6ff);
+            border-radius: 8px;
+        }
+
+        .fluent-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .fluent-subtitle {
+            font-size: 0.625rem;
+            color: #666;
+        }
+
+        .fluent-text {
+            font-size: 0.75rem;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .fluent-btn {
+            margin-top: 1rem;
+            background: #0078d4;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Neumorphism */
+        .preview-neumorphism {
+            background: #e0e5ec;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .neu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .neu-card {
+            background: #e0e5ec;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            box-shadow: 8px 8px 16px #b8bec7, -8px -8px 16px #ffffff;
+        }
+
+        .neu-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .neu-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .neu-btn {
+            width: 50px;
+            height: 50px;
+            background: #e0e5ec;
+            border-radius: 50%;
+            box-shadow: 6px 6px 12px #b8bec7, -6px -6px 12px #ffffff;
+        }
+
+        .neu-btn:nth-child(2) {
+            box-shadow: inset 6px 6px 12px #b8bec7, inset -6px -6px 12px #ffffff;
+        }
+
+        /* Glassmorphism */
+        .preview-glass {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            width: 80%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .glass-text {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.5rem;
+        }
+
+        .glass-btn {
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.75rem;
+        }
+
+        /* Flat Design */
+        .preview-flat {
+            background: #ffffff;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .flat-card {
+            background: #3498db;
+            border-radius: 4px;
+            padding: 1rem;
+            width: 100px;
+            text-align: center;
+        }
+
+        .flat-card:nth-child(2) {
+            background: #e74c3c;
+        }
+
+        .flat-card:nth-child(3) {
+            background: #2ecc71;
+        }
+
+        .flat-card-title {
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Gradient Design */
+        .preview-gradient {
+            background: #0f0f23;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gradient-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            width: 80%;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .gradient-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .gradient-text {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 0.5rem;
+        }
+
+        /* Brutalism */
+        .preview-brutal {
+            background: #f5f5f5;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brutal-card {
+            background: #ffffff;
+            border: 3px solid #000000;
+            padding: 1.5rem;
+            width: 80%;
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        .brutal-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #000;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .brutal-text {
+            font-size: 0.75rem;
+            color: #333;
+            margin-top: 0.5rem;
+        }
+
+        .brutal-btn {
+            margin-top: 1rem;
+            background: #ffff00;
+            border: 2px solid #000;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Minimalism */
+        .preview-minimal {
+            background: #ffffff;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .minimal-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #000;
+            letter-spacing: 0.3em;
+        }
+
+        .minimal-line {
+            width: 40px;
+            height: 1px;
+            background: #000;
+            margin: 1rem 0;
+        }
+
+        .minimal-text {
+            font-size: 0.625rem;
+            color: #999;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* Dark Mode */
+        .preview-dark {
+            background: #121212;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark-card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 80%;
+            border: 1px solid #333;
+        }
+
+        .dark-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .dark-text {
+            font-size: 0.625rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        .dark-btn {
+            margin-top: 1rem;
+            background: #bb86fc;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* SaaS Style */
+        .preview-saas {
+            background: #f8fafc;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 0.5rem;
+        }
+
+        .saas-nav {
+            background: white;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .saas-logo {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 6px;
+        }
+
+        .saas-nav-items {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .saas-nav-item {
+            width: 40px;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+
+        .saas-content {
+            flex: 1;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .saas-sidebar {
+            width: 60px;
+            background: white;
+            border-radius: 8px;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .saas-sidebar-item {
+            height: 32px;
+            background: var(--primary);
+            border-radius: 6px;
+        }
+
+        .saas-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .saas-chart {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .saas-chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+            height: 100%;
+            padding-top: 0.5rem;
+        }
+
+        .saas-bar {
+            flex: 1;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* Finance Style */
+        .preview-finance {
+            background: #f0f4f8;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 0.75rem;
+        }
+
+        .finance-header {
+            background: #1a365d;
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .finance-title {
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .finance-cards {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .finance-card {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .finance-card-title {
+            font-size: 0.5rem;
+            color: #718096;
+            text-transform: uppercase;
+        }
+
+        .finance-card-value {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin-top: 0.25rem;
+        }
+
+        .finance-chart {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .finance-line {
+            height: 2px;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            margin-top: auto;
+            border-radius: 2px;
+        }
+
+        /* E-commerce Style */
+        .preview-ecommerce {
+            background: #fff;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 0.75rem;
+        }
+
+        .ecom-banner {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: white;
+        }
+
+        .ecom-banner-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .ecom-products {
+            display: flex;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .ecom-product {
+            flex: 1;
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ecom-product-img {
+            flex: 1;
+            background: #e0e0e0;
+            border-radius: 4px;
+        }
+
+        .ecom-product-info {
+            margin-top: 0.5rem;
+        }
+
+        .ecom-product-name {
+            font-size: 0.5rem;
+            color: #333;
+        }
+
+        .ecom-product-price {
+            font-size: 0.625rem;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+
+        .ecom-badge {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: #ff6b6b;
+            color: white;
+            font-size: 0.5rem;
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+        }
+
+        /* Social Style */
+        .preview-social {
+            background: #f0f2f5;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 0.75rem;
+        }
+
+        .social-story {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .social-story-item {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            border-radius: 50%;
+            padding: 2px;
+        }
+
+        .social-story-item:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .social-story-item:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        .social-story-inner {
+            width: 100%;
+            height: 100%;
+            background: #f0f2f5;
+            border-radius: 50%;
+        }
+
+        .social-post {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 0.75rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .social-post-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-avatar {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+        }
+
+        .social-user {
+            font-size: 0.625rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .social-content {
+            margin-top: 0.5rem;
+            font-size: 0.5rem;
+            color: #666;
+        }
+
+        .social-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+        }
+
+        .social-action {
+            font-size: 0.5rem;
+            color: #666;
+        }
+
+        /* Gaming Style */
+        .preview-gaming {
+            background: linear-gradient(135deg, #0c0c1d, #1a1a2e);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gaming-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+            width: 80%;
+            backdrop-filter: blur(10px);
+        }
+
+        .gaming-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .gaming-text {
+            font-size: 0.625rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+        }
+
+        .gaming-btn {
+            margin-top: 1rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            color: white;
+            font-size: 0.625rem;
+            font-weight: 600;
+        }
+
+        .gaming-particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .gaming-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00d4ff;
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .gaming-particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .gaming-particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 0.5s; }
+        .gaming-particle:nth-child(3) { left: 30%; top: 70%; animation-delay: 1s; }
+        .gaming-particle:nth-child(4) { left: 70%; top: 80%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-20px); opacity: 1; }
+        }
+
+        /* ==================== Expanded Detail Modal ==================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg-tertiary);
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prompt-box {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8125rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            border: 1px solid var(--border);
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+
+        /* ==================== Toast Notification ==================== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: var(--success);
+        }
+
+        /* ==================== Responsive ==================== */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .filter-section {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .filter-group {
+                flex: 1;
+                min-width: 200px;
+                margin-bottom: 0;
+            }
+
+            .stats-card {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                order: 3;
+                max-width: 100%;
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .styles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-preview {
+                min-height: 160px;
+            }
+        }
+
+        /* ==================== Empty State ==================== */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            display: none;
+        }
+
+        .empty-state.show {
+            display: block;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">UI</div>
+                <div class="logo-text">
+                    <h1>UI设计风格集锦</h1>
+                    <span>Design Style Gallery</span>
+                </div>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索设计风格...">
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="resetFilters()">
+                    <span>↺</span> 重置筛选
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="filter-section">
+                <div class="filter-group">
+                    <div class="filter-group-title">📦 主流风格</div>
+                    <div class="filter-list" id="mainstreamFilters">
+                        <label class="filter-item active" data-category="mainstream" data-style="all">
+                            <input type="checkbox" checked>
+                            <span class="filter-checkbox"></span>
+                            <span>全部</span>
+                            <span class="filter-count" id="count-all">15</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="apple">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Apple/iOS</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="material">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Material Design</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="fluent">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Fluent Design</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="neumorphism">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Neumorphism</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="glass">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Glassmorphism</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="flat">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Flat Design</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="gradient">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Gradient</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="brutal">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Brutalism</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="minimal">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Minimalism</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="mainstream" data-style="dark">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>Dark Mode</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-group-title">🏢 行业风格</div>
+                    <div class="filter-list" id="industryFilters">
+                        <label class="filter-item" data-category="industry" data-style="saas">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>SaaS/企业级</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="industry" data-style="finance">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>金融/银行</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="industry" data-style="ecommerce">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>电商/零售</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="industry" data-style="social">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>社交/社区</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                        <label class="filter-item" data-category="industry" data-style="gaming">
+                            <input type="checkbox">
+                            <span class="filter-checkbox"></span>
+                            <span>游戏/娱乐</span>
+                            <span class="filter-count">1</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-card">
+                <h4>收录风格</h4>
+                <div class="number">15+</div>
+                <p>涵盖主流设计语言与行业解决方案</p>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="content">
+            <div class="content-header">
+                <div class="results-info">
+                    显示 <strong id="visibleCount">15</strong> 个设计风格
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid">⊞</button>
+                    <button class="view-btn" data-view="list">☰</button>
+                </div>
+            </div>
+
+            <!-- Style Cards Grid -->
+            <div class="styles-grid" id="stylesGrid">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-state-icon">🔍</div>
+                <div class="empty-state-title">未找到匹配的风格</div>
+                <div class="empty-state-text">请尝试调整筛选条件或搜索关键词</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Detail Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">风格详情</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be injected -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">关闭</button>
+                <button class="btn btn-primary" id="modalCopyBtn" onclick="copyModalPrompt()">
+                    📋 复制完整提示词
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">已复制到剪贴板</div>
+
+    <script>
+        // ==================== Style Data ====================
+        const styleData = [
+            {
+                id: 'apple',
+                name: 'Apple/iOS 风格',
+                subtitle: 'Apple Human Interface Guidelines',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['简洁留白', '毛玻璃效果', '大圆角', 'SF Pro字体', '微妙阴影', '高对比度', '动效流畅'],
+                preview: 'preview-apple',
+                prompt: `【Apple iOS风格 UI设计提示词】
+
+Design a clean, minimalist UI interface in Apple iOS style.
+
+## Style Overview
+Apple's iOS design language emphasizes clarity, deference, and depth. The interface uses subtle depth and translucency to communicate state changes and guide user attention.
+
+## Core Design Elements
+• Clean white/light gray background with subtle gradients
+• Rounded corners (16-24px radius for cards, 10-12px for buttons)
+• SF Pro font family with generous letter spacing
+• Subtle shadows creating depth hierarchy
+• Frosted glass (glassmorphism) effects for overlays and navigation
+• Smooth micro-animations and spring physics
+• High contrast between interactive and static elements
+• Generous white space (30-40% of layout)
+• SF Symbols for iconography
+• Bottom sheet navigation patterns
+
+## Color Palette
+• Primary: #007AFF (iOS Blue)
+• Background: #F5F5F7 to #FFFFFF gradient
+• Text Primary: #1D1D1F
+• Text Secondary: #86868B
+• System Colors: #FF3B30 (Red), #34C759 (Green), #FF9500 (Orange)
+
+## Typography
+• Font Family: SF Pro Display, SF Pro Text
+• Headings: 600-700 weight, -0.5% letter spacing
+• Body: 400 weight, 17px base size
+• Captions: 300 weight, 12-13px
+
+## Keywords
+iOS, Apple, minimalist, clean, premium, elegant, frosted glass, rounded, SF Pro, macOS, Apple Watch`
+
+            },
+            {
+                id: 'material',
+                name: 'Material Design',
+                subtitle: 'Google Material Design 3',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['卡片布局', '层级阴影', '品牌色彩', '图标系统', '动效反馈', '响应式', '组件化'],
+                preview: 'preview-material',
+                prompt: `【Material Design UI设计提示词】
+
+Design a modern UI interface following Google Material Design 3 principles.
+
+## Style Overview
+Material Design 3 (Material You) emphasizes personalization, inclusivity, and accessibility. It uses dynamic color schemes derived from wallpaper and emphasizes tone variation for hierarchy.
+
+## Core Design Elements
+• Card-based layout with consistent 8px grid system
+• Elevation shadows creating clear visual hierarchy
+• Dynamic color system based on user preference
+• Rounded corners (28px max for large containers)
+• M3 component shapes with medium emphasis
+• Surface tints instead of shadows for elevation
+• Responsive layouts adapting to screen size
+• FAB (Floating Action Button) as primary action
+• Top app bar with navigation and actions
+• Bottom navigation for primary destinations
+
+## Color Palette (M3 Tonal Palette)
+• Primary: Customizable based on brand
+• Secondary: #625B71
+• Tertiary: #7D5260
+• Surface: #FFFBFE
+• Error: #B3261E
+• Use tonal palettes for color harmony
+
+## Typography
+• Font Family: Roboto, Product Sans
+• Display: 57px, 400 weight
+• Headline: 32px, 400 weight
+• Body: 16px, 400 weight
+• Label: 14px, 500 weight
+
+## Keywords
+Material Design, Material You, Google, M3, cards, elevation, dynamic color, accessible, inclusive, modern, clean, Roboto`
+
+            },
+            {
+                id: 'fluent',
+                name: 'Fluent Design',
+                subtitle: 'Microsoft Fluent Design System',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['亚克力背景', '光效层次', ' Insider风格', '动效设计', '响应式', '触感触控', '多设备'],
+                preview: 'preview-fluent',
+                prompt: `【Microsoft Fluent Design UI设计提示词】
+
+Design a UI interface using Microsoft Fluent Design System principles.
+
+## Style Overview
+Fluent Design emphasizes creating interfaces that feel native across all Windows devices and platforms. It uses depth, motion, and material to communicate hierarchy and state.
+
+## Core Design Elements
+• Acrylic material for backgrounds (60% opacity blur)
+• Reveal highlight effects on hover
+• Connected elements showing relationships
+• Light dismiss and pull-down menus
+• Motion as a design element, not decoration
+• Parallax viewing for depth perception
+• Screen-space ambient animation
+• Touch-first with precise pointer support
+• RTL (right-to-left) language support
+• Bold, readable typography at all sizes
+
+## Color Palette
+• Primary: #0078D4 (Windows Blue)
+• Accent: #50E6FF (Light Blue)
+• Background: #F3F3F3
+• Surface: rgba(255, 255, 255, 0.7) with acrylic
+• Text Primary: #1A1A1A
+• Text Secondary: #666666
+
+## Typography
+• Font Family: Segoe UI Variable, Segoe UI
+• Display: 60px, 300 weight
+• Headline: 28px, 600 weight
+• Body: 14px, 400 weight
+• Caption: 12px, 400 weight
+
+## Keywords
+Fluent, Microsoft, Windows, Acrylic, Reveal, Segoe, modern, depth, motion, cross-platform, desktop, touch`
+
+            },
+            {
+                id: 'neumorphism',
+                name: 'Neumorphism',
+                subtitle: '新拟态设计风格',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['柔和阴影', '浮雕效果', '单色系', '凸起凹陷', '触感UI', '轻量感', '创新性'],
+                preview: 'preview-neumorphism',
+                prompt: `【Neumorphism 新拟态 UI设计提示词】
+
+Design a soft UI interface in Neumorphism (New Skorphism) style.
+
+## Style Overview
+Neumorphism creates a soft, extruded plastic look by using dual shadows - one light and one dark. Elements appear to emerge from or sink into the background, creating a tactile, soft appearance.
+
+## Core Design Elements
+• Monochromatic background matching element colors
+• Dual box shadows: light shadow (top-left) and dark shadow (bottom-right)
+• Soft shadows with 10-20px blur and spread
+• Rounded corners (16-20px for cards, full round for icons)
+• Subtle inset shadows for pressed states
+• Low contrast between background and elements
+• Soft, muted color palette
+• Minimalist iconography
+• Gentle hover and active state transitions
+• Touch-friendly large interaction areas
+
+## Color Palette
+• Background: #E0E5EC (typical)
+• Light Shadow: #FFFFFF
+• Dark Shadow: #A3B1C4
+• Text Primary: #4A5568
+• Accent: #6366F1 (subtle use)
+
+## Technical Specifications
+• Light shadow: inset 6-8px -6-8px 10-15px #FFFFFF
+• Dark shadow: inset 6-8px 6-8px 10-15px #A3B1C4
+• Background blur (if using glass): 10-20px
+• Border radius: 16-24px for containers
+
+## Keywords
+Neumorphism, soft UI, new skomorphism, extruded, tactile, soft shadows, minimal, modern, 3D, subtle, gentle`
+
+            },
+            {
+                id: 'glass',
+                name: 'Glassmorphism',
+                subtitle: '玻璃拟态设计风格',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['毛玻璃', '透明背景', '模糊效果', '边框高光', '渐变底', '现代感', '层次感'],
+                preview: 'preview-glass',
+                prompt: `【Glassmorphism 玻璃态 UI设计提示词】
+
+Design a modern UI interface with Glassmorphism aesthetic.
+
+## Style Overview
+Glassmorphism uses frosted glass effects with blur, transparency, and subtle borders to create layered, depth-rich interfaces. It's commonly seen in macOS Big Sur, iOS, and modern web designs.
+
+## Core Design Elements
+• Frosted glass effect using backdrop-filter blur
+• Semi-transparent backgrounds (10-30% opacity)
+• Subtle white borders (1px, 10-20% opacity)
+• Vibrant gradient backgrounds behind glass elements
+• Soft shadows for depth separation
+• Border-radius: 16-24px for glass panels
+• Layered z-index hierarchy
+• Subtle inner glow effects
+• High color contrast between glass and content
+• Blur radius: 10-25px for glass effect
+
+## Color Palette
+• Background Gradient: #667EEA to #764BA2 (or any vibrant gradient)
+• Glass Fill: rgba(255, 255, 255, 0.1-0.25)
+• Glass Border: rgba(255, 255, 255, 0.2-0.4)
+• Shadow: rgba(0, 0, 0, 0.1)
+• Text: #FFFFFF (primary), rgba(255, 255, 255, 0.7) (secondary)
+
+## Technical Implementation
+• backdrop-filter: blur(20px) saturate(180%)
+• background: rgba(255, 255, 255, 0.1)
+• border: 1px solid rgba(255, 255, 255, 0.2)
+• box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1)
+
+## Keywords
+Glassmorphism, glass, frosted, blur, transparent, modern, glass effect, depth, layers, iOS, macOS, backdrop blur, dreamy`
+
+            },
+            {
+                id: 'flat',
+                name: 'Flat Design',
+                subtitle: '扁平化设计风格',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['无阴影', '纯色块', '简洁图形', '二维感', '清晰易读', '加载快速', '响应式'],
+                preview: 'preview-flat',
+                prompt: `【Flat Design 扁平化 UI设计提示词】
+
+Design a clean UI interface in Flat Design style.
+
+## Style Overview
+Flat Design eliminates all 3D effects like gradients, shadows, and textures. It uses solid colors, simple shapes, and clear typography to create clean, functional interfaces with excellent readability.
+
+## Core Design Elements
+• No gradients, shadows, or textures
+• Solid, bold color blocks
+• Simple geometric shapes
+• Clear visual hierarchy through color contrast
+• Two-dimensional appearance
+• Clean, sans-serif typography
+• Simple iconography with solid fills
+• Minimalist approach to decoration
+• Focus on functionality over embellishment
+• High contrast for accessibility
+
+## Color Palette
+• Use 3-4 bold, contrasting colors
+• Primary: #3498DB (Blue)
+• Secondary: #E74C3C (Red)
+• Accent: #2ECC71 (Green)
+• Neutral: #2C3E50 (Dark Blue-Gray)
+• Background: #FFFFFF or #ECF0F1
+
+## Typography
+• Font Family: Helvetica, Arial, Roboto
+• Simple, clean sans-serif
+• Bold weights for headings
+• Clear size hierarchy
+• Sufficient line height (1.4-1.6)
+
+## Keywords
+Flat Design, flat, minimalist, clean, solid colors, no shadows, geometric, simple, modern, Windows 8, Metro, UI, 2D`
+
+            },
+            {
+                id: 'gradient',
+                name: 'Gradient Design',
+                subtitle: '渐变设计风格',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['色彩渐变', '流动感', '活力感', '品牌识别', '现代感', '梦幻感', '渐变叠加'],
+                preview: 'preview-gradient',
+                prompt: `【Gradient Design 渐变风 UI设计提示词】
+
+Design a vibrant UI interface featuring bold gradient aesthetics.
+
+## Style Overview
+Gradient Design uses smooth color transitions to create depth, energy, and visual interest. It has evolved from subtle background gradients to bold, eye-catching full-gradient interfaces popular in modern apps like Instagram and Spotify.
+
+## Core Design Elements
+• Smooth color gradients as primary visual element
+• Gradient mesh and complex gradient backgrounds
+• Gradient text effects
+• Gradient icons and buttons
+• Soft, glowing shadows matching gradient colors
+• Color harmony through analogous or complementary palettes
+• Rounded corners (16-24px) for friendly feel
+• Glass elements layered over gradients
+• Dark mode pairs well with vibrant gradients
+• Subtle grain texture for premium feel
+
+## Color Palette - Popular Gradients
+• Purple-Pink: #667EEA → #764BA2 → #F093FB
+• Sunset: #F12711 → #F5AF19
+• Ocean: #1A2980 → #26D0CE
+• Aurora: #00C9FF → #92FE9D
+• Fire: #FF416C → #FF4B2B
+• Cosmic: #FF00CC → #333399
+
+## Typography
+• Font Family: Inter, Poppins, SF Pro Display
+• White or gradient text on dark backgrounds
+• Bold weights for impact
+• Letter spacing: -0.02em
+
+## Keywords
+Gradient, gradients, colorful, vibrant, mesh gradient, color transition, modern, Instagram style, Spotify, bold, energetic, dreamy, aurora`
+
+            },
+            {
+                id: 'brutal',
+                name: 'Brutalism',
+                subtitle: '粗野主义设计风格',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['粗犷原始', '高对比', '大胆排版', '不妥协', '功能直白', '反美观', '独特个性'],
+                preview: 'preview-brutal',
+                prompt: `【Brutalism 粗野主义 UI设计提示词】
+
+Design a bold UI interface in Web Brutalism style.
+
+## Style Overview
+Brutalism in digital design rejects conventional aesthetics in favor of raw, unpolished, and intentionally "ugly" interfaces. It emphasizes function over form and often uses unconventional layouts, harsh colors, and industrial typography.
+
+## Core Design Elements
+• Heavy black borders (2-4px solid)
+• Stark color contrasts (often yellow, black, white)
+• Raw, industrial aesthetic
+• Monospace or bold sans-serif typography
+• Visible, unstyled HTML elements sometimes
+• Unconventional, asymmetric layouts
+• Deliberately "ugly" or jarring combinations
+• Minimal or no border-radius
+• Uppercase text for headers
+• Harsh box shadows (solid color, not blur)
+
+## Color Palette
+• Primary: #FFFF00 (Yellow)
+• Secondary: #000000 (Black)
+• Background: #FFFFFF or #F5F5F5
+• Accent: #FF0000 (Red)
+• Sometimes: Pastel backgrounds with harsh black text
+
+## Typography
+• Font Family: Arial Black, Impact, Courier New, Space Mono
+• Large, bold headings (uppercase)
+• Monospace for body text sometimes
+• No letter spacing (or very tight)
+• Large font sizes for emphasis
+
+## Keywords
+Brutalism, brutal, raw, harsh, bold, industrial, web brutalism, unconventional, anti-design, ugly, honest, brutalist, punk, hacker`
+
+            },
+            {
+                id: 'minimal',
+                name: 'Minimalism',
+                subtitle: '极简主义设计风格',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['极少元素', '大量留白', '单色/少色', '精致排版', '安静感', '高端感', '功能至上'],
+                preview: 'preview-minimal',
+                prompt: `【Minimalism 极简主义 UI设计提示词】
+
+Design a sophisticated UI interface in Ultra Minimal style.
+
+## Style Overview
+Minimalism strips away everything non-essential, leaving only what's necessary. It uses extensive white space, restrained color palettes, and meticulous typography to create serene, high-end experiences.
+
+## Core Design Elements
+• Extensive white space (50%+ of layout)
+• Minimal color palette (1-2 colors max)
+• Simple, clean typography
+• No decorative elements
+• Strong visual hierarchy
+• Rounded corners (very subtle, 4-8px)
+• Thin, light borders or none at all
+• Small, precise icons or none
+• Subtle micro-interactions
+• Focus on content over decoration
+
+## Color Palette
+• Background: #FFFFFF or #FAFAFA
+• Primary: #000000 or #1A1A1A
+• Secondary: #888888 or #999999
+• Accent: #0066FF (used sparingly)
+• No gradients
+
+## Typography
+• Font Family: Inter, SF Pro Text, or elegant serif
+• Light to medium weights (300-500)
+• Generous letter spacing (0.05-0.2em for headings)
+• Small but readable body text
+• Generous line height (1.6-2.0)
+• Text alignment: often center or left
+
+## Keywords
+Minimalism, minimal, clean, white space, ultra minimal, luxury, premium, serene, Japanese, zen, simple, refined, elegant, restrained`
+
+            },
+            {
+                id: 'dark',
+                name: 'Dark Mode',
+                subtitle: '深色模式设计风格',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['深色背景', '护眼舒适', '节能省电', '内容突出', '高对比', '科技感', '夜间友好'],
+                preview: 'preview-dark',
+                prompt: `【Dark Mode 深色模式 UI设计提示词】
+
+Design a modern UI interface optimized for dark mode viewing.
+
+## Style Overview
+Dark Mode uses dark color schemes as the primary interface, reducing eye strain in low-light environments, saving battery on OLED screens, and creating a sleek, modern aesthetic popular in developer tools and media apps.
+
+## Core Design Elements
+• Dark backgrounds (not pure black, #121212 or similar)
+• Elevated surfaces use slightly lighter shades
+• High contrast text for readability
+• Muted, desaturated accent colors
+• Subtle glow effects for focus states
+• No pure white (#FFFFFF) text, use off-white
+• Bottom navigation for thumb-friendly access
+• Ambient icons that don't strain eyes
+• Smooth transitions between dark/light
+• Elevation through lightness, not shadows
+
+## Color Palette
+• Background: #121212 (surface), #1E1E1E (elevated)
+• Surface: #2D2D2D (cards), #383838 (modals)
+• Primary: #BB86FC (purple accent)
+• Secondary: #03DAC6 (teal)
+• Text Primary: #E1E1E1
+• Text Secondary: #A0A0A0
+• Text Disabled: #666666
+
+## Typography
+• Font Family: System fonts optimized for dark
+• Slightly increased font weight for readability
+• Avoid pure black text on dark backgrounds
+• Use semi-transparent overlays
+
+## Keywords
+Dark Mode, dark theme, night mode, dark UI, OLED, black, night-friendly, eye comfort, developer tools, sleek, modern, Spotify style, YouTube Dark`
+
+            },
+            {
+                id: 'saas',
+                name: 'SaaS/企业级',
+                subtitle: 'B2B软件界面设计',
+                category: 'industry',
+                tag: 'industry',
+                features: ['清晰导航', '数据仪表盘', '专业配色', '表单设计', '权限管理', '多角色', '响应迅速'],
+                preview: 'preview-saas',
+                prompt: `【SaaS/企业级 UI设计提示词】
+
+Design a professional SaaS dashboard interface for B2B software.
+
+## Style Overview
+SaaS interfaces prioritize efficiency, clarity, and task completion. They use clean layouts, clear data visualization, and consistent patterns to help users accomplish complex workflows quickly.
+
+## Core Design Elements
+• Clean sidebar navigation with clear hierarchy
+• Dashboard with key metrics and KPIs
+• Card-based content organization
+• Consistent component library
+• Clear data tables with sorting/filtering
+• Form layouts with inline validation
+• Toast notifications for feedback
+• Modal dialogs for focused tasks
+• Breadcrumb navigation for context
+• User avatar and settings in header
+
+## Color Palette
+• Primary: #6366F1 (Indigo) or #2563EB (Blue)
+• Secondary: #8B5CF6 (Purple)
+• Success: #10B981
+• Warning: #F59E0B
+• Error: #EF4444
+• Background: #F8FAFC
+• Surface: #FFFFFF
+• Text: #1E293B
+• Muted: #64748B
+
+## Typography
+• Font Family: Inter, SF Pro, system-ui
+• Headings: 600-700 weight
+• Body: 400 weight, 14-16px
+• Code/Data: Monospace (JetBrains Mono)
+
+## Common Components
+• Data tables with pagination
+• Charts: line, bar, pie, area
+• Status badges and tags
+• Avatar and user menu
+• Search with filters
+• Tabs for content sections
+• Empty states with CTAs
+
+## Keywords
+SaaS, dashboard, enterprise, B2B, admin panel, data visualization, metrics, KPIs, tables, forms, professional, clean, organized, efficient`
+
+            },
+            {
+                id: 'finance',
+                name: '金融/银行',
+                subtitle: '金融科技界面设计',
+                category: 'industry',
+                tag: 'industry',
+                features: ['信任感', '稳重配色', '数据可视化', '安全标识', '清晰数字', '合规设计', '易用性'],
+                preview: 'preview-finance',
+                prompt: `【金融/银行 UI设计提示词】
+
+Design a trustworthy financial services interface for banking or fintech applications.
+
+## Style Overview
+Financial interfaces must communicate trust, security, and professionalism while making complex financial data accessible and actionable. They balance regulatory requirements with modern, approachable design.
+
+## Core Design Elements
+• Deep blue or navy primary color (trustworthy)
+• Clean data presentation with clear typography
+• Prominent security indicators (lock icons, verification)
+• Balance between information density and clarity
+• Accessible contrast ratios (WCAG AA minimum)
+• Transaction history with clear categorization
+• Account summaries with prominent balances
+• Progress indicators for goals
+• Clear call-to-action buttons
+• Multi-factor authentication flows
+
+## Color Palette
+• Primary: #1A365D (Navy Blue)
+• Secondary: #2D3748 (Dark Gray)
+• Accent: #48BB78 (Green for positive)
+• Warning: #ED8936 (Orange)
+• Danger: #E53E3E (Red for negative)
+• Background: #F7FAFC
+• Card: #FFFFFF
+• Text: #1A202C
+• Muted: #718096
+
+## Typography
+• Font Family: Inter, Roboto, or proprietary banking fonts
+• Numbers: Tabular figures, monospace for amounts
+• Large, clear balance displays
+• Consistent decimal places for currency
+• Weight: 500-700 for important numbers
+
+## Key Features
+• Account overview dashboard
+• Transaction list with filters
+• Fund transfer flow
+• Bill payment interface
+• Investment portfolio view
+• Credit card management
+• Budget tracking tools
+
+## Keywords
+Finance, banking, fintech, money, secure, trustworthy, professional, data visualization, charts, transactions, account, investment, payment, compliance`
+
+            },
+            {
+                id: 'ecommerce',
+                name: '电商/零售',
+                subtitle: '电商平台界面设计',
+                category: 'industry',
+                tag: 'industry',
+                features: ['吸引眼球', '促销氛围', '转化导向', '商品展示', '便捷购物流', '信任标识', '移动优先'],
+                preview: 'preview-ecommerce',
+                prompt: `【电商/零售 UI设计提示词】
+
+Design a conversion-focused e-commerce interface for online shopping platforms.
+
+## Style Overview
+E-commerce design prioritizes product discovery, trust building, and frictionless purchase flows. Every element serves the goal of converting visitors into customers while creating an enjoyable shopping experience.
+
+## Core Design Elements
+• Hero banners with promotional content
+• Clear product cards with images, prices, ratings
+• Prominent search with filters
+• Category navigation (mega menu)
+• Shopping cart always accessible
+• Trust badges and security seals
+• User reviews and ratings display
+• Flash sales and countdown timers
+• Related product recommendations
+• Guest checkout option
+
+## Color Palette
+• Primary: #FF4757 (Action Red) or #6C5CE7 (Brand Purple)
+• Secondary: #2ED573 (Success Green)
+• Sale: #FF6B6B, #FECA57
+• Background: #F5F5F5 or #FFFFFF
+• Text: #2D3436
+• Muted: #636E72
+• Accent: #00CEC9 (Teal)
+
+## Typography
+• Font Family: Inter, Poppins
+• Sale prices: Bold, red, strikethrough original
+• Product titles: 500 weight, clear
+• Prices: Monospace for alignment
+• Promotional text: Bold, uppercase
+
+## Key Components
+• Product grid with quick-view
+• Size/color selectors
+• Add to cart button (sticky on mobile)
+• Checkout progress indicator
+• Order tracking interface
+• Wishlist and favorites
+• Recently viewed products
+
+## Keywords
+E-commerce, shopping, retail, product, cart, checkout, sale, discount, store, online store, marketplace, conversion, purchase, buy`
+
+            },
+            {
+                id: 'social',
+                name: '社交/社区',
+                subtitle: '社交平台界面设计',
+                category: 'industry',
+                tag: 'industry',
+                features: ['用户中心', '互动性强', '内容展示', '情感化', '媒体丰富', '社交关系', '实时性'],
+                preview: 'preview-social',
+                prompt: `【社交/社区 UI设计提示词】
+
+Design an engaging social platform interface for community and social networking apps.
+
+## Style Overview
+Social interfaces prioritize content consumption, user interaction, and social connections. They use visual-heavy layouts, clear user presence indicators, and intuitive interaction patterns to encourage engagement.
+
+## Core Design Elements
+• User profile photos prominent
+• Stories/reels vertical feed
+• Infinite scroll content stream
+• Like, comment, share actions visible
+• Real-time notifications
+• Following/follower counts
+• Content creator badges
+• Hashtag and mention highlighting
+• Emoji reactions
+• Pull-to-refresh interaction
+
+## Color Palette
+• Primary: #E1306C (Instagram Pink) or #1DA1F2 (Twitter Blue)
+• Secondary: #833AB4 (Purple gradient)
+• Background: #FFFFFF or #F0F2F5
+• Text: #050505
+• Secondary Text: #65676B
+• Accent gradients for stories
+
+## Typography
+• Font Family: Inter, SF Pro, system-ui
+• Usernames: 600 weight
+• Bio: 400 weight, 14px
+• Post content: 400 weight, 15-16px
+• Comments: 400 weight, 13px
+
+## Key Features
+• Feed with posts/stories
+• User profile pages
+• Direct messaging
+• Notification center
+• Search and discovery
+• Trending topics
+• Content creation tools
+• Live streaming interface
+
+## Keywords
+Social, social media, community, feed, posts, stories, profile, followers, likes, comments, share, engagement, networking, Instagram, Twitter, TikTok`
+
+            },
+            {
+                id: 'gaming',
+                name: '游戏/娱乐',
+                subtitle: '游戏界面设计',
+                category: 'industry',
+                tag: 'industry',
+                features: ['酷炫视觉', '动态效果', '沉浸感', 'RGB灯效', '科幻元素', '高清画质', '交互反馈'],
+                preview: 'preview-gaming',
+                prompt: `【游戏/娱乐 UI设计提示词】
+
+Design a visually striking gaming interface with futuristic and immersive aesthetics.
+
+## Style Overview
+Gaming interfaces embrace bold visuals, dynamic animations, and immersive elements. They often feature sci-fi aesthetics, neon accents, and responsive feedback that enhance the gaming experience.
+
+## Core Design Elements
+• Dark backgrounds with neon accents
+• RGB color effects and glows
+• Cyberpunk/sci-fi typography
+• Animated particles and effects
+• Glass panels with blur
+• Dynamic loading animations
+• Health bars and progress indicators
+• Achievement and badge displays
+• Leaderboard rankings
+• In-game chat interfaces
+
+## Color Palette
+• Background: #0C0C1D, #1A1A2E (Deep space blues)
+• Primary: #00D4FF (Cyan neon)
+• Secondary: #7B2CBF (Purple)
+• Accent: #FF00CC (Magenta)
+• Warning: #FFD700 (Gold)
+• Success: #00FF88 (Neon green)
+• Text: #FFFFFF, rgba(255,255,255,0.7)
+
+## Typography
+• Font Family: Orbitron, Rajdhani, Exo 2
+• Headings: Bold, uppercase, letter-spaced
+• Text glow effects
+• Monospace for stats/numbers
+• Sci-fi inspired letterforms
+
+## Key Features
+• Game launcher interface
+• Character/avatar customization
+• Inventory management
+• Matchmaking lobby
+• Leaderboards and rankings
+• Achievement system
+• Live streaming overlay
+• Esports tournament brackets
+
+## Keywords
+Gaming, game UI, esports, cyberpunk, sci-fi, neon, RGB, futuristic, dark theme, particles, effects, leaderboard, achievement, streamer, Twitch`
+
+            }
+        ];
+
+        // ==================== Initialize ====================
+        let activeFilters = ['all'];
+        let currentModalPrompt = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards();
+            setupFilters();
+            setupSearch();
+        });
+
+        // ==================== Render Cards ====================
+        function renderCards() {
+            const grid = document.getElementById('stylesGrid');
+            grid.innerHTML = styleData.map(style => `
+                <div class="style-card" data-id="${style.id}" data-category="${style.category}" data-tag="${style.tag}">
+                    <div class="card-preview">
+                        <div class="${style.preview}"></div>
+                    </div>
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">${style.name}</div>
+                            <div class="card-subtitle">${style.subtitle}</div>
+                        </div>
+                        <div class="card-tags">
+                            <span class="tag ${style.tag === 'mainstream' ? 'tag-mainstream' : 'tag-industry'}">
+                                ${style.tag === 'mainstream' ? '主流风格' : '行业风格'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <h4>设计特点</h4>
+                            <div class="feature-list">
+                                ${style.features.map(f => `<span class="feature-item">${f}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('${style.id}')">
+                            📋 复制提示词
+                        </button>
+                        <button class="expand-btn" onclick="event.stopPropagation(); openModal('${style.id}')">
+                            ⋯
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            updateVisibleCount();
+        }
+
+        // ==================== Filters ====================
+        function setupFilters() {
+            document.querySelectorAll('.filter-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const style = item.dataset.style;
+                    const category = item.dataset.category;
+                    
+                    if (style === 'all') {
+                        // Reset all filters
+                        activeFilters = ['all'];
+                        document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
+                        item.classList.add('active');
+                    } else {
+                        // Remove 'all' if selecting specific filter
+                        const allItem = document.querySelector(`.filter-item[data-style="all"]`);
+                        allItem.classList.remove('active');
+                        activeFilters = activeFilters.filter(f => f !== 'all');
+                        
+                        // Toggle current filter
+                        if (activeFilters.includes(style)) {
+                            activeFilters = activeFilters.filter(f => f !== style);
+                            item.classList.remove('active');
+                        } else {
+                            activeFilters.push(style);
+                            item.classList.add('active');
+                        }
+                        
+                        // If no filters selected, select 'all'
+                        if (activeFilters.length === 0) {
+                            activeFilters = ['all'];
+                            allItem.classList.add('active');
+                        }
+                    }
+                    
+                    applyFilters();
+                });
+            });
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.style-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const id = card.dataset.id;
+                const style = styleData.find(s => s.id === id);
+                const matchesFilter = activeFilters.includes('all') || activeFilters.includes(id);
+                const matchesSearch = style.name.toLowerCase().includes(searchTerm) || 
+                                     style.features.some(f => f.toLowerCase().includes(searchTerm));
+
+                if (matchesFilter && matchesSearch) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('visibleCount').textContent = visibleCount;
+            document.getElementById('emptyState').classList.toggle('show', visibleCount === 0);
+        }
+
+        function resetFilters() {
+            activeFilters = ['all'];
+            document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
+            document.querySelector('.filter-item[data-style="all"]').classList.add('active');
+            document.getElementById('searchInput').value = '';
+            applyFilters();
+        }
+
+        // ==================== Search ====================
+        function setupSearch() {
+            document.getElementById('searchInput').addEventListener('input', applyFilters);
+        }
+
+        function updateVisibleCount() {
+            const visible = document.querySelectorAll('.style-card:not(.hidden)').length;
+            document.getElementById('visibleCount').textContent = visible;
+        }
+
+        // ==================== Copy Functions ====================
+        function copyPrompt(id) {
+            const style = styleData.find(s => s.id === id);
+            if (style) {
+                navigator.clipboard.writeText(style.prompt).then(() => {
+                    showToast('提示词已复制到剪贴板', 'success');
+                    
+                    // Visual feedback on button
+                    const btn = document.querySelector(`[data-id="${id}"] .copy-btn`);
+                    btn.classList.add('copied');
+                    btn.innerHTML = '✓ 已复制';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.innerHTML = '📋 复制提示词';
+                    }, 2000);
+                });
+            }
+        }
+
+        function copyModalPrompt() {
+            navigator.clipboard.writeText(currentModalPrompt).then(() => {
+                showToast('完整提示词已复制到剪贴板', 'success');
+            });
+        }
+
+        // ==================== Modal ====================
+        function openModal(id) {
+            const style = styleData.find(s => s.id === id);
+            if (!style) return;
+
+            currentModalPrompt = style.prompt;
+            
+            document.getElementById('modalTitle').textContent = style.name;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-section">
+                    <div class="modal-section-title">📖 风格概述</div>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8;">
+                        ${getStyleDescription(style.id)}
+                    </p>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-section-title">✨ 设计特点</div>
+                    <div class="feature-list">
+                        ${style.features.map(f => `<span class="feature-item">${f}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-section-title">💬 提示词模板</div>
+                    <div class="prompt-box">${style.prompt}</div>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // ==================== Toast ====================
+        function showToast(message, type = 'default') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ==================== Style Descriptions ====================
+        function getStyleDescription(id) {
+            const descriptions = {
+                apple: 'Apple的iOS设计语言强调清晰、谦逊和深度。界面使用微妙的深度和半透明效果来传达状态变化，引导用户注意力。毛玻璃效果和SF Pro字体是其标志性元素。',
+                material: 'Material Design 3强调个性化和包容性。使用动态配色系统、基于高程的光影层次和以触觉响应为核心的动效设计。卡片布局和FAB是核心组件。',
+                fluent: 'Fluent Design强调跨设备的一致性体验。使用亚克力材质、reveal高光效果和以光效为核心的动效系统。适合Windows生态的应用程序。',
+                neumorphism: '新拟态通过双层阴影（亮色和暗色）创造柔和的浮雕效果。元素看起来像是从背景中凸起或凹陷，创造出一种有触感的软质外观。',
+                glass: '玻璃态使用毛玻璃效果、透明背景和微妙边框创造层次丰富的界面。常见于macOS Big Sur和iOS系统中，具有梦幻般的视觉效果。',
+                flat: '扁平化设计消除所有3D效果，使用纯色块和简洁图形创造简洁实用的界面。强调功能性和加载速度，是现代网页设计的基础。',
+                gradient: '渐变设计使用平滑的色彩过渡创造深度和活力。从Instagram到Spotify，渐变已成为现代应用中增加视觉冲击力的重要元素。',
+                brutal: '粗野主义拒绝传统美学，选择原始、未经修饰的界面。它强调功能而非形式，使用非常规布局和大胆的色彩对比。',
+                minimal: '极简主义剥离所有非必要元素，只保留必需的部分。使用大量留白、克制的配色和精确的排版创造宁静、高端的体验。',
+                dark: '深色模式使用深色配色作为主要界面，减少低光环境下的眼睛疲劳，在OLED屏幕上节省电量，创造现代科技感的视觉效果。',
+                saas: 'SaaS界面优先考虑效率、清晰度和任务完成。使用简洁的布局、清晰的数据可视化和一致的组件模式，帮助用户快速完成复杂工作流程。',
+                finance: '金融界面必须传达信任、安全和专业性。平衡监管要求与现代、友好的设计，使复杂的财务数据变得易于理解和使用。',
+                ecommerce: '电商设计优先考虑产品发现、信任建立和无摩擦的购买流程。每个元素都服务于将访客转化为客户的目标。',
+                social: '社交界面优先考虑内容消费、用户互动和社交联系。使用视觉化的布局、清晰的用户存在指示器和直观的交互模式来鼓励参与。',
+                gaming: '游戏界面采用大胆的视觉效果、动态动画和沉浸式元素。经常融入科幻美学、霓虹灯效果和响应式反馈来增强游戏体验。'
+            };
+            return descriptions[id] || '';
+        }
+    </script>
+</body>
+</html>
