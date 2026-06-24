@@ -2015,6 +2015,82 @@
         }
         /* ==================== End Memphis ==================== */
 
+        /* ==================== Cyberpunk / Synthwave ==================== */
+        .preview-cyber {
+            background: linear-gradient(180deg, #1a0033 0%, #2d0066 45%, #ff006e 95%);
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .cyber-grid {
+            position: absolute;
+            bottom: 0;
+            left: -20%;
+            right: -20%;
+            height: 55%;
+            background-image:
+                linear-gradient(90deg, rgba(255, 0, 110, 0.6) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(255, 0, 110, 0.45) 1px, transparent 1px);
+            background-size: 22px 18px;
+            transform: perspective(80px) rotateX(38deg);
+            transform-origin: top center;
+        }
+        .cyber-sun {
+            position: absolute;
+            bottom: 38%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background:
+                linear-gradient(180deg, #ffeb00 0%, #ff8c00 35%, #ff006e 65%, #2d0066 100%);
+            box-shadow:
+                0 0 30px rgba(255, 0, 110, 0.6),
+                0 0 60px rgba(255, 105, 0, 0.4);
+        }
+        .cyber-sun::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: repeating-linear-gradient(0deg, transparent 0, transparent 6px, rgba(45, 0, 102, 0.85) 6px, rgba(45, 0, 102, 0.85) 8px);
+            mask: radial-gradient(circle at center, transparent 0%, transparent 50%, black 50%);
+            -webkit-mask: radial-gradient(circle at center, transparent 0%, transparent 50%, black 50%);
+        }
+        .cyber-scanline {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0, 0, 0, 0.18) 2px, rgba(0, 0, 0, 0.18) 3px);
+            pointer-events: none;
+        }
+        .cyber-title {
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #00f0ff;
+            letter-spacing: 0.2em;
+            text-shadow: 0 0 8px #00f0ff, 0 0 16px rgba(0, 240, 255, 0.6);
+            white-space: nowrap;
+        }
+        .cyber-sub {
+            position: absolute;
+            top: 26%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Courier New', monospace;
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: #ff6ec7;
+            letter-spacing: 0.25em;
+            text-shadow: 0 0 4px #ff6ec7;
+        }
+        /* ==================== End Cyberpunk ==================== */
+
     </style>
 </head>
 <body>
@@ -2481,6 +2557,13 @@
                     <div class="memphis-blob"></div>
                     <div class="memphis-text">RETRO 80s</div>
                 </div>
+            `,
+            'preview-cyber': `
+                <div class="cyber-grid"></div>
+                <div class="cyber-sun"></div>
+                <div class="cyber-scanline"></div>
+                <div class="cyber-title">NEO TOKYO</div>
+                <div class="cyber-sub">// 2049 //</div>
             `
         };
 
@@ -3378,6 +3461,58 @@ The Memphis Group (Milan, 1981) rejected good taste in favor of playful clashes.
 
 ## Keywords
 Memphis Group, 80s, retro, Ettore Sottsass, terrazzo, postmodern, anti-design, clash, playful, polka dots, zigzag, squiggle, MTV, Saved By the Bell, Y2K-adjacent`
+
+            },
+            {
+                id: 'cyber',
+                name: '赛博朋克 / Cyberpunk',
+                subtitle: 'Synthwave · 霓虹未来',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['紫粉霓虹', 'CRT扫描线', '赛博网格', '蒸汽波太阳', '终端字体', '故障美学', '复古未来'],
+                preview: 'preview-cyber',
+                prompt: `【Cyberpunk / Synthwave UI设计提示词】
+
+Design a UI in 1980s Synthwave / Cyberpunk style — neon-drenched retro-future visual language inspired by Blade Runner, Tron, Outrun, and Vaporwave.
+
+## Style Overview
+The interface evokes a CRT screen looking out over a synthetic horizon at night: deep violet gradient sky, hot magenta-pink at the bottom, an infinite glowing grid receding to a vanishing point, and a giant pixelated sun on the horizon. Text glows in cyan and pink neon, with subtle scanlines overlay for that VHS / CRT feel.
+
+## Core Design Elements
+• Deep gradient sky: #1a0033 (top) → #2d0066 (mid) → #ff006e (bottom)
+• Perspective grid floor: 1px hot-pink lines (rgba 255,0,110,0.6) on transparent, rotated rotateX(35-40°)
+• Pixelated retro sun: vertical gradient sphere (yellow → orange → pink → violet), with horizontal dark stripe mask creating the "venetian blind" sun effect
+• CRT scanline overlay: repeating 2px horizontal dark lines at ~15-20% opacity
+• Glowing neon text: cyan (#00f0ff) or magenta (#ff6ec7) with text-shadow 0 0 8-16px in same color
+• Monospace / terminal font: Courier New, JetBrains Mono, VT323
+• Optional glitch / chromatic aberration: red+blue offset by 1-2px on key headings
+
+## Color Palette
+• Sky violet deep: #1a0033, #2d0066
+• Magenta horizon: #ff006e
+• Sun gradient: #ffeb00 → #ff8c00 → #ff006e → #2d0066
+• Neon cyan: #00f0ff
+• Hot pink text: #ff6ec7
+• Black scanline: rgba(0,0,0,0.18)
+
+## Difference From Dark Mode / Gaming
+• Dark Mode = neutral dark grey/black with a single accent — productivity feel
+• Gaming = modern RGB rainbow + cartoon esports vibe
+• Cyberpunk/Synthwave = specifically 80s retro-future, neon pink + violet + scanlines, nostalgic VHS aesthetic
+
+## Typography
+• Headings: Courier New / Press Start 2P / VT323, 700-900, all-caps, letter-spacing 0.15-0.25em
+• Body: monospace, often with glitch decorations like "//" or "[]"
+
+## Key Features
+• Game launchers (especially indie retro-style)
+• Music streaming for synthwave / electronic
+• Crypto / Web3 dashboards
+• Cyberpunk fiction / film websites
+• Tech conference branding (e.g. retro-futurist hackathon)
+
+## Keywords
+Cyberpunk, Synthwave, Outrun, Vaporwave, retro-future, neon, CRT scanlines, magenta, cyan, grid floor, pixelated sun, 80s, Blade Runner, Tron, VT323, Press Start 2P, glow, glitch`
 
             }
         ];
