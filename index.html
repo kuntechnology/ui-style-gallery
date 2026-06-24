@@ -3044,6 +3044,298 @@
         }
         /* ==================== End Scrapbook ==================== */
 
+        /* ==================== Liquid Glass / 液态玻璃 ==================== */
+        .preview-liquid {
+            background:
+                radial-gradient(circle at 20% 30%, rgba(108, 141, 255, 0.45) 0%, transparent 50%),
+                radial-gradient(circle at 75% 70%, rgba(180, 100, 255, 0.35) 0%, transparent 55%),
+                radial-gradient(circle at 50% 100%, rgba(80, 200, 255, 0.25) 0%, transparent 50%),
+                linear-gradient(135deg, #0a1124 0%, #1a1f3d 50%, #0d1530 100%);
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .liquid-bg-photo {
+            position: absolute;
+            top: 18%;
+            left: 12%;
+            width: 76%;
+            height: 50%;
+            background:
+                radial-gradient(ellipse at 30% 40%, #ff9a8b 0%, transparent 45%),
+                radial-gradient(ellipse at 70% 60%, #6ec1ff 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, #c084fc 0%, transparent 55%),
+                linear-gradient(160deg, #ffb1cc 0%, #8ec5ff 60%, #b794f6 100%);
+            border-radius: 14px;
+            opacity: 0.85;
+            filter: blur(0.5px);
+        }
+        .liquid-pill {
+            position: absolute;
+            bottom: 14%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 72%;
+            height: 18%;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 0.6rem;
+            overflow: hidden;
+        }
+        .liquid-pill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 8%;
+            width: 35%;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 100px 100px 50px 50px / 100px 100px 30px 30px;
+            pointer-events: none;
+        }
+        .liquid-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 2;
+        }
+        .liquid-dot.active {
+            width: 22px;
+            height: 6px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #6ec1ff, #c084fc);
+            box-shadow: 0 0 10px rgba(108, 141, 255, 0.7);
+        }
+        .liquid-orb {
+            position: absolute;
+            top: 8%;
+            right: 10%;
+            width: 38px;
+            height: 38px;
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(108, 141, 255, 0.4) 40%, rgba(180, 100, 255, 0.2) 80%);
+            border-radius: 50%;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow:
+                inset 0 2px 4px rgba(255, 255, 255, 0.5),
+                0 4px 12px rgba(108, 141, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        /* ==================== End Liquid Glass ==================== */
+
+        /* ==================== Solarpunk / 太阳朋克 ==================== */
+        .preview-solarpunk {
+            background:
+                radial-gradient(ellipse at 70% 20%, rgba(255, 200, 100, 0.35) 0%, transparent 55%),
+                radial-gradient(ellipse at 30% 90%, rgba(90, 138, 62, 0.18) 0%, transparent 50%),
+                repeating-linear-gradient(0deg, transparent 0, transparent 5px, rgba(160, 117, 85, 0.04) 5px, rgba(160, 117, 85, 0.04) 6px),
+                #f4ead0;
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .solar-sun {
+            position: absolute;
+            top: 12%;
+            right: 14%;
+            width: 32px;
+            height: 32px;
+            background: radial-gradient(circle, #f5b347 0%, #e8a153 60%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 18px rgba(245, 179, 71, 0.55);
+        }
+        .solar-sun::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1.5px dashed rgba(245, 179, 71, 0.4);
+        }
+        .solar-card {
+            position: absolute;
+            top: 32%;
+            left: 12%;
+            width: 56%;
+            background: #fbf5e3;
+            border: 1.5px solid #a07555;
+            border-radius: 4px;
+            padding: 0.6rem 0.7rem 0.5rem;
+            box-shadow: 3px 3px 0 rgba(160, 117, 85, 0.25);
+            font-family: 'Playfair Display', 'Lora', 'Source Serif Pro', serif;
+            color: #3a2a1a;
+        }
+        .solar-card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.1;
+            font-style: italic;
+            margin-bottom: 0.15rem;
+        }
+        .solar-card-sub {
+            font-size: 0.4rem;
+            font-family: 'Courier New', monospace;
+            color: #5a8a3e;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .solar-leaf {
+            position: absolute;
+            top: 18%;
+            left: 8%;
+            width: 26px;
+            height: 36px;
+            background: linear-gradient(135deg, #7ab055 0%, #5a8a3e 100%);
+            border-radius: 0 100% 0 100%;
+            transform: rotate(-25deg);
+            box-shadow: inset -2px -2px 4px rgba(40, 80, 30, 0.3);
+        }
+        .solar-leaf::after {
+            content: '';
+            position: absolute;
+            top: 8%;
+            left: 48%;
+            width: 1px;
+            height: 80%;
+            background: rgba(40, 80, 30, 0.4);
+            transform: rotate(15deg);
+        }
+        .solar-leaf-2 {
+            position: absolute;
+            bottom: 18%;
+            right: 9%;
+            width: 22px;
+            height: 30px;
+            background: linear-gradient(135deg, #95c46f 0%, #6b9e4a 100%);
+            border-radius: 0 100% 0 100%;
+            transform: rotate(135deg);
+            opacity: 0.85;
+        }
+        .solar-tag {
+            position: absolute;
+            bottom: 14%;
+            left: 14%;
+            background: #5a8a3e;
+            color: #fbf5e3;
+            font-family: 'Courier New', monospace;
+            font-size: 0.42rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            letter-spacing: 0.18em;
+            border-radius: 2px;
+            box-shadow: 1px 1px 0 rgba(60, 80, 40, 0.4);
+        }
+        .solar-panel {
+            position: absolute;
+            bottom: 12%;
+            right: 18%;
+            width: 30px;
+            height: 22px;
+            background:
+                repeating-linear-gradient(0deg, #1a3a5a 0, #1a3a5a 2px, #2a4a6a 2px, #2a4a6a 5px),
+                repeating-linear-gradient(90deg, transparent 0, transparent 9px, rgba(255, 255, 255, 0.2) 9px, rgba(255, 255, 255, 0.2) 10px);
+            transform: perspective(40px) rotateX(35deg);
+            border: 1px solid #a07555;
+            border-radius: 1px;
+        }
+        /* ==================== End Solarpunk ==================== */
+
+        /* ==================== Frutiger Aero / 千禧水汽 ==================== */
+        .preview-frutiger {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.7) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 100%, rgba(149, 225, 211, 0.4) 0%, transparent 50%),
+                linear-gradient(180deg, #87ceeb 0%, #4ecdc4 50%, #95e1d3 100%);
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .aero-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 35%, rgba(110, 200, 230, 0.15) 70%, transparent 100%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+        .aero-bubble-1 { width: 44px; height: 44px; top: 14%; left: 12%; }
+        .aero-bubble-2 { width: 28px; height: 28px; top: 26%; right: 16%; }
+        .aero-bubble-3 { width: 20px; height: 20px; bottom: 28%; left: 22%; }
+        .aero-bubble-4 { width: 32px; height: 32px; bottom: 14%; right: 12%; }
+        .aero-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 110px;
+            padding: 0.4rem 1rem;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(110, 200, 230, 0.3) 50%, rgba(80, 180, 220, 0.5) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 100px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 -2px 4px rgba(255, 255, 255, 0.3),
+                0 4px 10px rgba(50, 150, 200, 0.35),
+                0 0 0 1px rgba(120, 200, 230, 0.4);
+            color: #0a4a7a;
+            font-family: 'Segoe UI', 'Frutiger', 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-align: center;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .aero-button::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 8%;
+            right: 8%;
+            height: 40%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 100px;
+            pointer-events: none;
+        }
+        .aero-leaf {
+            position: absolute;
+            top: 18%;
+            right: 9%;
+            width: 22px;
+            height: 14px;
+            background: linear-gradient(135deg, #2ea44f 0%, #137a3a 100%);
+            border-radius: 0 100% 0 100%;
+            transform: rotate(35deg);
+            box-shadow: 0 2px 4px rgba(0, 80, 40, 0.3);
+        }
+        .aero-drop {
+            position: absolute;
+            bottom: 22%;
+            left: 14%;
+            width: 14px;
+            height: 18px;
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(110, 200, 230, 0.6) 50%, rgba(50, 150, 200, 0.5) 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform: rotate(-15deg);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        /* ==================== End Frutiger Aero ==================== */
+
 
     </style>
 </head>
@@ -3519,6 +3811,36 @@
                 </div>
                 <div class="scrap-tag">NOTE</div>
                 <div class="scrap-doodle"></div>
+            `,
+            'preview-liquid': `
+                <div class="liquid-bg-photo"></div>
+                <div class="liquid-orb"></div>
+                <div class="liquid-pill">
+                    <div class="liquid-dot active"></div>
+                    <div class="liquid-dot"></div>
+                    <div class="liquid-dot"></div>
+                    <div class="liquid-dot"></div>
+                </div>
+            `,
+            'preview-solarpunk': `
+                <div class="solar-sun"></div>
+                <div class="solar-leaf"></div>
+                <div class="solar-leaf-2"></div>
+                <div class="solar-card">
+                    <div class="solar-card-title">Grow<br>Together</div>
+                    <div class="solar-card-sub">— solar · soil · soul —</div>
+                </div>
+                <div class="solar-tag">SOLARPUNK</div>
+                <div class="solar-panel"></div>
+            `,
+            'preview-frutiger': `
+                <div class="aero-bubble aero-bubble-1"></div>
+                <div class="aero-bubble aero-bubble-2"></div>
+                <div class="aero-bubble aero-bubble-3"></div>
+                <div class="aero-bubble aero-bubble-4"></div>
+                <div class="aero-leaf"></div>
+                <div class="aero-drop"></div>
+                <div class="aero-button">Start ▶</div>
             `
         };
 
@@ -4820,6 +5142,224 @@ The interface looks like a page torn from someone's journal — cream paper back
 ## Keywords
 Scrapbook, anti-design, handmade, washi tape, sticky note, kraft paper, rubber stamp, polaroid, hand-lettered, Caveat, Permanent Marker, Bradley Hand, typewriter, Special Elite, doodle, imperfection, tactile, craft, journal, zine, indie, slow, anti-AI, 2026 counter-trend, Adobe Canva Figma trend report, hyper-color resistance`
 
+            },
+            {
+                id: 'liquid',
+                name: '液态玻璃 / Liquid Glass',
+                subtitle: 'Apple WWDC 2025 · 下一个十年 iOS 范式',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['动态折射', '镜面高光', '光学扭曲', '深度分层', 'Apple范式', '内容优先', '硬件几何对齐'],
+                preview: 'preview-liquid',
+                prompt: `【Liquid Glass 液态玻璃 UI设计提示词】
+
+Design a UI in Apple's Liquid Glass language — the material system introduced by Alan Dye at WWDC 2025 and deployed across iOS 26, iPadOS 26, macOS Tahoe 26, watchOS 26, tvOS 26 and visionOS 26. Liquid Glass is not a theme; it is a real-time refractive material that bends light from content behind it, reacts to motion, and adapts between light and dark modes automatically. Three principles drive it: content leads, controls float above on glass layers; hardware-aligned geometry, rounded corners mirror device edges; cross-platform harmony, the same material across watch, phone, tablet, desktop, TV, and spatial.
+
+## Style Overview
+The interface is built in two layers — a rich, photographic content layer below and a translucent floating glass layer above. Controls live on glass: pill-shaped tab bars, capsule toggles, floating toolbars, modal sheets — all with subtle refraction, specular highlights at the top edge, and a soft hairline border. As the user scrolls or moves the device, the glass picks up color from the content beneath. The tab bar shrinks when scrolling and expands on return. Nothing sits in a solid box anymore.
+
+## Core Design Elements
+• Translucent surfaces with backdrop-filter: blur(20-30px) saturate(180%)
+• Specular highlight: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 100%) along the top 40-50% of each glass element
+• Hairline border: 1px solid rgba(255,255,255,0.3-0.4)
+• Inner shadow: inset 0 1px 0 rgba(255,255,255,0.6) for top-edge gleam
+• Drop shadow: 0 8-12px 24-32px rgba(0,0,0,0.3-0.4) for floating depth
+• Pill / capsule geometry: border-radius 100px for tab bars and controls
+• Rounded squircles for cards: border-radius matches device corner radius
+• Active indicator: linear-gradient(90deg, system-color-start, system-color-end) instead of solid fill
+• Floating orbs / lens elements with radial-gradient highlights
+• Content layer underneath uses photographic imagery, vibrant gradients, or rich illustration
+
+## Color Palette
+• Dark mode primary background: #0a1124 to #1a1f3d (deep space blue)
+• Light mode primary background: #f5f5f7 to #ffffff
+• Glass tint dark: rgba(255,255,255,0.15-0.22)
+• Glass tint light: rgba(255,255,255,0.55-0.7)
+• Apple accent colors retained: system blue #007aff, indigo #5e5ce6, pink #ff2d55, orange #ff9500
+• Refraction tints in content layer: pink #ff9a8b, blue #6ec1ff, purple #c084fc, mint #6ee7c7
+
+## Typography
+• San Francisco Pro / SF Pro Display (Apple system) for all interface text
+• Semibold or Bold for primary actions, Regular for body
+• Letter-spacing slightly tighter than default at large sizes
+• Text on glass uses pure white #ffffff or pure black #000000 with sufficient contrast
+• Never use semi-transparent text — readability over aesthetic
+
+## Layout Principles
+• Two-layer thinking: content layer below, controls floating above on glass
+• Controls shrink and expand based on scroll context (adaptive density)
+• Edge-to-edge content, controls hover inside safe areas
+• Modal sheets present from bottom with backdrop blur
+• Sidebars extend to window edge with seamless refraction
+• Icons retain original colors — never tint them to match the glass
+
+## Difference From Glassmorphism
+• Classic glassmorphism = static frosted backdrop-filter blur
+• Liquid Glass = dynamic real-time refraction + specular highlights + light/dark auto-adapt + hardware-aligned geometry
+• Glassmorphism is a CSS effect. Liquid Glass is a material system.
+• Glass cards sit flat against the page. Liquid Glass floats above content and bends light through it.
+
+## Key Features
+• Next-generation iOS / macOS / iPadOS / visionOS applications
+• Premium SaaS dashboards (Vercel, Linear, Raycast style)
+• Music players, photo apps, video apps where content is hero
+• Spatial computing interfaces (Vision Pro pattern)
+• High-end portfolio sites and Apple-adjacent products
+
+## Keywords
+Liquid Glass, Apple WWDC 2025, iOS 26, macOS Tahoe, visionOS, material system, real-time refraction, specular highlight, backdrop-filter, dynamic blur, content leads, hardware-aligned geometry, pill tab bar, capsule toggle, floating toolbar, depth layer, Alan Dye, next-decade iOS, light-dark adaptive, spatial computing`
+            },
+            {
+                id: 'solarpunk',
+                name: '太阳朋克 / Solarpunk',
+                subtitle: 'Cyber 的乐观对立面 · 阳光乌托邦',
+                category: 'creative',
+                tag: 'creative',
+                features: ['自然元素', '太阳能板', '植物叶片', '大地色系', '衬线字体', '反 Cyber', '乌托邦未来'],
+                preview: 'preview-solarpunk',
+                prompt: `【Solarpunk 太阳朋克 UI设计提示词】
+
+Design a UI in Solarpunk style — the optimistic counter to Cyberpunk. Where cyberpunk imagines a dystopian neon-drenched future of corporate decay, solarpunk imagines a sustainable, plant-integrated, sunlit world after the climate transition. Named explicitly around 2008 in opposition to cyberpunk, the aesthetic has escaped speculative fiction into mainstream design by 2026, identified by Solarpunk Magazine and Retrowave as one of the two leading "future aesthetics" of the decade.
+
+## Style Overview
+The interface feels like a page from a beautifully printed nature journal: cream paper background with subtle fiber texture, warm soft sunlight from the upper right, hand-drawn leaves and vines framing the content, small icons of solar panels and wind turbines as decorative elements, a serif typeface used in italics for the main heading, and monospace uppercase for tags. The palette is rooted in nature — moss green, oak brown, ivory cream, sunset orange — never neon, never digital. Hope, not hype.
+
+## Core Design Elements
+• Cream / kraft paper background with paper-fiber noise (repeating-linear-gradient at 3-5% opacity)
+• Soft warm radial gradient in upper right corner simulating sunlight
+• Hand-drawn or organic-shaped leaves and vines as decoration (border-radius 0 100% 0 100%)
+• Solar panel icons rendered as small isometric/perspective rectangles with grid pattern
+• Cards with thin warm-brown borders (1.5-2px solid) and offset solid shadow (3-4px, no blur)
+• Botanical illustrations or leaf silhouettes as accent
+• Serif italic display typography for emotional headlines
+• Monospace uppercase for labels, tags, dates ("evidence of intentional craft")
+• Olive green tags with sand-colored text, slightly rotated for handcrafted feel
+• Subtle solid drop shadows in warm brown (never pure black, never blurred)
+
+## Color Palette
+• Ivory cream background: #f4ead0, #fbf5e3
+• Kraft paper: #ead7b3
+• Moss green / sage: #5a8a3e, #7ab055, #95c46f
+• Oak brown: #a07555, #6b4a30
+• Sunset orange / amber: #e8a153, #f5b347
+• Ink: #3a2a1a (warm dark brown, never pure black)
+• Accent for tech elements: deep navy #1a3a5a (solar panel framing)
+
+## Typography
+• Display: Playfair Display Italic, Lora, Source Serif Pro, Cormorant Garamond
+• Body: serif at 14-15px with generous line-height (1.6+)
+• Labels / tags: Courier New / IBM Plex Mono uppercase with +0.16em tracking
+• Mix serif italic and monospace deliberately — handcraft meets engineering
+• Never use clean geometric sans like Helvetica or Inter
+
+## Layout Principles
+• Generous warm whitespace — like the margins of a printed botanical book
+• Asymmetric placement of natural elements (leaves in opposite corners)
+• Cards have visible weight and texture, sit on the page rather than floating
+• Solid shadows offset 3-4px down-right (printing-press feel)
+• Decorative botanical elements rotated slightly off-axis (±15-25°)
+• Embedded "tech" elements (solar panels, wind turbines) integrated tastefully, not dominating
+
+## Difference From Cyber
+• Cyber = black background, neon magenta/cyan, scanlines, glitch, corporate dystopia
+• Solarpunk = cream background, moss/oak/sunset, hand-drawn botanicals, post-climate utopia
+• Cyber is "high tech, low life." Solarpunk is "high tech, high life with plants."
+• Cyber rebels against the system. Solarpunk imagines what comes after we win.
+
+## Difference From Scrapbook
+• Scrapbook = handmade craft journaling, washi tape, sticky notes, deliberate imperfection
+• Solarpunk = published botanical journal, intentional typography, integrated tech-with-nature
+• Scrapbook is personal craft. Solarpunk is curated ecological design.
+
+## Key Features
+• Sustainability and climate-tech startups
+• Community gardens, vertical farms, renewable energy platforms
+• Wellness and slow-living applications
+• Eco-conscious e-commerce (artisan, organic, fair-trade)
+• Speculative fiction publications, ecological journals
+• Anti-AI / anti-dystopia design statements
+
+## Keywords
+Solarpunk, post-cyberpunk, climate optimism, sustainability, vertical garden, solar panel, wind turbine, plant-integrated technology, Becky Chambers, Kim Stanley Robinson, vine, leaf, cream paper, kraft, moss green, oak brown, sunset, Playfair Display italic, botanical, ecological, utopia, hope, hopepunk, Solarpunk Magazine, future aesthetic 2026, post-climate transition`
+            },
+            {
+                id: 'frutiger',
+                name: '千禧水汽 / Frutiger Aero',
+                subtitle: '2003-2013 Vista 复刻 · TikTok 怀旧大爆发',
+                category: 'creative',
+                tag: 'creative',
+                features: ['透明气泡', '蓝绿渐变', '玻璃高光', '自然元素', 'Aero 玻璃', '圆润按钮', '乐观未来'],
+                preview: 'preview-frutiger',
+                prompt: `【Frutiger Aero 千禧水汽 UI设计提示词】
+
+Design a UI in Frutiger Aero style — the optimistic blue-green glassy aesthetic that defined Windows Vista (2007), Windows 7 (2009), early iOS, Nintendo Wii, and consumer electronics packaging from 2003 to 2013. After being dormant for a decade, Frutiger Aero exploded on TikTok in 2024-2026 under the #frutigeraero tag as the next major nostalgia wave following Y2K. It is the visual language of "the future as imagined in 2007" — clean, glossy, optimistic, full of bubbles, water, and nature.
+
+## Style Overview
+The interface is bathed in sky blue and aqua green vertical gradient, with semi-transparent floating bubbles drifting across the surface. A central glossy capsule button gleams with a strong upper highlight reflection — the signature Aero glass effect. Small natural elements (a green leaf, a water droplet, fish, dolphins, clouds) anchor the composition. Everything is round, soft, and inviting. There is no edge anywhere; every shape is a curve. The future, in 2007, was supposed to look like this.
+
+## Core Design Elements
+• Vertical gradient background: sky blue top → aqua mid → mint green bottom
+• Strong white radiance from the top simulating sky-light
+• Semi-transparent bubbles of varying sizes (20px to 60px), with radial gradient highlights
+• Aero glass button: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, transparent 50%, color-tint 50%, color-darker 100%) — the iconic Vista 50/50 split
+• Inset top highlight: inset 0 1px 0 rgba(255,255,255,0.9) on every button and pill
+• Outer glow: 0 4-8px 16px rgba(blue/green, 0.35) for floating presence
+• Rounded capsules and pills (border-radius: 100px) for all interactive elements
+• Natural decorative elements: leaves, water droplets, fish silhouettes, clouds, grass blades
+• Window chrome: thick white border with rounded corners and subtle reflections
+• Backdrop-filter: blur(4-8px) on glass elements
+
+## Color Palette
+• Sky blue: #87ceeb, #6dd5ed, #4a9fd1
+• Aqua / teal: #4ecdc4, #6ec1ff
+• Mint green: #95e1d3, #b8e8a5
+• Deep ocean accent: #0a4a7a, #1a6a9a
+• Leaf green: #2ea44f, #137a3a
+• Highlight white: rgba(255, 255, 255, 0.7-0.9)
+• Text on glass: deep ocean #0a4a7a with white text-shadow
+
+## Typography
+• Display: Segoe UI (Microsoft signature) — the Vista/Windows 7 default
+• Alternative: Frutiger (the typeface that named the aesthetic), Helvetica Neue
+• Bold weight for buttons with letter-spacing +0.03 to +0.05em
+• White text-shadow: 0 1px 0 rgba(255,255,255,0.8) for that engraved glass look
+• Never use serifs — Frutiger Aero is exclusively sans-serif
+
+## Layout Principles
+• Soft, rounded, never sharp — every corner is at least 8px radius
+• Central focus with decorative elements drifting in periphery
+• Multiple layers of transparency stacked (Vista famously called this "Aero")
+• Strong vertical light source from top (sky metaphor)
+• Bubbles and natural elements add ambient motion, not literal content
+• Buttons have weight — they look pressable, glossy, almost edible
+• Generous breathing room between elements (optimistic, not cramped)
+
+## Difference From Y3K
+• Y3K = chrome metal, holographic iridescence, dark space backgrounds, Sailor Moon energy
+• Frutiger Aero = sky blue/green water, clear bubbles, sunlight optimism, Wii/Vista energy
+• Y3K is the cool kid's mall in 2002. Frutiger Aero is the science museum gift shop in 2007.
+
+## Difference From Skeuomorphism
+• Skeuomorphism = pretend digital objects are real physical objects (leather, wood, paper)
+• Frutiger Aero = celebrate the digital glass surface itself, plus natural references
+• Skeuo is "make it look like a thing." Frutiger Aero is "make it look like the future of glass."
+
+## Difference From Glassmorphism / Glass
+• Classic glass = flat semi-transparent frosted card on dark background
+• Frutiger Aero = full glossy ecosystem with bubbles, sky, leaves, water — a complete world
+• Glass is a CSS effect. Frutiger Aero is a worldview.
+
+## Key Features
+• Nostalgia-driven consumer brands (Y2K-adjacent fashion, retro gaming)
+• Wellness, water, ecology, aquatic theme products
+• Music players (iTunes 7 / 8 era revival)
+• Children and family applications
+• TikTok-era nostalgic content platforms
+• Operating system theme packs and customization tools
+• 2026 anti-AI nostalgia statements (real human optimism vs AI sterility)
+
+## Keywords
+Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7, Wii, Y2K nostalgia, TikTok #frutigeraero, sky blue, aqua, bubble, gloss, glassy, optimistic future, 2007 aesthetic, 2024-2026 revival, natural element, leaf, water drop, fish, dolphin, clouds, gradient background, capsule button, vertical light, semi-transparent`
             }
         ];
 
