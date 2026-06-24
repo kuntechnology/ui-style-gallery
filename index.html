@@ -2689,6 +2689,362 @@
         }
         /* ==================== End Skeuomorphism ==================== */
 
+        /* ==================== Bento Grid / 便当网格 ==================== */
+        .preview-bento {
+            background: #0a0a0a;
+            position: absolute;
+            inset: 0;
+            padding: 0.55rem;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 0.4rem;
+            font-family: -apple-system, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+        }
+        .bento-card {
+            background: #18181b;
+            border-radius: 10px;
+            padding: 0.5rem 0.6rem;
+            color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .bento-card-hero {
+            grid-row: span 2;
+            background: linear-gradient(135deg, #0071e3 0%, #0050b3 100%);
+            border: none;
+        }
+        .bento-card-wide {
+            grid-column: span 2;
+        }
+        .bento-tag {
+            font-size: 0.5rem;
+            color: #a1a1aa;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .bento-card-hero .bento-tag {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .bento-num {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+        .bento-num-sm {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        .bento-arrow {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #34d399;
+            letter-spacing: -0.02em;
+        }
+        .bento-bar {
+            height: 5px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #34d399 0%, #34d399 70%, #3f3f46 70%);
+        }
+        .bento-foot {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.02em;
+        }
+        /* ==================== End Bento Grid ==================== */
+
+        /* ==================== Editorial / 编辑杂志风 ==================== */
+        .preview-editorial {
+            background: #f7f3ed;
+            position: absolute;
+            inset: 0;
+            padding: 0.7rem 0.8rem;
+            font-family: 'Playfair Display', 'Cormorant Garamond', 'Times New Roman', 'Songti SC', Georgia, serif;
+            color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+        }
+        .editorial-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 0.35rem;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 0.45rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 600;
+        }
+        .editorial-vol {
+            font-style: italic;
+        }
+        .editorial-issue {
+            color: #c7001a;
+            font-weight: 700;
+        }
+        .editorial-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin: 0.45rem 0 0.3rem;
+            font-style: italic;
+        }
+        .editorial-title em {
+            color: #c7001a;
+            font-style: normal;
+        }
+        .editorial-rule {
+            height: 1px;
+            background: #1a1a1a;
+            margin: 0.25rem 0 0.35rem;
+        }
+        .editorial-cols {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.45rem;
+            font-size: 0.42rem;
+            line-height: 1.5;
+            color: #3a3a3a;
+            font-family: 'Charter', 'Georgia', serif;
+        }
+        .editorial-col {
+            text-align: justify;
+            hyphens: auto;
+        }
+        .editorial-drop {
+            float: left;
+            font-size: 1.05rem;
+            line-height: 0.85;
+            margin: 0 3px 0 0;
+            font-weight: 800;
+            color: #1a1a1a;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+        }
+        .editorial-caption {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.38rem;
+            color: #6b6b6b;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
+        }
+        /* ==================== End Editorial ==================== */
+
+        /* ==================== Y3K / 复古未来主义 ==================== */
+        .preview-y3k {
+            background:
+                radial-gradient(ellipse at 28% 22%, rgba(168, 85, 247, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 78%, rgba(56, 189, 248, 0.32) 0%, transparent 55%),
+                radial-gradient(ellipse at 88% 15%, rgba(236, 72, 153, 0.22) 0%, transparent 45%),
+                linear-gradient(135deg, #0c0a1f 0%, #1a1235 50%, #14102a 100%);
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            font-family: 'Eurostile', 'Arial Black', 'Helvetica', sans-serif;
+        }
+        .y3k-blob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -45%);
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 200deg,
+                #c4b5fd 0%,
+                #fbcfe8 14%,
+                #fda4af 28%,
+                #fef3c7 42%,
+                #a5f3fc 58%,
+                #ddd6fe 75%,
+                #93c5fd 88%,
+                #c4b5fd 100%);
+            box-shadow:
+                0 0 32px rgba(168, 85, 247, 0.55),
+                0 0 70px rgba(56, 189, 248, 0.25),
+                inset 0 -8px 16px rgba(99, 102, 241, 0.4),
+                inset 0 8px 12px rgba(255, 255, 255, 0.5);
+        }
+        .y3k-blob::before {
+            content: '';
+            position: absolute;
+            top: 14%;
+            left: 22%;
+            width: 38%;
+            height: 30%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.85) 0%, transparent 70%);
+            filter: blur(1px);
+        }
+        .y3k-blob::after {
+            content: '';
+            position: absolute;
+            bottom: 18%;
+            right: 22%;
+            width: 24%;
+            height: 18%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(196, 181, 253, 0.6) 0%, transparent 75%);
+            filter: blur(1.5px);
+        }
+        .y3k-title {
+            position: absolute;
+            top: 9%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.15rem;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            background: linear-gradient(180deg, #f5f3ff 0%, #ddd6fe 40%, #818cf8 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-shadow: 0 0 14px rgba(196, 181, 253, 0.5);
+        }
+        .y3k-sub {
+            position: absolute;
+            bottom: 11%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.42rem;
+            letter-spacing: 0.5em;
+            color: #c4b5fd;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-shadow: 0 0 6px rgba(196, 181, 253, 0.4);
+        }
+        .y3k-star {
+            position: absolute;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.8), 0 0 8px rgba(196, 181, 253, 0.6);
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+        .y3k-star.s1 { top: 24%; left: 16%; }
+        .y3k-star.s2 { top: 32%; right: 13%; font-size: 0.5rem; opacity: 0.85; }
+        .y3k-star.s3 { bottom: 30%; left: 14%; font-size: 0.55rem; opacity: 0.7; }
+        .y3k-star.s4 { bottom: 38%; right: 17%; font-size: 0.4rem; opacity: 0.6; }
+        /* ==================== End Y3K ==================== */
+
+        /* ==================== Scrapbook / 拼贴剪贴簿 ==================== */
+        .preview-scrapbook {
+            background:
+                radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 60%),
+                radial-gradient(circle at 78% 72%, rgba(180, 140, 80, 0.12) 0%, transparent 50%),
+                repeating-linear-gradient(0deg, transparent 0, transparent 6px, rgba(180, 140, 80, 0.05) 6px, rgba(180, 140, 80, 0.05) 7px),
+                repeating-linear-gradient(90deg, transparent 0, transparent 8px, rgba(180, 140, 80, 0.04) 8px, rgba(180, 140, 80, 0.04) 9px),
+                #f0e3c8;
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .scrap-note {
+            position: absolute;
+            top: 30%;
+            left: 14%;
+            width: 56%;
+            background: #fffceb;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18), 0 1px 2px rgba(0, 0, 0, 0.1);
+            transform: rotate(-4deg);
+            padding: 0.55rem 0.6rem 0.6rem;
+            font-family: 'Caveat', 'Bradley Hand', 'Shadows Into Light', 'Comic Sans MS', cursive;
+            color: #2a2a2a;
+            font-size: 0.95rem;
+            line-height: 1.05;
+            border-radius: 1px;
+            font-weight: 600;
+        }
+        .scrap-note::before {
+            content: '';
+            position: absolute;
+            top: -9px;
+            left: 28%;
+            width: 52px;
+            height: 18px;
+            background: linear-gradient(180deg, rgba(255, 215, 100, 0.85) 0%, rgba(255, 195, 60, 0.85) 100%);
+            transform: rotate(7deg);
+            border-left: 1px dashed rgba(180, 140, 0, 0.45);
+            border-right: 1px dashed rgba(180, 140, 0, 0.45);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+        .scrap-note small {
+            display: block;
+            font-size: 0.42rem;
+            color: #c7001a;
+            margin-top: 0.2rem;
+            font-family: 'Courier New', 'Special Elite', monospace;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+        .scrap-stamp {
+            position: absolute;
+            top: 9%;
+            right: 8%;
+            width: 38px;
+            height: 38px;
+            border: 2.5px solid #c7001a;
+            border-radius: 50%;
+            color: #c7001a;
+            font-family: 'Courier New', 'Special Elite', monospace;
+            font-size: 0.38rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.1;
+            transform: rotate(-12deg);
+            opacity: 0.85;
+            letter-spacing: 0.05em;
+        }
+        .scrap-tag {
+            position: absolute;
+            bottom: 14%;
+            left: 9%;
+            background: #6b8e4e;
+            color: #fffceb;
+            font-family: 'Courier New', 'Special Elite', monospace;
+            font-size: 0.42rem;
+            font-weight: 700;
+            padding: 0.18rem 0.45rem;
+            letter-spacing: 0.18em;
+            transform: rotate(-6deg);
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .scrap-doodle {
+            position: absolute;
+            bottom: 16%;
+            right: 14%;
+            width: 22px;
+            height: 22px;
+            border: 1.5px solid #1a1a1a;
+            border-radius: 50% 48% 52% 50% / 50% 52% 48% 50%;
+            transform: rotate(12deg);
+        }
+        .scrap-doodle::after {
+            content: '✦';
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            transform: rotate(-10deg);
+            font-weight: 700;
+        }
+        /* ==================== End Scrapbook ==================== */
+
+
     </style>
 </head>
 <body>
@@ -3106,6 +3462,63 @@
                         <div class="skeuo-btn">NEXT</div>
                     </div>
                 </div>
+            `,
+            'preview-bento': `
+                <div class="bento-card bento-card-hero">
+                    <span class="bento-tag">Active Users</span>
+                    <div>
+                        <div class="bento-num">98%</div>
+                        <div class="bento-foot">Today · Online</div>
+                    </div>
+                </div>
+                <div class="bento-card">
+                    <span class="bento-tag">Revenue</span>
+                    <div class="bento-arrow">+12%</div>
+                </div>
+                <div class="bento-card">
+                    <span class="bento-tag">Theme</span>
+                    <div class="bento-num-sm">◐</div>
+                </div>
+                <div class="bento-card bento-card-wide">
+                    <span class="bento-tag">Performance</span>
+                    <div class="bento-bar"></div>
+                </div>
+            `,
+            'preview-editorial': `
+                <div class="editorial-top">
+                    <span class="editorial-vol">Vol. XXVII</span>
+                    <span>The Quarterly</span>
+                    <span class="editorial-issue">№ 042</span>
+                </div>
+                <div class="editorial-title">Quiet <em>Type</em></div>
+                <div class="editorial-rule"></div>
+                <div class="editorial-cols">
+                    <div class="editorial-col">
+                        <span class="editorial-drop">T</span>he revival of editorial design brings serif typography and grid discipline back to the screen.
+                    </div>
+                    <div class="editorial-col">
+                        Like turning the page of a magazine — every margin and rule does its quiet work in silence.
+                    </div>
+                </div>
+                <div class="editorial-caption">— By the Editors · Spring 2026</div>
+            `,
+            'preview-y3k': `
+                <div class="y3k-title">Y3K</div>
+                <div class="y3k-blob"></div>
+                <div class="y3k-sub">2000 · 3000</div>
+                <div class="y3k-star s1">✦</div>
+                <div class="y3k-star s2">✧</div>
+                <div class="y3k-star s3">✦</div>
+                <div class="y3k-star s4">✧</div>
+            `,
+            'preview-scrapbook': `
+                <div class="scrap-stamp">JUN<br>2026</div>
+                <div class="scrap-note">
+                    Hello,<br>世界 ♡
+                    <small>— handmade vibes —</small>
+                </div>
+                <div class="scrap-tag">NOTE</div>
+                <div class="scrap-doodle"></div>
             `
         };
 
@@ -4167,6 +4580,245 @@ Every interface element should look like a tangible object — leather notebook,
 
 ## Keywords
 Skeuomorphism, skeuomorphic, iOS 6, leather, wood, brushed metal, stitching, bevel, gradient, inset shadow, LCD, realistic, photoreal, material design (NOT Google Material), Apple Forstall era, nostalgia, physical metaphor`
+
+            },
+            {
+                id: 'bento',
+                name: '便当网格 / Bento Grid',
+                subtitle: '模块化非对称卡片 · Apple 范式',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['圆角卡片', '非对称排布', '信息分层', '苹果风', '响应式', '密度可控', 'CSS Grid'],
+                preview: 'preview-bento',
+                prompt: `【Bento Grid 便当网格 UI设计提示词】
+
+Design a UI in the Bento Grid layout style — a modular, asymmetric card system inspired by Japanese bento boxes, popularized by Apple's product pages and modern SaaS dashboards from 2023-2026.
+
+## Style Overview
+Content is split into rounded-rectangle cards of varying proportions (square, wide, tall, hero). Each card carries ONE message — a number, a chart, an icon, a quote. The grid feels orderly yet asymmetric, dense yet breathable. It is the layout language of 2024-2026 Apple Keynote, Vercel, Linear, and Raycast.
+
+## Core Design Elements
+• Modular cards with large border-radius (12-24px), filling the viewport in a CSS Grid layout
+• Asymmetric proportions: one or two "hero" cards span 2 columns or 2 rows, surrounded by smaller satellite cards
+• ONE message per card: a giant number, a sparkline, a single icon, a one-line quote
+• Subtle elevation: hairline border (1px rgba white 0.05) or very soft drop shadow (no heavy shadows)
+• Dark-mode-first palette (premium feel) but works in light mode too
+• Generous internal padding; cards never feel cramped
+• Optional gradient accent on hero cards (Apple blue, indigo, emerald, rose)
+
+## Color Palette
+• Dark variant: background #0a0a0a, card #18181b, hero linear-gradient(135deg, #0071e3 → #0050b3), success #34d399, muted text #a1a1aa
+• Light variant: background #f4f4f5, card #ffffff, hairline border #e4e4e7, accents same as dark
+• Accent gradients: Apple blue (#0071e3 → #0050b3), indigo (#6366f1 → #4338ca), emerald (#10b981 → #047857), rose (#f43f5e → #be123c)
+
+## Typography
+• Font Family: SF Pro Display, Inter, Geist, system-ui (NEVER serif)
+• Display numbers: 700-800 weight, -0.04em letter-spacing, large (3-6rem for hero)
+• Labels: 0.7rem uppercase, +0.1em letter-spacing, muted color
+• Body: 0.95rem regular for one-line quotes or descriptions
+
+## Grid Patterns
+• 3-column / 2-row classic bento (Apple Watch product page)
+• 4-column / 3-row dense dashboard (Linear roadmap, Stripe dashboard)
+• Asymmetric editorial bento (one tall + three short)
+• Use CSS Grid + grid-row/grid-column span, with subgrid for nested layouts
+
+## Key Features
+• SaaS landing pages with feature highlights
+• Product launch pages (Apple, Vercel, Linear, Raycast)
+• Analytics dashboards with at-a-glance KPIs
+• Portfolio "selected work" grids
+• Marketing pages where each card is a stat or testimonial
+• AI tool homepages (Anthropic, OpenAI, Perplexity)
+
+## Difference From Standard Card Grids
+• Bento = INTENTIONALLY asymmetric, varying card sizes, one message per card
+• Card grid = uniform card sizes, multiple data points per card
+• Bento prioritizes visual rhythm and information hierarchy over uniformity
+
+## Keywords
+Bento Grid, modular, asymmetric, Apple Keynote, Vercel, Linear, Raycast, dashboard, CSS Grid, asymmetric layout, hero card, big numbers, hairline border, dark mode, 2024-2026 trend, premium SaaS, one-message-per-card`
+
+            },
+            {
+                id: 'editorial',
+                name: '编辑杂志 / Editorial',
+                subtitle: '印刷感网格排版 · 衬线字体',
+                category: 'creative',
+                tag: 'creative',
+                features: ['衬线字体', '严谨网格', '大留白', '版面层次', '杂志感', '红色点缀', '内容驱动'],
+                preview: 'preview-editorial',
+                prompt: `【Editorial 编辑杂志风 UI设计提示词】
+
+Design a UI in Editorial Magazine style — a print-inspired aesthetic with serif typography, strict grid discipline, generous white space, and the quiet authority of a well-designed magazine like The New Yorker, Wallpaper*, or Monocle.
+
+## Style Overview
+The interface reads like a printed page. Serif headlines anchor the hierarchy, hairline rules separate sections, two- or three-column text flows justify naturally, and a single accent color (almost always crimson red) draws the eye to issue numbers or pull quotes. Restraint is the dominant feeling — every element earns its place.
+
+## Core Design Elements
+• Serif typography for headlines (Playfair Display, Cormorant Garamond, GT Sectra, Times New Roman, 思源宋体)
+• Sans-serif for captions and labels (Inter, Söhne, or system sans)
+• Hairline horizontal rules (1px solid) separating masthead, headline, and body
+• Multi-column body text (2-3 columns), justified alignment with hyphens
+• Drop caps on lead paragraphs (3-line drop, bold serif)
+• Issue number / volume / date in uppercase with wide letter-spacing
+• Italic for subtitles, captions, and pull quotes
+• A single accent color (deep red #c7001a or burgundy) used sparingly
+
+## Color Palette
+• Background: warm ivory #f7f3ed or cream #faf6ee (never pure white)
+• Body text: near-black #1a1a1a, never #000
+• Captions / metadata: muted gray #6b6b6b
+• Accent: crimson red #c7001a or oxblood #8b1e1e
+• Optional second accent: midnight blue #1a2547 or forest green #2a4a32
+
+## Typography Pairing
+• Headline serif (Playfair / Cormorant / GT Sectra) + body serif (Charter / Source Serif / Tisa)
+• Or: bold sans display (Söhne Breit) + serif body for a more modern editorial feel
+• Caption sans (Inter Caption / Söhne Mono) for metadata and folios
+• Generous line-height (1.5-1.7) on body text
+
+## Layout Principles
+• Strict baseline grid — every element aligns to a vertical rhythm
+• Asymmetric column widths (wide-narrow-wide) inspired by magazine spreads
+• Pull quotes at 1.5-2x body size, in italic serif, flanked by hairlines
+• Liberal use of white space — the page breathes
+• Page numbers, kickers, and section labels in tiny uppercase
+
+## Key Features
+• Long-form journalism sites (The New Yorker, The Atlantic, n+1)
+• Cultural institutions (museums, biennials, literary magazines)
+• Premium brand storytelling pages
+• Newsletter and essay platforms (Substack premium, Every)
+• Architecture, design, and fashion publications
+• shadcn/ui "Sera" style — editorial weight with modern app structure
+
+## Difference From Minimal
+• Minimal = sparse sans-serif, lots of negative space, no decoration
+• Editorial = print discipline, serif type, accent colors, hairlines, drop caps — restrained but not empty
+
+## Keywords
+Editorial, magazine, print, serif, Playfair, Cormorant Garamond, GT Sectra, drop cap, hairline rule, justified text, crimson accent, ivory background, masthead, pull quote, baseline grid, The New Yorker, Wallpaper, Monocle, shadcn Sera, long-form, authoritative, kicker, folio`
+
+            },
+            {
+                id: 'y3k',
+                name: 'Y3K 复古未来 / Retro-Futurism',
+                subtitle: '铬金属 · 全息渐变 · 千禧感',
+                category: 'creative',
+                tag: 'creative',
+                features: ['铬金属反光', '液态银', '全息渐变', '圆润字体', 'Y2K复刻', '镜面光晕', '未来怀旧'],
+                preview: 'preview-y3k',
+                prompt: `【Y3K 复古未来主义 UI设计提示词】
+
+Design a UI in Y3K / Retro-Futurism style — the year-2000 imagination of the year-3000, revived for the 2020s. Liquid chrome surfaces, holographic gradients, dreamy starfields, and rounded sci-fi typography evoke the optimistic futurism of Y2K-era club flyers, early Apple product photography, Frutiger Aero, and Sailor Moon transformation sequences.
+
+## Style Overview
+Surfaces are reflective, iridescent, and weightless. A conic-gradient chrome blob hovers at the center, catching purple, pink, cyan, and pale gold highlights. The background drifts between deep indigo and aubergine with nebula-like radial glows. Typography is wide, rounded, and metallic — think Eurostile, Microgramma, or chunky Arial Black with chrome-gradient fill. Everything feels like a freeze-frame from a 1999 Pantone trend forecast for the year 3000.
+
+## Core Design Elements
+• Liquid chrome blobs: conic-gradient (lavender → pink → cyan → gold) with soft outer glow and inner specular highlight
+• Holographic gradients: shifting hues that suggest oil-on-water iridescence (use conic-gradient or animated linear-gradient)
+• Nebula backgrounds: deep indigo (#0c0a1f) with radial-gradient glows of purple (#a855f7) and cyan (#38bdf8)
+• Wide-track rounded sans display fonts (Eurostile, Microgramma, Aldrich, Orbitron, Arial Black with letter-spacing 0.15-0.2em)
+• Chrome-text effect: linear-gradient white → lavender → indigo, background-clip text
+• Sparse 4-point star decorations (sailor-moon style sparkles using ✦ ✧)
+• Tiny diamond / lozenge accents, vertical centered composition
+• Glow text-shadow on all metallic text for the "screen-printed" feel
+
+## Color Palette
+• Background: deep indigo #0c0a1f, aubergine #1a1235, midnight purple #1e1b4b
+• Nebula glow: violet #a855f7, magenta #ec4899, sky cyan #38bdf8
+• Chrome highlights: lavender #c4b5fd, baby blue #93c5fd, pale pink #fda4af, pearl #f5d0fe, mint #a5f3fc
+• Text gradient: ivory #f5f3ff → lavender #ddd6fe → indigo #818cf8
+
+## Typography
+• Display: Eurostile Extended, Microgramma, Aldrich, Orbitron, Arial Black (very wide tracking 0.15-0.3em)
+• Body: Geist Mono, Space Mono, or rounded sans (Nunito)
+• ALL CAPS for display headlines; numerals styled with tabular figures
+• Apply chrome gradient via background-clip: text and -webkit-text-fill-color: transparent
+
+## Difference From Cyberpunk
+• Cyberpunk = high-contrast black + neon, dystopian, glitch, terminal aesthetic, Blade Runner
+• Y3K = optimistic future, chrome + iridescence, soft glows, dreamy, Sailor Moon
+• Cyberpunk says "the future is broken". Y3K says "the future is shiny and pink"
+
+## Key Features
+• Fashion brand landing pages (Heaven by Marc Jacobs, Diesel, Mowalola)
+• Music streaming for synth / hyperpop / electronic
+• Crypto / NFT galleries (the ones that didn't age badly)
+• Festival microsites, club night flyers
+• Digital art portfolios, generative art tools
+• Apple Vision Pro era spatial UI experiments
+• Beauty / fragrance / skincare gen-Z products
+
+## Keywords
+Y3K, Y2K, retro-futurism, chrome, liquid metal, holographic, iridescent, nebula, Eurostile, Microgramma, Aldrich, sparkle, four-point star, lavender, lilac, mint, aubergine, conic-gradient, oil-on-water, Frutiger Aero, blobjects, Sailor Moon, iMac G3, 1999, 3000, future nostalgia, chrome-text, mirror finish`
+
+            },
+            {
+                id: 'scrapbook',
+                name: '拼贴剪贴簿 / Scrapbook',
+                subtitle: '手作纸艺 · 反 AI 真实感',
+                category: 'creative',
+                tag: 'creative',
+                features: ['手写字体', '胶带贴纸', '便签纸', '故意歪斜', '撕纸边缘', '邮戳印章', '复古怀旧'],
+                preview: 'preview-scrapbook',
+                prompt: `【Scrapbook 拼贴剪贴簿 / Anti-Design UI设计提示词】
+
+Design a UI in Scrapbook / Anti-Design style — handmade, imperfect, tactile, and deliberately resistant to the AI-generated polish that floods 2026 design. Think washi tape, kraft paper, polaroid corners, hand-lettered notes, postal stamps, doodles, and the deliberate wobble of a human hand. This is the 2026 counter-trend identified by Adobe, Canva, Figma, and Shopify trend reports.
+
+## Style Overview
+The interface looks like a page torn from someone's journal — cream paper background with subtle fiber texture, sticky notes rotated -4 degrees, washi tape holding things in place, a red rubber stamp dated this week, a green tag, and the occasional doodle of a star or wobbly heart. Nothing aligns to a perfect grid. Typefaces mix handwriting scripts with typewriter mono. Imperfection is the point.
+
+## Core Design Elements
+• Kraft paper or cream background with subtle paper-fiber noise (repeating-linear-gradient at 4-5% opacity)
+• Sticky notes: pastel yellow / mint / pink rectangles, rotated -6° to +8°, drop shadow 3-6px
+• Washi tape strips: pastel gradient + dashed border on the edges, rotated, covering corners and overlaps
+• Rubber stamps: 2-3px solid red/blue ring + monospace text inside, rotated -12°, 80% opacity for "ink fade"
+• Polaroid frames: white border-bottom 32px, photo on top, hand-written caption below
+• Hand-lettered fonts: Caveat, Shadows Into Light, Bradley Hand, Permanent Marker, Indie Flower (mix 2-3)
+• Typewriter mono for stamps and tags: Courier New, Special Elite, IBM Plex Mono
+• Doodle decorations: wobbly circles, four-point stars (✦), arrows, hearts (all 1.5-2px stroke, slightly off-perfect)
+• Torn paper edges (zigzag clip-path or jagged border)
+• Tags / labels: rectangle with rotated -6°, monospace text, hole + string optional
+
+## Color Palette
+• Background: cream #f7efd9, kraft #f0e3c8, manila #ead7b3
+• Sticky notes: butter yellow #fffceb, mint #d8f0d0, dusty pink #fce4ec
+• Stamp red: #c7001a (faded to 80% for ink-fade)
+• Tag green: olive #6b8e4e
+• Pen color: near-black #2a2a2a (never pure black — feels handwritten)
+• Washi tape: pastel coral #ffc8b4, sage #c0d9a0, lavender #d4c5e2
+
+## Typography
+• Handwriting display: Caveat / Permanent Marker / Bradley Hand / Indie Flower (rotate ±2° for liveliness)
+• Mono for stamps / receipts / tags: Courier New / Special Elite (uppercase, +0.1em tracking)
+• Mix sizes wildly — handwriting can be 1.5x body, mono is always small
+• Never use clean geometric sans like Helvetica
+
+## Layout Principles
+• Asymmetric, slightly off-grid — elements rotate ±4° to ±12°
+• Layer 4-6 elements per composition with overlapping z-index
+• Drop shadows are noticeable (3-6px blur, low opacity) to suggest physical depth
+• White space is intentional but uneven — like a real scrapbook page
+• Date stamps and tiny captions add "evidence of authorship"
+
+## Difference From Memphis
+• Memphis = bright geometric shapes, primary colors, abstract 80s graphic design
+• Scrapbook = handmade craft materials, muted natural palette, tactile and personal
+• Memphis is graphic design. Scrapbook is craft journaling.
+
+## Key Features
+• Personal blogs and indie portfolios
+• Wedding / event invitations
+• Small-batch brand storytelling (artisan food, handmade goods)
+• Cultural zines and independent publications
+• Anti-AI counter-aesthetic statements
+• Slow-living / wellness / journaling apps
+
+## Keywords
+Scrapbook, anti-design, handmade, washi tape, sticky note, kraft paper, rubber stamp, polaroid, hand-lettered, Caveat, Permanent Marker, Bradley Hand, typewriter, Special Elite, doodle, imperfection, tactile, craft, journal, zine, indie, slow, anti-AI, 2026 counter-trend, Adobe Canva Figma trend report, hyper-color resistance`
 
             }
         ];
