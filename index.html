@@ -2091,6 +2091,75 @@
         }
         /* ==================== End Cyberpunk ==================== */
 
+        /* ==================== Japanese Zen / 日式和风 ==================== */
+        .preview-zen {
+            background: #f4ede4;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .zen-circle {
+            position: absolute;
+            top: 50%;
+            left: 38%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid #1a1a1a;
+        }
+        .zen-circle::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            right: 16%;
+            width: 22px;
+            height: 8px;
+            background: #f4ede4;
+            transform: rotate(20deg);
+        }
+        .zen-title {
+            position: absolute;
+            top: 12%;
+            right: 14%;
+            font-family: 'Songti SC', 'STSong', 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            writing-mode: vertical-rl;
+            letter-spacing: 0.35em;
+            line-height: 1.4;
+        }
+        .zen-stamp {
+            position: absolute;
+            bottom: 14%;
+            left: 12%;
+            width: 30px;
+            height: 30px;
+            background: #c41e3a;
+            color: white;
+            font-family: 'Songti SC', 'STSong', serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            box-shadow: 1px 1px 0 rgba(180, 20, 40, 0.3);
+        }
+        .zen-text {
+            position: absolute;
+            bottom: 16%;
+            right: 12%;
+            font-family: 'Songti SC', 'Hiragino Sans', serif;
+            font-size: 0.55rem;
+            font-weight: 500;
+            color: #5c5048;
+            letter-spacing: 0.2em;
+        }
+        /* ==================== End Japanese Zen ==================== */
+
     </style>
 </head>
 <body>
@@ -2564,6 +2633,12 @@
                 <div class="cyber-scanline"></div>
                 <div class="cyber-title">NEO TOKYO</div>
                 <div class="cyber-sub">// 2049 //</div>
+            `,
+            'preview-zen': `
+                <div class="zen-circle"></div>
+                <div class="zen-title">静寂</div>
+                <div class="zen-stamp">禅</div>
+                <div class="zen-text">わび · さび</div>
             `
         };
 
@@ -3513,6 +3588,62 @@ The interface evokes a CRT screen looking out over a synthetic horizon at night:
 
 ## Keywords
 Cyberpunk, Synthwave, Outrun, Vaporwave, retro-future, neon, CRT scanlines, magenta, cyan, grid floor, pixelated sun, 80s, Blade Runner, Tron, VT323, Press Start 2P, glow, glitch`
+
+            },
+            {
+                id: 'zen',
+                name: '日式和风 / Japanese Zen',
+                subtitle: '侘寂 · 留白 · 和色',
+                category: 'culture',
+                tag: 'culture',
+                features: ['极致留白', '和色三色', '毛笔/宋体', '竖排文字', '圆形构图', '朱红印章', '侘寂哲学'],
+                preview: 'preview-zen',
+                prompt: `【Japanese Zen 日式和风 UI设计提示词】
+
+Design a UI rooted in Japanese aesthetic principles of Zen Buddhism — Wabi-sabi (侘寂), Ma (間, negative space), and Mono no aware (物の哀れ).
+
+## Style Overview
+Inspired by sumi-e ink painting, kaiseki menu design, and traditional washi paper. The interface uses an Enso (一円相) brushed circle as visual anchor, generous off-white "ma" emptiness, a single hot red hanko stamp as accent, and serif type set vertically. Every element earns its place; nothing is decorative for decoration's sake.
+
+## Core Design Elements
+• Warm off-white washi paper background: #f4ede4 (not pure white)
+• Single Enso brush circle as hero element (transparent fill, 3-4px black border, asymmetric gap at top-right to suggest brushstroke)
+• Vertical typography (writing-mode: vertical-rl) for titles
+• Hanko 印 stamp: small red square (#c41e3a) with single kanji in white, slight offset shadow
+• Hiragana / Kanji subtext, letter-spacing 0.3em+
+• Massive negative space (60-70% of canvas empty)
+• No drop shadows, no gradients, no rounded corners on cards
+• Serif typography only (Songti / Mincho / Noto Serif JP)
+• Optional faint horizon or ink wash texture in background
+
+## Color Palette
+• Washi cream: #f4ede4 (background — never pure white)
+• Sumi black: #1a1a1a (ink + body text)
+• Akané red 茜: #c41e3a (hanko stamp accent only)
+• Cha brown 茶: #5c5048 (secondary text)
+• Indigo ai 藍: #1d3557 (optional cool accent)
+• Bamboo green 竹: #4a7c59 (optional natural accent)
+
+## Typography
+• Songti SC / Mincho / Noto Serif JP / STSong — serif only
+• Vertical writing mode for headings
+• Letter-spacing 0.3em on Latin/kana captions
+• Weight 500-600 — never bold/black
+
+## Difference From Minimalism
+• Minimalism = Western reductive design, pure white, black sans-serif, geometric grid
+• Japanese Zen = warm cream washi background, vertical serif text, Enso circle, hanko stamp, deeply rooted in Wabi-sabi aesthetics
+
+## Key Features
+• Tea ceremony / kaiseki restaurant websites
+• Traditional Japanese product pages (sake, ceramics, kimono, washi paper)
+• Mindfulness / meditation apps
+• Boutique ryokan booking pages
+• Editorial / curatorial museum pages
+• Zen wallpaper / wellness apps
+
+## Keywords
+Japanese, Zen, Wabi-sabi, Enso, Ma, hanko, kaiseki, sumi-e, washi paper, vertical typography, Songti, Mincho, Noto Serif JP, kimono, ryokan, tea ceremony, mindfulness, negative space, akané red, 侘寂, 静寂, 禅`
 
             }
         ];
