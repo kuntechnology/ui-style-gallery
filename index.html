@@ -1948,6 +1948,73 @@
         }
         /* ==================== End Bauhaus ==================== */
 
+        /* ==================== Memphis Design / 孟菲斯 ==================== */
+        .preview-memphis {
+            background: #f9f5e8;
+            padding: 0;
+            overflow: hidden;
+        }
+        .memphis-stage {
+            position: absolute;
+            inset: 0;
+        }
+        .memphis-dots {
+            position: absolute;
+            top: 8%;
+            right: 10%;
+            width: 50px;
+            height: 50px;
+            background-image: radial-gradient(circle, #1a936f 2px, transparent 2.5px);
+            background-size: 10px 10px;
+        }
+        .memphis-stripe {
+            position: absolute;
+            top: 30%;
+            left: 6%;
+            width: 70px;
+            height: 14px;
+            background: repeating-linear-gradient(45deg, #2a9df4 0, #2a9df4 4px, transparent 4px, transparent 8px);
+            transform: rotate(-15deg);
+        }
+        .memphis-blob {
+            position: absolute;
+            bottom: 14%;
+            right: 14%;
+            width: 50px;
+            height: 32px;
+            background: #f5d547;
+            border-radius: 60% 40% 50% 50% / 60% 60% 40% 40%;
+            transform: rotate(-12deg);
+        }
+        .memphis-zigzag {
+            position: absolute;
+            bottom: 20%;
+            left: 10%;
+            width: 60px;
+            height: 12px;
+            background:
+                linear-gradient(135deg, #ff6b9d 33%, transparent 33%) 0 0,
+                linear-gradient(45deg, #ff6b9d 33%, transparent 33%) 0 0;
+            background-size: 12px 12px;
+        }
+        .memphis-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-3deg);
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            background: white;
+            padding: 0.2rem 0.55rem;
+            border: 2px solid #1a1a1a;
+            box-shadow: 4px 4px 0 #ff6b9d;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+        }
+        /* ==================== End Memphis ==================== */
+
     </style>
 </head>
 <body>
@@ -2404,6 +2471,15 @@
                     <div class="bauhaus-triangle"></div>
                     <div class="bauhaus-line"></div>
                     <div class="bauhaus-text">FORM FOLLOWS FUNCTION</div>
+                </div>
+            `,
+            'preview-memphis': `
+                <div class="memphis-stage">
+                    <div class="memphis-dots"></div>
+                    <div class="memphis-stripe"></div>
+                    <div class="memphis-zigzag"></div>
+                    <div class="memphis-blob"></div>
+                    <div class="memphis-text">RETRO 80s</div>
                 </div>
             `
         };
@@ -3244,6 +3320,64 @@ The Bauhaus design system emphasizes "form follows function". Use a strict typog
 
 ## Keywords
 Bauhaus, Swiss design, International Style, constructivism, geometric, primary colors, Helvetica, grid, typography, poster, form follows function, Mondrian, Müller-Brockmann`
+
+            },
+            {
+                id: 'memphis',
+                name: '孟菲斯 / Memphis',
+                subtitle: '80年代复古撞色拼贴',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['撞色拼贴', '波点条纹', '锯齿斑点', '复古80s', '刻意不和谐', '潮玩感', 'Z世代'],
+                preview: 'preview-memphis',
+                prompt: `【Memphis Design 孟菲斯 UI设计提示词】
+
+Design a UI in 1980s Memphis Group style — bold, irreverent, anti-modernist, with chaotic geometric decoration and clashing colors.
+
+## Style Overview
+The Memphis Group (Milan, 1981) rejected good taste in favor of playful clashes. The interface should look like a vintage MTV graphic or an 80s Saved-By-The-Bell title card: hot pink dots, electric teal zigzags, mustard squiggles, on warm cream backgrounds. Composition is intentionally "off"—nothing aligns to grid.
+
+## Core Design Elements
+• Cream / off-white background (#f9f5e8) — never pure white
+• Pattern fragments scattered across canvas (not centered):
+  - Polka dots (radial gradient)
+  - Diagonal stripes
+  - Zigzag triangle waves
+  - Squiggle / blob shapes
+  - Confetti / terrazzo speckles
+• Hard black 2px outline on text bubbles
+• Sharp solid-color drop shadow (offset 4px, no blur)
+• Hand-drawn-feel monospace or condensed type
+• Slight rotation on all elements (-3° to +12°)
+• Loud color clashes: hot pink + teal + mustard + cobalt + black
+
+## Color Palette
+• Background: #f9f5e8 (warm cream)
+• Hot pink: #ff6b9d
+• Electric teal: #1a936f
+• Mustard yellow: #f5d547
+• Cobalt blue: #2a9df4
+• Black: #1a1a1a (outlines + text)
+
+## Difference From Gradient / Brutalism
+• Gradient = smooth multi-color blends
+• Brutalism = harsh and aggressive
+• Memphis = playful chaotic decoration with cream warmth, MTV / 80s nostalgia
+
+## Typography
+• 'Courier New' or condensed sans
+• Bold, often in outlined text bubbles
+• ALL CAPS short phrases
+
+## Key Features
+• Streetwear / sneaker drop landing pages
+• Music festival posters
+• Gen-Z brand identity
+• Throwback editorial features
+• Toy / collectible product pages
+
+## Keywords
+Memphis Group, 80s, retro, Ettore Sottsass, terrazzo, postmodern, anti-design, clash, playful, polka dots, zigzag, squiggle, MTV, Saved By the Bell, Y2K-adjacent`
 
             }
         ];
