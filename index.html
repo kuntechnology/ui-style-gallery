@@ -1877,6 +1877,77 @@
         }
         /* ==================== End Claymorphism ==================== */
 
+        /* ==================== Bauhaus / 包豪斯 ==================== */
+        .preview-bauhaus {
+            background: #fefcf3;
+            padding: 0;
+            overflow: hidden;
+        }
+        .bauhaus-stage {
+            position: absolute;
+            inset: 0;
+        }
+        .bauhaus-number {
+            position: absolute;
+            top: 6%;
+            right: 8%;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            line-height: 1;
+            color: #000;
+            letter-spacing: -0.05em;
+        }
+        .bauhaus-circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #d62828;
+            top: 16%;
+            left: 8%;
+        }
+        .bauhaus-square {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #1d3557;
+            top: 42%;
+            right: 18%;
+            transform: rotate(15deg);
+        }
+        .bauhaus-triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 26px solid transparent;
+            border-right: 26px solid transparent;
+            border-bottom: 44px solid #fcbf49;
+            bottom: 14%;
+            left: 22%;
+        }
+        .bauhaus-line {
+            position: absolute;
+            left: 4%;
+            right: 4%;
+            bottom: 38%;
+            height: 2px;
+            background: #000;
+        }
+        .bauhaus-text {
+            position: absolute;
+            bottom: 10%;
+            right: 6%;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 0.55rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            color: #000;
+            writing-mode: vertical-rl;
+            line-height: 1.1;
+        }
+        /* ==================== End Bauhaus ==================== */
+
     </style>
 </head>
 <body>
@@ -2323,6 +2394,16 @@
                     <div class="clay-title">Claymorphism</div>
                     <div class="clay-text">Soft 3D · Playful · Pastel</div>
                     <div class="clay-btn">点这里</div>
+                </div>
+            `,
+            'preview-bauhaus': `
+                <div class="bauhaus-stage">
+                    <div class="bauhaus-number">01</div>
+                    <div class="bauhaus-circle"></div>
+                    <div class="bauhaus-square"></div>
+                    <div class="bauhaus-triangle"></div>
+                    <div class="bauhaus-line"></div>
+                    <div class="bauhaus-text">FORM FOLLOWS FUNCTION</div>
                 </div>
             `
         };
@@ -3114,6 +3195,55 @@ Claymorphism makes interface elements look like soft, rounded clay or plastic ob
 
 ## Keywords
 Claymorphism, clay, 3D, plastic, pastel, soft shadows, rounded, playful, toy, friendly, chunky, multi-color, Nunito, kid-friendly, Dribbble trend 2023, 2024`
+
+            },
+            {
+                id: 'bauhaus',
+                name: '包豪斯 / Bauhaus',
+                subtitle: '几何构成主义 · 三原色',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['三原色', '几何拼贴', '严谨网格', 'Helvetica', '极致字号对比', '理性教学感', '黑色粗线'],
+                preview: 'preview-bauhaus',
+                prompt: `【Bauhaus 包豪斯 UI设计提示词】
+
+Design a UI based on Bauhaus / Swiss International Style — geometric constructivism, primary colors, and strict typographic grid.
+
+## Style Overview
+The Bauhaus design system emphasizes "form follows function". Use a strict typographic grid, primary colors (red, yellow, blue) plus black/white, and pure geometric primitives (circle / square / triangle) as the only decoration. Composition is asymmetric but mathematically balanced.
+
+## Core Design Elements
+• Three pure geometric shapes only: circle, square, triangle (no organic shapes)
+• Primary palette: red #d62828, blue #1d3557, yellow #fcbf49, plus black + warm off-white #fefcf3
+• Black hairlines (1-2px) as compositional dividers
+• Helvetica / Akzidenz-Grotesk / Univers — sans-serif only, weight 700-900
+• Extreme size contrast: massive numerals (60-200px) next to tiny captions (10-12px)
+• Vertical typography rotation acceptable
+• Asymmetric grid composition, but balanced by visual weight
+• No shadows, no gradients, no decoration beyond shape and type
+• Off-white paper-feel background, not pure white
+
+## Difference From Flat / Minimal / Brutalism
+• Flat = modern flat solids, often soft blue/green/pink
+• Minimal = whitespace + black/white + serif optional
+• Brutalism = chaos, raw, anti-grid
+• Bauhaus = rigorous grid + primary triad + geometric primitives + teaching-poster feel
+
+## Typography
+• Helvetica Neue / Akzidenz-Grotesk / Univers / Inter Bold
+• ALL CAPS for short labels, mixed case for body
+• Letter-spacing 0.1-0.2em on captions
+• Numerals as visual hero
+
+## Key Features
+• Museum / gallery / art-school websites
+• Editorial poster covers
+• Type-driven hero sections
+• Brand identity for design studios and architecture firms
+• Educational / pedagogical interfaces
+
+## Keywords
+Bauhaus, Swiss design, International Style, constructivism, geometric, primary colors, Helvetica, grid, typography, poster, form follows function, Mondrian, Müller-Brockmann`
 
             }
         ];
