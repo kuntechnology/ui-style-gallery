@@ -1813,6 +1813,70 @@
             font-size: 0.875rem;
             color: var(--text-secondary);
         }
+        /* ==================== Claymorphism / 黏土风 ==================== */
+        .preview-clay {
+            background: linear-gradient(135deg, #ffe6f0 0%, #fff5e0 50%, #e0f5ff 100%);
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .clay-card {
+            background: #ffd6e8;
+            border-radius: 28px;
+            padding: 0.85rem 1rem;
+            box-shadow:
+                10px 10px 22px rgba(255, 145, 175, 0.45),
+                -6px -6px 14px rgba(255, 255, 255, 0.95),
+                inset 3px 3px 6px rgba(255, 255, 255, 0.7),
+                inset -3px -3px 6px rgba(255, 145, 175, 0.25);
+            width: 86%;
+        }
+        .clay-icon-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.55rem;
+        }
+        .clay-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 12px;
+            box-shadow:
+                3px 3px 6px rgba(0, 0, 0, 0.12),
+                -2px -2px 5px rgba(255, 255, 255, 0.9),
+                inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.7);
+        }
+        .clay-icon-1 { background: #ff9ec7; }
+        .clay-icon-2 { background: #9ed1ff; }
+        .clay-icon-3 { background: #c9f09e; }
+        .clay-title {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: #8b4863;
+            margin-bottom: 0.25rem;
+        }
+        .clay-text {
+            font-size: 0.55rem;
+            color: #b56b89;
+            margin-bottom: 0.55rem;
+            font-weight: 600;
+        }
+        .clay-btn {
+            background: #ff85b3;
+            color: white;
+            border-radius: 16px;
+            padding: 0.35rem 0.8rem;
+            font-size: 0.6rem;
+            font-weight: 800;
+            display: inline-block;
+            box-shadow:
+                3px 3px 8px rgba(255, 105, 180, 0.45),
+                -2px -2px 5px rgba(255, 255, 255, 0.55),
+                inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.05em;
+        }
+        /* ==================== End Claymorphism ==================== */
+
     </style>
 </head>
 <body>
@@ -2247,6 +2311,18 @@
                     <div class="gaming-title">CYBER MODE</div>
                     <div class="gaming-text">沉浸式电竞体验 · RGB · 4K HDR</div>
                     <div class="gaming-btn">PRESS START</div>
+                </div>
+            `,
+            'preview-clay': `
+                <div class="clay-card">
+                    <div class="clay-icon-row">
+                        <div class="clay-icon clay-icon-1"></div>
+                        <div class="clay-icon clay-icon-2"></div>
+                        <div class="clay-icon clay-icon-3"></div>
+                    </div>
+                    <div class="clay-title">Claymorphism</div>
+                    <div class="clay-text">Soft 3D · Playful · Pastel</div>
+                    <div class="clay-btn">点这里</div>
                 </div>
             `
         };
@@ -2987,6 +3063,57 @@ Gaming interfaces embrace bold visuals, dynamic animations, and immersive elemen
 
 ## Keywords
 Gaming, game UI, esports, cyberpunk, sci-fi, neon, RGB, futuristic, dark theme, particles, effects, leaderboard, achievement, streamer, Twitch`
+
+            },
+            {
+                id: 'clay',
+                name: '黏土风 / Claymorphism',
+                subtitle: '3D塑料质感设计',
+                category: 'mainstream',
+                tag: 'mainstream',
+                features: ['超大圆角', '3D凸起', '柔和色彩', '双层阴影', '塑料质感', '玩具风', '内外阴影'],
+                preview: 'preview-clay',
+                prompt: `【Claymorphism 黏土风 UI设计提示词】
+
+Design a playful, three-dimensional UI in Claymorphism style.
+
+## Style Overview
+Claymorphism makes interface elements look like soft, rounded clay or plastic objects. It combines exaggerated rounded corners, multi-layer shadows (both outer drop shadows and inner highlights), and pastel color palettes to create a friendly, toy-like feeling.
+
+## Core Design Elements
+• Extreme rounded corners (24-40px radius for cards, 16-24px for buttons)
+• Multi-layer shadow system:
+  - Outer drop shadow (offset 8-12px, blur 20-30px) using a darker tint of the base color
+  - Top-left inner highlight (white, low opacity) simulating soft 3D bulge
+  - Bottom-right inner shadow (color tint) adding depth
+• Pastel multi-color palette — never flat monochrome
+• Solid backgrounds (not transparent like Glassmorphism)
+• Icons housed in colorful rounded squares with same 3D treatment
+• Chunky pressable buttons
+
+## Color Palette
+• Background: pastel gradient (pink #ffe6f0, peach #fff5e0, sky #e0f5ff)
+• Card: solid pastel pink #ffd6e8, mint #d9ffe6, lavender #e6d9ff
+• Accents: hot pink #ff85b3, baby blue #9ed1ff, lime #c9f09e
+• Text: muted plum #8b4863, dusty purple #b56b89
+
+## Typography
+• Font Family: Nunito, Quicksand, Poppins, DM Sans (rounded sans-serif only)
+• Weight: 700-800 (chunky)
+• Avoid thin or serif fonts; avoid all-caps brutalist text
+
+## Difference From Neumorphism
+• Neumorphism = single base color, monochrome inset/outset bumps
+• Claymorphism = multi-color, solid 3D blobs, much more playful and saturated
+
+## Key Features
+• Onboarding screens for kids / education / wellness apps
+• Toy-like dashboards for fitness and habit tracking
+• Friendly 404 / empty states / loading screens
+• Trendy Dribbble-style hero sections
+
+## Keywords
+Claymorphism, clay, 3D, plastic, pastel, soft shadows, rounded, playful, toy, friendly, chunky, multi-color, Nunito, kid-friendly, Dribbble trend 2023, 2024`
 
             }
         ];
