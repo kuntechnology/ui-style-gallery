@@ -852,6 +852,79 @@
         }
         /* ==================== End Stage 2 Enhancements ==================== */
 
+        /* ==================== Stage 3 Enhancements (P1) ==================== */
+        /* Flat: icon + numeric value */
+        .flat-card-icon {
+            font-size: 1.4rem;
+            line-height: 1;
+            margin-bottom: 0.35rem;
+        }
+        .flat-card-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Dark: status dot + big metric */
+        .dark-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .dark-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #bb86fc;
+            box-shadow: 0 0 6px #bb86fc;
+        }
+        .dark-stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin: 0.4rem 0 0.25rem;
+            letter-spacing: -0.02em;
+        }
+        .dark-stat-unit {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #bb86fc;
+            margin-left: 2px;
+        }
+
+        /* SaaS: KPI strip above chart */
+        .saas-kpis {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .saas-kpi {
+            flex: 1;
+            background: white;
+            border-radius: 6px;
+            padding: 0.4rem 0.55rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .saas-kpi-label {
+            font-size: 0.55rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .saas-kpi-value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 0.15rem;
+        }
+        .saas-kpi-value.positive {
+            color: #10b981;
+        }
+        /* ==================== End Stage 3 Enhancements ==================== */
+
         /* Neumorphism */
         .preview-neumorphism {
             background: #e0e5ec;
@@ -1979,17 +2052,28 @@
                         <div class="fluent-icon"></div>
                         <div>
                             <div class="fluent-title">Fluent Design</div>
-                            <div class="fluent-subtitle">Light · Depth · Motion</div>
+                            <div class="fluent-subtitle">Acrylic · Depth · Reveal</div>
                         </div>
                     </div>
-                    <div class="fluent-text">Acrylic surfaces and reveal effects bring tactile depth across Microsoft platforms.</div>
-                    <div class="fluent-btn">操作</div>
+                    <div class="fluent-pivot">
+                        <div class="fluent-pivot-item active">主页</div>
+                        <div class="fluent-pivot-item">文档</div>
+                        <div class="fluent-pivot-item">设置</div>
+                    </div>
+                    <div class="fluent-actions">
+                        <div class="fluent-btn">立即开始</div>
+                        <div class="fluent-btn-ghost">了解</div>
+                    </div>
                 </div>
             `,
             'preview-neumorphism': `
                 <div class="neu-container">
-                    <div class="neu-card">
-                        <div class="neu-title">Neumorphism</div>
+                    <div class="neu-card neu-card-rich">
+                        <div class="neu-label">今日步数</div>
+                        <div class="neu-value">8,524</div>
+                        <div class="neu-progress">
+                            <div class="neu-progress-fill"></div>
+                        </div>
                     </div>
                     <div class="neu-buttons">
                         <div class="neu-btn"></div>
@@ -2006,9 +2090,21 @@
                 </div>
             `,
             'preview-flat': `
-                <div class="flat-card"><div class="flat-card-title">Tasks</div></div>
-                <div class="flat-card"><div class="flat-card-title">Alerts</div></div>
-                <div class="flat-card"><div class="flat-card-title">Done</div></div>
+                <div class="flat-card">
+                    <div class="flat-card-icon">📋</div>
+                    <div class="flat-card-value">12</div>
+                    <div class="flat-card-title">Tasks</div>
+                </div>
+                <div class="flat-card">
+                    <div class="flat-card-icon">🔔</div>
+                    <div class="flat-card-value">3</div>
+                    <div class="flat-card-title">Alerts</div>
+                </div>
+                <div class="flat-card">
+                    <div class="flat-card-icon">✅</div>
+                    <div class="flat-card-value">28</div>
+                    <div class="flat-card-title">Done</div>
+                </div>
             `,
             'preview-gradient': `
                 <div class="gradient-stack">
@@ -2035,7 +2131,11 @@
             `,
             'preview-dark': `
                 <div class="dark-card">
-                    <div class="dark-title">Dark Mode</div>
+                    <div class="dark-header">
+                        <div class="dark-dot"></div>
+                        <div class="dark-title">Dark Mode</div>
+                    </div>
+                    <div class="dark-stat-value">98<span class="dark-stat-unit">%</span></div>
                     <div class="dark-text">Eye-friendly · Battery-saving</div>
                     <div class="dark-btn">激活</div>
                 </div>
