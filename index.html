@@ -1814,6 +1814,210 @@
     <div class="toast" id="toast">已复制到剪贴板</div>
 
     <script>
+
+        // ==================== Preview Templates (UI Mock Samples) ====================
+        const previewTemplates = {
+            'preview-apple': `
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:0.75rem 0 1.25rem;">
+                    <div class="apple-nav">
+                        <div class="apple-nav-title">设计</div>
+                        <div class="apple-nav-icons">
+                            <div class="apple-nav-icon"></div>
+                            <div class="apple-nav-icon" style="background:#34c759"></div>
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content:center;">
+                        <div class="apple-card">
+                            <div class="apple-card-title">Hello, iOS</div>
+                            <div class="apple-card-text">Clarity · Deference · Depth</div>
+                            <div class="apple-buttons">
+                                <div class="apple-btn-primary">开始</div>
+                                <div class="apple-btn-secondary">了解更多</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            'preview-material': `
+                <div class="material-app-bar">
+                    <div class="material-menu"></div>
+                    <div class="material-title">Material</div>
+                </div>
+                <div class="material-cards">
+                    <div class="material-card">
+                        <div class="material-card-title">Tasks</div>
+                        <div class="material-card-text">12 active</div>
+                    </div>
+                    <div class="material-card">
+                        <div class="material-card-title">Reports</div>
+                        <div class="material-card-text">3 pending</div>
+                    </div>
+                </div>
+                <div class="material-fab"></div>
+            `,
+            'preview-fluent': `
+                <div class="fluent-card">
+                    <div class="fluent-header">
+                        <div class="fluent-icon"></div>
+                        <div>
+                            <div class="fluent-title">Fluent Design</div>
+                            <div class="fluent-subtitle">Light · Depth · Motion</div>
+                        </div>
+                    </div>
+                    <div class="fluent-text">Acrylic surfaces and reveal effects bring tactile depth across Microsoft platforms.</div>
+                    <div class="fluent-btn">操作</div>
+                </div>
+            `,
+            'preview-neumorphism': `
+                <div class="neu-container">
+                    <div class="neu-card">
+                        <div class="neu-title">Neumorphism</div>
+                    </div>
+                    <div class="neu-buttons">
+                        <div class="neu-btn"></div>
+                        <div class="neu-btn"></div>
+                        <div class="neu-btn"></div>
+                    </div>
+                </div>
+            `,
+            'preview-glass': `
+                <div class="glass-card">
+                    <div class="glass-title">Glassmorphism</div>
+                    <div class="glass-text">Frosted layers with blurred backgrounds.</div>
+                    <div class="glass-btn">Get Started</div>
+                </div>
+            `,
+            'preview-flat': `
+                <div class="flat-card"><div class="flat-card-title">Tasks</div></div>
+                <div class="flat-card"><div class="flat-card-title">Alerts</div></div>
+                <div class="flat-card"><div class="flat-card-title">Done</div></div>
+            `,
+            'preview-gradient': `
+                <div class="gradient-card">
+                    <div class="gradient-title">Vivid Gradient</div>
+                    <div class="gradient-text">Color flows that energize the brand.</div>
+                </div>
+            `,
+            'preview-brutal': `
+                <div class="brutal-card">
+                    <div class="brutal-title">BRUTAL.</div>
+                    <div class="brutal-text">Raw type. Unapologetic edges.</div>
+                    <div class="brutal-btn">CLICK ME</div>
+                </div>
+            `,
+            'preview-minimal': `
+                <div class="minimal-title">LESS</div>
+                <div class="minimal-line"></div>
+                <div class="minimal-text">is more</div>
+            `,
+            'preview-dark': `
+                <div class="dark-card">
+                    <div class="dark-title">Dark Mode</div>
+                    <div class="dark-text">Eye-friendly · Battery-saving</div>
+                    <div class="dark-btn">激活</div>
+                </div>
+            `,
+            'preview-saas': `
+                <div class="saas-nav">
+                    <div class="saas-logo"></div>
+                    <div class="saas-nav-items">
+                        <div class="saas-nav-item"></div>
+                        <div class="saas-nav-item"></div>
+                        <div class="saas-nav-item"></div>
+                    </div>
+                </div>
+                <div class="saas-content">
+                    <div class="saas-sidebar">
+                        <div class="saas-sidebar-item"></div>
+                        <div class="saas-sidebar-item" style="background:#e2e8f0"></div>
+                        <div class="saas-sidebar-item" style="background:#e2e8f0"></div>
+                    </div>
+                    <div class="saas-main">
+                        <div class="saas-chart">
+                            <div class="saas-chart-bars">
+                                <div class="saas-bar" style="height:40%"></div>
+                                <div class="saas-bar" style="height:70%"></div>
+                                <div class="saas-bar" style="height:55%"></div>
+                                <div class="saas-bar" style="height:85%"></div>
+                                <div class="saas-bar" style="height:60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            'preview-finance': `
+                <div class="finance-header">
+                    <div class="finance-title">资产总览</div>
+                </div>
+                <div class="finance-cards">
+                    <div class="finance-card">
+                        <div class="finance-card-title">余额</div>
+                        <div class="finance-card-value">¥ 128,560</div>
+                    </div>
+                    <div class="finance-card">
+                        <div class="finance-card-title">收益</div>
+                        <div class="finance-card-value" style="color:#38a169">+ 2.34%</div>
+                    </div>
+                </div>
+                <div class="finance-chart">
+                    <div class="finance-line"></div>
+                </div>
+            `,
+            'preview-ecommerce': `
+                <div class="ecom-banner">
+                    <div class="ecom-banner-text">🎉 限时 5 折  立即抢购</div>
+                </div>
+                <div class="ecom-products">
+                    <div class="ecom-product">
+                        <div class="ecom-product-img"></div>
+                        <div class="ecom-product-info">
+                            <div class="ecom-product-name">商品 A</div>
+                            <div class="ecom-product-price">¥ 99</div>
+                        </div>
+                    </div>
+                    <div class="ecom-product">
+                        <div class="ecom-product-img"></div>
+                        <div class="ecom-product-info">
+                            <div class="ecom-product-name">商品 B</div>
+                            <div class="ecom-product-price">¥ 168</div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            'preview-social': `
+                <div class="social-story">
+                    <div class="social-story-item"><div class="social-story-inner"></div></div>
+                    <div class="social-story-item"><div class="social-story-inner"></div></div>
+                    <div class="social-story-item"><div class="social-story-inner"></div></div>
+                </div>
+                <div class="social-post">
+                    <div class="social-post-header">
+                        <div class="social-avatar"></div>
+                        <div class="social-user">@designer</div>
+                    </div>
+                    <div class="social-content">刚发布了一组新设计稿 ✨</div>
+                    <div class="social-actions">
+                        <div class="social-action">❤ 128</div>
+                        <div class="social-action">💬 24</div>
+                        <div class="social-action">↗ 分享</div>
+                    </div>
+                </div>
+            `,
+            'preview-gaming': `
+                <div class="gaming-particles">
+                    <div class="gaming-particle"></div>
+                    <div class="gaming-particle"></div>
+                    <div class="gaming-particle"></div>
+                    <div class="gaming-particle"></div>
+                </div>
+                <div class="gaming-card">
+                    <div class="gaming-title">CYBER MODE</div>
+                    <div class="gaming-text">沉浸式电竞体验 · RGB · 4K HDR</div>
+                    <div class="gaming-btn">PRESS START</div>
+                </div>
+            `
+        };
+
         // ==================== Style Data ====================
         const styleData = [
             {
@@ -2570,7 +2774,7 @@ Gaming, game UI, esports, cyberpunk, sci-fi, neon, RGB, futuristic, dark theme, 
             grid.innerHTML = styleData.map(style => `
                 <div class="style-card" data-id="${style.id}" data-category="${style.category}" data-tag="${style.tag}">
                     <div class="card-preview">
-                        <div class="${style.preview}"></div>
+                        <div class="${style.preview}">${previewTemplates[style.preview] || ''}</div>
                     </div>
                     <div class="card-header">
                         <div>
