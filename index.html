@@ -2089,6 +2089,56 @@
             letter-spacing: 0.25em;
             text-shadow: 0 0 4px #ff6ec7;
         }
+        .cyber-kanji {
+            position: absolute;
+            top: 8%;
+            left: 5%;
+            font-family: 'Hiragino Sans', 'Yu Gothic', 'Microsoft YaHei', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #ff6ec7;
+            text-shadow: 0 0 6px #ff6ec7, 0 0 12px rgba(255, 110, 199, 0.6);
+            writing-mode: vertical-rl;
+            letter-spacing: 0.2em;
+            line-height: 1.1;
+            z-index: 4;
+        }
+        .cyber-sign-l {
+            position: absolute;
+            top: 52%;
+            left: 6%;
+            width: 16px;
+            height: 5px;
+            background: #ffeb00;
+            box-shadow: 0 0 6px #ffeb00, 0 0 12px rgba(255, 235, 0, 0.5);
+            transform: rotate(-4deg);
+            z-index: 3;
+        }
+        .cyber-sign-r {
+            position: absolute;
+            top: 56%;
+            right: 6%;
+            width: 14px;
+            height: 5px;
+            background: #00f0ff;
+            box-shadow: 0 0 6px #00f0ff, 0 0 12px rgba(0, 240, 255, 0.5);
+            transform: rotate(3deg);
+            z-index: 3;
+        }
+        .cyber-glitch {
+            position: absolute;
+            bottom: 7%;
+            right: 5%;
+            font-family: 'Courier New', monospace;
+            font-size: 0.42rem;
+            color: #00f0ff;
+            line-height: 1.2;
+            text-shadow: 0 0 3px #00f0ff;
+            writing-mode: vertical-rl;
+            opacity: 0.85;
+            letter-spacing: 0.05em;
+            z-index: 4;
+        }
         /* ==================== End Cyberpunk ==================== */
 
         /* ==================== Japanese Zen / 日式和风 ==================== */
@@ -2770,7 +2820,11 @@
             'preview-cyber': `
                 <div class="cyber-grid"></div>
                 <div class="cyber-sun"></div>
+                <div class="cyber-kanji">サイバー</div>
+                <div class="cyber-sign-l"></div>
+                <div class="cyber-sign-r"></div>
                 <div class="cyber-scanline"></div>
+                <div class="cyber-glitch">01<br>11<br>00<br>10</div>
                 <div class="cyber-title">NEO TOKYO</div>
                 <div class="cyber-sub">// 2049 //</div>
             `,
