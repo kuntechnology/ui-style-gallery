@@ -2158,6 +2158,86 @@
             color: #5c5048;
             letter-spacing: 0.2em;
         }
+        .zen-paper {
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(0deg, transparent 0, transparent 3px, rgba(140, 110, 70, 0.04) 3px, rgba(140, 110, 70, 0.04) 4px);
+            pointer-events: none;
+        }
+        .zen-mountain {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 32%;
+            background:
+                radial-gradient(ellipse 80% 100% at 22% 100%, rgba(140, 120, 90, 0.55) 0 35%, transparent 35.5%),
+                radial-gradient(ellipse 100% 110% at 58% 100%, rgba(110, 90, 70, 0.5) 0 30%, transparent 30.5%),
+                radial-gradient(ellipse 70% 95% at 90% 100%, rgba(120, 105, 80, 0.55) 0 28%, transparent 28.5%);
+            pointer-events: none;
+        }
+        .zen-sakura {
+            position: absolute;
+            top: 14%;
+            left: 11%;
+            width: 22px;
+            height: 22px;
+        }
+        .zen-sakura::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% 20%, #f4b8c4 0 5px, transparent 5.5px),
+                radial-gradient(circle at 85% 50%, #f4b8c4 0 5px, transparent 5.5px),
+                radial-gradient(circle at 65% 88%, #f4b8c4 0 5px, transparent 5.5px),
+                radial-gradient(circle at 18% 78%, #f4b8c4 0 5px, transparent 5.5px),
+                radial-gradient(circle at 12% 35%, #f4b8c4 0 5px, transparent 5.5px);
+        }
+        .zen-sakura::after {
+            content: '';
+            position: absolute;
+            top: 38%;
+            left: 38%;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #d49060;
+        }
+        .zen-bamboo {
+            position: absolute;
+            top: 6%;
+            right: 7%;
+            width: 2.5px;
+            height: 38%;
+            background: linear-gradient(180deg, #3a5a30 0%, #4d7340 100%);
+            transform: rotate(7deg);
+            transform-origin: top right;
+            border-radius: 2px;
+        }
+        .zen-bamboo::before {
+            content: '';
+            position: absolute;
+            top: 22%;
+            left: -11px;
+            width: 14px;
+            height: 4px;
+            background: #4d7340;
+            border-radius: 50% 100% 50% 100%;
+            transform: rotate(-30deg);
+        }
+        .zen-bamboo::after {
+            content: '';
+            position: absolute;
+            top: 56%;
+            left: 1px;
+            width: 14px;
+            height: 4px;
+            background: #4d7340;
+            border-radius: 100% 50% 100% 50%;
+            transform: rotate(-18deg);
+        }
         /* ==================== End Japanese Zen ==================== */
 
         /* ==================== Skeuomorphism / 拟物化 ==================== */
@@ -2695,6 +2775,10 @@
                 <div class="cyber-sub">// 2049 //</div>
             `,
             'preview-zen': `
+                <div class="zen-paper"></div>
+                <div class="zen-mountain"></div>
+                <div class="zen-sakura"></div>
+                <div class="zen-bamboo"></div>
                 <div class="zen-circle"></div>
                 <div class="zen-title">静寂</div>
                 <div class="zen-stamp">禅</div>
