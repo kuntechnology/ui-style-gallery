@@ -257,150 +257,303 @@
             position: sticky;
             top: 100px;
             height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
         }
 
-        .filter-section {
+        /* ---------- 风格演进时间线 ---------- */
+        .timeline {
             background: rgba(232, 237, 244, 0.65);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
+            padding: 1.125rem 0.875rem 0.875rem;
             box-shadow: var(--shadow-md);
         }
 
-        .filter-title {
-            font-size: 0.75rem;
-            font-weight: 600;
+        .section-title {
+            font-size: 0.6875rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             color: var(--text-tertiary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.875rem;
+            padding: 0 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
         }
 
-        .filter-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .filter-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .filter-group-title {
+        .section-title-icon {
             font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
+        }
+
+        .timeline-list {
+            position: relative;
+            padding-left: 1.0625rem;
+        }
+
+        .timeline-list::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: linear-gradient(180deg, #0EA5E9 0%, #00D4FF 50%, #00FF94 100%);
+            border-radius: 2px;
+            opacity: 0.4;
+        }
+
+        .timeline-node {
+            position: relative;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .filter-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .filter-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.625rem 0.875rem;
-            border-radius: var(--radius-md);
+            padding: 0.3125rem 0.5rem;
+            border-radius: 7px;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            background: transparent;
+            user-select: none;
         }
 
-        .filter-item:hover {
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -1.0625rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
             background: var(--neu-bg);
-            color: var(--text-primary);
+            box-shadow: 1.5px 1.5px 3px var(--neu-shadow-dark), -1.5px -1.5px 3px var(--neu-shadow-light);
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .timeline-node:hover {
+            background: var(--neu-bg);
             box-shadow: var(--shadow-sm);
         }
 
-        .filter-item.active {
+        .timeline-node:hover::before {
+            box-shadow: 2px 2px 4px var(--neu-shadow-dark), -2px -2px 4px var(--neu-shadow-light);
+        }
+
+        .timeline-node.active {
             background: var(--neu-bg);
-            color: var(--primary);
-            font-weight: 600;
             box-shadow: var(--shadow-inset-sm);
         }
 
-        .filter-item input {
-            display: none;
+        .timeline-node.active::before {
+            background: linear-gradient(135deg, #00D4FF 0%, #0EA5E9 50%, #00FF94 100%);
+            box-shadow: 0 0 0 2px var(--neu-bg), 0 0 7px rgba(0, 212, 255, 0.6);
         }
 
-        .filter-checkbox {
-            width: 18px;
-            height: 18px;
+        .timeline-node.is-current::before {
+            background: linear-gradient(135deg, #00D4FF, #00FF94);
+            box-shadow: 0 0 0 2px var(--neu-bg), 0 0 6px rgba(0, 255, 148, 0.5);
+        }
+
+        .timeline-year {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            min-width: 38px;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.01em;
+            flex-shrink: 0;
+        }
+
+        .timeline-node.is-industry .timeline-year {
+            color: #94A3B8;
+            font-size: 0.625rem;
+            font-weight: 500;
+        }
+
+        .timeline-name {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .timeline-node:hover .timeline-name,
+        .timeline-node.active .timeline-name {
+            color: var(--text-primary);
+        }
+
+        .timeline-node.is-current .timeline-name::after {
+            content: ' \25C6';
+            color: #0EA5E9;
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .timeline-divider {
+            margin: 0.5rem 0 0.4375rem;
+            padding: 0 0.5rem;
+            font-size: 0.5625rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.65;
+        }
+
+        .timeline-divider::before,
+        .timeline-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neu-shadow-dark), transparent);
+        }
+
+        /* ---------- 提示词组装器 ---------- */
+        .prompt-builder {
+            background: rgba(232, 237, 244, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: var(--radius-lg);
+            padding: 1.125rem 0.875rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .builder-field {
+            margin-bottom: 0.625rem;
+        }
+
+        .builder-label {
+            display: block;
+            font-size: 0.625rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            margin-bottom: 0.3125rem;
+            padding-left: 0.375rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .builder-style-display {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            background: var(--neu-bg);
+            border-radius: 8px;
+            font-size: 0.8125rem;
+            font-weight: 700;
+            background-image: linear-gradient(135deg, #0EA5E9, #00D4FF, #00C896);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            box-shadow: var(--shadow-inset-sm);
+        }
+
+        .builder-select {
+            width: 100%;
+            padding: 0.5rem 1.75rem 0.5rem 0.75rem;
+            background-color: var(--neu-bg);
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='3'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.625rem center;
+            background-size: 10px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
+            font-size: 0.8125rem;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-inset-sm);
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .builder-select:hover {
+            color: var(--primary);
+        }
+
+        .builder-select:focus {
+            outline: none;
+            box-shadow: var(--shadow-inset-sm), 0 0 0 2px rgba(14, 165, 233, 0.25);
+        }
+
+        .builder-output {
+            background: var(--neu-bg);
+            border-radius: 8px;
+            padding: 0.625rem 0.75rem;
+            font-size: 0.6875rem;
+            line-height: 1.55;
+            color: var(--text-secondary);
+            box-shadow: var(--shadow-inset-sm);
+            margin: 0.875rem 0 0.625rem;
+            font-family: 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
+            max-height: 84px;
+            overflow-y: auto;
+            word-break: break-word;
+        }
+
+        .builder-output::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .builder-output::-webkit-scrollbar-thumb {
+            background: var(--neu-shadow-dark);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .builder-copy-btn {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            background: var(--neu-bg);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
-            flex-shrink: 0;
-            background: var(--neu-bg);
-            box-shadow: var(--shadow-inset-sm);
+            gap: 0.375rem;
+            font-family: inherit;
         }
 
-        .filter-item.active .filter-checkbox {
-            box-shadow: var(--shadow-sm);
-            background: var(--neu-bg);
-        }
-
-        .filter-item.active .filter-checkbox::after {
-            content: "\2713";
-            color: var(--primary);
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        .filter-count {
-            margin-left: auto;
-            font-size: 0.75rem;
-            background: var(--neu-bg);
-            padding: 0.125rem 0.5rem;
-            border-radius: 999px;
-            color: var(--text-tertiary);
-            box-shadow: var(--shadow-inset-sm);
-        }
-
-        .filter-item.active .filter-count {
-            background: var(--neu-bg);
-            color: var(--primary);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .stats-card {
-            background: rgba(232, 237, 244, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            color: var(--text-primary);
-            margin-top: 1.5rem;
+        .builder-copy-btn:hover {
             box-shadow: var(--shadow-md);
         }
 
-        .stats-card h4 {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+        .builder-copy-btn:active {
+            box-shadow: var(--shadow-inset-sm);
         }
 
-        .stats-card .number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
+        .builder-copy-btn.copied {
+            color: var(--success);
+            box-shadow: var(--shadow-inset-sm);
         }
 
-        .stats-card p {
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-            margin-top: 0.5rem;
+        .builder-copy-btn svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+        }
+
+        /* 卡片高亮态（被时间轴选中时） */
+        .style-card.highlighted {
+            box-shadow: var(--shadow-lg), 0 0 0 2px rgba(0, 212, 255, 0.65), 0 0 28px rgba(0, 212, 255, 0.4);
+            transform: translateY(-4px) scale(1.015);
+            z-index: 10;
         }
 
         /* ==================== Content Area ==================== */
@@ -1866,20 +2019,10 @@
                 top: 0;
             }
 
-            .filter-section {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .filter-group {
+            .timeline,
+            .prompt-builder {
                 flex: 1;
-                min-width: 200px;
-                margin-bottom: 0;
-            }
-
-            .stats-card {
-                display: none;
+                min-width: 260px;
             }
         }
 
@@ -2502,118 +2645,66 @@
     <main class="main-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="filter-section">
-                <div class="filter-group">
-                    <div class="filter-group-title">📦 主流风格</div>
-                    <div class="filter-list" id="mainstreamFilters">
-                        <label class="filter-item active" data-category="mainstream" data-style="all">
-                            <input type="checkbox" checked>
-                            <span class="filter-checkbox"></span>
-                            <span>全部</span>
-                            <span class="filter-count" id="count-all">15</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="apple">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Apple/iOS</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="material">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Material Design</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="fluent">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Fluent Design</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="neumorphism">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Neumorphism</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="glass">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Glassmorphism</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="flat">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Flat Design</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="gradient">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Gradient</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="brutal">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Brutalism</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="minimal">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Minimalism</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="mainstream" data-style="dark">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>Dark Mode</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                    </div>
+            <!-- 风格演进时间线 -->
+            <div class="timeline">
+                <div class="section-title">
+                    <span class="section-title-icon">⏳</span>
+                    <span>风格演进时间线</span>
                 </div>
-                <div class="filter-group">
-                    <div class="filter-group-title">🏢 行业风格</div>
-                    <div class="filter-list" id="industryFilters">
-                        <label class="filter-item" data-category="industry" data-style="saas">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>SaaS/企业级</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="industry" data-style="finance">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>金融/银行</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="industry" data-style="ecommerce">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>电商/零售</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="industry" data-style="social">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>社交/社区</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                        <label class="filter-item" data-category="industry" data-style="gaming">
-                            <input type="checkbox">
-                            <span class="filter-checkbox"></span>
-                            <span>游戏/娱乐</span>
-                            <span class="filter-count">1</span>
-                        </label>
-                    </div>
-                </div>
+                <div class="timeline-list" id="timelineList"></div>
             </div>
-            <div class="stats-card">
-                <h4>收录风格</h4>
-                <div class="number">15+</div>
-                <p>涵盖主流设计语言与行业解决方案</p>
+
+            <!-- 提示词组装器 -->
+            <div class="prompt-builder">
+                <div class="section-title">
+                    <span class="section-title-icon">🛠</span>
+                    <span>提示词组装器</span>
+                </div>
+                <div class="builder-field">
+                    <label class="builder-label">风格 · 上方时间轴选择</label>
+                    <div class="builder-style-display" id="builderStyle">Neumorphism</div>
+                </div>
+                <div class="builder-field">
+                    <label class="builder-label">场景</label>
+                    <select class="builder-select" id="builderScene">
+                        <option value="login page">登录页 · Login</option>
+                        <option value="dashboard">仪表盘 · Dashboard</option>
+                        <option value="mobile app interface">移动 App</option>
+                        <option value="landing page">落地页 · Landing</option>
+                        <option value="product card">商品卡 · Product</option>
+                        <option value="profile page">个人主页 · Profile</option>
+                        <option value="settings page">设置页 · Settings</option>
+                        <option value="data visualization dashboard">数据可视化</option>
+                    </select>
+                </div>
+                <div class="builder-field">
+                    <label class="builder-label">色调</label>
+                    <select class="builder-select" id="builderTone">
+                        <option value="cool blue-green tones">冷色调 · 蓝绿</option>
+                        <option value="warm tones">暖色调 · 橙红</option>
+                        <option value="neutral grays">中性灰</option>
+                        <option value="high saturation vivid colors">高饱和</option>
+                        <option value="low saturation muted colors">低饱和</option>
+                        <option value="monochrome black and white">黑白单色</option>
+                    </select>
+                </div>
+                <div class="builder-field">
+                    <label class="builder-label">设备</label>
+                    <select class="builder-select" id="builderDevice">
+                        <option value="desktop web">Web 桌面</option>
+                        <option value="mobile">移动端</option>
+                        <option value="tablet">平板</option>
+                        <option value="large screen TV">大屏</option>
+                    </select>
+                </div>
+                <div class="builder-output" id="builderOutput">Design a login page in Neumorphism style with cool blue-green tones for desktop web.</div>
+                <button class="builder-copy-btn" id="builderCopyBtn" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    </svg>
+                    <span class="builder-copy-text">复制 Prompt</span>
+                </button>
             </div>
         </aside>
 
@@ -4037,13 +4128,16 @@ Skeuomorphism, skeuomorphic, iOS 6, leather, wood, brushed metal, stitching, bev
         ];
 
         // ==================== Initialize ====================
-        let activeFilters = ['all'];
+        let currentBuilderStyleId = 'neumorphism';
+        let currentBuilderStyleName = 'Neumorphism';
         let currentModalPrompt = '';
 
         document.addEventListener('DOMContentLoaded', () => {
             renderCards();
-            setupFilters();
+            renderTimeline();
+            setupBuilder();
             setupSearch();
+            highlightCurrentTimelineNode('neumorphism');
         });
 
         // ==================== Render Cards ====================
@@ -4087,85 +4181,166 @@ Skeuomorphism, skeuomorphic, iOS 6, leather, wood, brushed metal, stitching, bev
             updateVisibleCount();
         }
 
-        // ==================== Filters ====================
-        function setupFilters() {
-            document.querySelectorAll('.filter-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    const style = item.dataset.style;
-                    const category = item.dataset.category;
-                    
-                    if (style === 'all') {
-                        // Reset all filters
-                        activeFilters = ['all'];
-                        document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
-                        item.classList.add('active');
-                    } else {
-                        // Remove 'all' if selecting specific filter
-                        const allItem = document.querySelector(`.filter-item[data-style="all"]`);
-                        allItem.classList.remove('active');
-                        activeFilters = activeFilters.filter(f => f !== 'all');
-                        
-                        // Toggle current filter
-                        if (activeFilters.includes(style)) {
-                            activeFilters = activeFilters.filter(f => f !== style);
-                            item.classList.remove('active');
-                        } else {
-                            activeFilters.push(style);
-                            item.classList.add('active');
-                        }
-                        
-                        // If no filters selected, select 'all'
-                        if (activeFilters.length === 0) {
-                            activeFilters = ['all'];
-                            allItem.classList.add('active');
-                        }
-                    }
-                    
-                    applyFilters();
+        // ==================== Timeline ====================
+        const timelineData = [
+            { id: 'bauhaus',     year: '1919',  name: 'Bauhaus', industry: false },
+            { id: 'memphis',     year: '1981',  name: 'Memphis', industry: false },
+            { id: 'skeuo',       year: '1990s', name: 'Skeuomorphism', industry: false },
+            { id: 'apple',       year: '2007',  name: 'Apple / iOS', industry: false },
+            { id: 'flat',        year: '2013',  name: 'Flat Design', industry: false },
+            { id: 'material',    year: '2014',  name: 'Material Design', industry: false },
+            { id: 'brutal',      year: '2016',  name: 'Brutalism', industry: false },
+            { id: 'fluent',      year: '2017',  name: 'Fluent Design', industry: false },
+            { id: 'gradient',    year: '2017',  name: 'Gradient', industry: false },
+            { id: 'minimal',     year: '2017',  name: 'Minimalism', industry: false },
+            { id: 'dark',        year: '2018',  name: 'Dark Mode', industry: false },
+            { id: 'neumorphism', year: '2019',  name: 'Neumorphism', industry: false, current: true },
+            { id: 'glass',       year: '2020',  name: 'Glassmorphism', industry: false },
+            { id: 'cyber',       year: '2020',  name: 'Cyberpunk', industry: false },
+            { id: 'clay',        year: '2021',  name: 'Claymorphism', industry: false },
+            { id: 'zen',         year: '2022',  name: 'Zen 日式', industry: false },
+            { id: 'saas',        year: '场景',  name: 'SaaS / 企业级', industry: true },
+            { id: 'finance',     year: '场景',  name: '金融 / 银行', industry: true },
+            { id: 'ecommerce',   year: '场景',  name: '电商 / 零售', industry: true },
+            { id: 'social',      year: '场景',  name: '社交 / 社区', industry: true },
+            { id: 'gaming',      year: '场景',  name: '游戏 / 娱乐', industry: true }
+        ];
+
+        function renderTimeline() {
+            const list = document.getElementById('timelineList');
+            if (!list) return;
+            let html = '';
+            let dividerInserted = false;
+            timelineData.forEach((item) => {
+                if (item.industry && !dividerInserted) {
+                    html += '<div class="timeline-divider"><span>应用场景</span></div>';
+                    dividerInserted = true;
+                }
+                const cls = [
+                    'timeline-node',
+                    item.industry ? 'is-industry' : '',
+                    item.current ? 'is-current' : ''
+                ].filter(Boolean).join(' ');
+                html += '<div class="' + cls + '" data-style-id="' + item.id + '">' +
+                        '<span class="timeline-year">' + item.year + '</span>' +
+                        '<span class="timeline-name">' + item.name + '</span>' +
+                        '</div>';
+            });
+            list.innerHTML = html;
+            list.querySelectorAll('.timeline-node').forEach(node => {
+                node.addEventListener('click', () => {
+                    const id = node.dataset.styleId;
+                    highlightCurrentTimelineNode(id);
+                    scrollToCard(id);
+                    setBuilderStyle(id);
                 });
             });
         }
 
+        function highlightCurrentTimelineNode(id) {
+            document.querySelectorAll('.timeline-node').forEach(n => {
+                n.classList.toggle('active', n.dataset.styleId === id);
+            });
+        }
+
+        function scrollToCard(id) {
+            const card = document.querySelector('.style-card[data-id="' + id + '"]');
+            if (!card) return;
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.classList.add('highlighted');
+            setTimeout(() => card.classList.remove('highlighted'), 2000);
+        }
+
+        // ==================== Builder ====================
+        function setBuilderStyle(id) {
+            const item = timelineData.find(t => t.id === id);
+            if (!item) return;
+            currentBuilderStyleId = item.id;
+            currentBuilderStyleName = item.name;
+            const el = document.getElementById('builderStyle');
+            if (el) el.textContent = item.name;
+            rebuildPrompt();
+        }
+
+        function rebuildPrompt() {
+            const sceneEl = document.getElementById('builderScene');
+            const toneEl = document.getElementById('builderTone');
+            const deviceEl = document.getElementById('builderDevice');
+            const outEl = document.getElementById('builderOutput');
+            if (!sceneEl || !toneEl || !deviceEl || !outEl) return;
+            const scene = sceneEl.value;
+            const tone = toneEl.value;
+            const device = deviceEl.value;
+            const styleName = currentBuilderStyleName;
+            outEl.textContent = 'Design a ' + scene + ' in ' + styleName + ' style with ' + tone + ' for ' + device + '.';
+        }
+
+        function setupBuilder() {
+            ['builderScene', 'builderTone', 'builderDevice'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('change', rebuildPrompt);
+            });
+            const btn = document.getElementById('builderCopyBtn');
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    const text = document.getElementById('builderOutput').textContent;
+                    navigator.clipboard.writeText(text).then(() => {
+                        btn.classList.add('copied');
+                        const txt = btn.querySelector('.builder-copy-text');
+                        if (txt) txt.textContent = '已复制 ✓';
+                        showToast('Prompt 已复制', 'success');
+                        setTimeout(() => {
+                            btn.classList.remove('copied');
+                            if (txt) txt.textContent = '复制 Prompt';
+                        }, 1500);
+                    });
+                });
+            }
+            rebuildPrompt();
+        }
+
+        // ==================== Filters (search only) ====================
         function applyFilters() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchEl = document.getElementById('searchInput');
+            const searchTerm = (searchEl ? searchEl.value : '').toLowerCase();
             const cards = document.querySelectorAll('.style-card');
             let visibleCount = 0;
-
             cards.forEach(card => {
                 const id = card.dataset.id;
                 const style = styleData.find(s => s.id === id);
-                const matchesFilter = activeFilters.includes('all') || activeFilters.includes(id);
-                const matchesSearch = style.name.toLowerCase().includes(searchTerm) || 
-                                     style.features.some(f => f.toLowerCase().includes(searchTerm));
-
-                if (matchesFilter && matchesSearch) {
+                if (!style) return;
+                const matchesSearch = !searchTerm ||
+                    style.name.toLowerCase().includes(searchTerm) ||
+                    style.features.some(f => f.toLowerCase().includes(searchTerm));
+                if (matchesSearch) {
                     card.classList.remove('hidden');
                     visibleCount++;
                 } else {
                     card.classList.add('hidden');
                 }
             });
-
-            document.getElementById('visibleCount').textContent = visibleCount;
-            document.getElementById('emptyState').classList.toggle('show', visibleCount === 0);
+            const visEl = document.getElementById('visibleCount');
+            if (visEl) visEl.textContent = visibleCount;
+            const emptyEl = document.getElementById('emptyState');
+            if (emptyEl) emptyEl.classList.toggle('show', visibleCount === 0);
         }
 
         function resetFilters() {
-            activeFilters = ['all'];
-            document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
-            document.querySelector('.filter-item[data-style="all"]').classList.add('active');
-            document.getElementById('searchInput').value = '';
+            const searchEl = document.getElementById('searchInput');
+            if (searchEl) searchEl.value = '';
             applyFilters();
         }
 
         // ==================== Search ====================
         function setupSearch() {
-            document.getElementById('searchInput').addEventListener('input', applyFilters);
+            const el = document.getElementById('searchInput');
+            if (el) el.addEventListener('input', applyFilters);
         }
 
         function updateVisibleCount() {
             const visible = document.querySelectorAll('.style-card:not(.hidden)').length;
-            document.getElementById('visibleCount').textContent = visible;
+            const el = document.getElementById('visibleCount');
+            if (el) el.textContent = visible;
         }
 
         // ==================== Copy Functions ====================
