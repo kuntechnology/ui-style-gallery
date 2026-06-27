@@ -1,77 +1,110 @@
 # ui-style-gallery
 
-UI Design Style Gallery — 15 mainstream & industry UI design styles with live mock previews.
+UI Design Style Gallery — **28 mainstream / industry / culture / trending UI design styles** with live mock previews. 现已支持深色模式、全文搜索与无障碍键盘导航。
 
 🌐 **Live demo:** https://kuntechnology.github.io/ui-style-gallery/
 
 ## What's inside
 
-15 风格全覆盖：
+**28 张风格卡全覆盖：**
 
-**主流风格 (10)**
-- Apple / iOS · Material Design · Fluent Design
-- Neumorphism · Glassmorphism · Flat Design · Gradient
-- Brutalism · Minimalism · Dark Mode
+**主流风格 (10)** — Apple / iOS · Material Design · Fluent Design · Neumorphism · Glassmorphism · Flat Design · Gradient · Brutalism · Minimalism · Dark Mode
 
-**行业风格 (5)**
-- SaaS / 企业级 · 金融 / 银行 · 电商 / 零售 · 社交 / 社区 · 游戏 / 娱乐
+**行业风格 (5)** — SaaS / 企业级 · 金融 / 银行 · 电商 / 零售 · 社交 / 社区 · 游戏 / 娱乐
+
+**趋势 / 视觉变体 (6)** — Claymorphism · Bauhaus · Memphis · Cyberpunk · Japanese Zen (culture) · Skeuomorphism
+
+**v4.x 浪潮 (7)** — 3D Glass Type · Bento Grid · Anti-Design · Y2K Aero · Pastel Gradient Mesh · Liquid Glass · Solarpunk · Frutiger Aero
 
 每张卡片：
-- 微型 UI mock 预览（纯 HTML+CSS，无图片依赖，体现该风格的视觉特征）
+- 微型 UI mock 预览（纯 HTML+CSS，无图片依赖，精准体现该风格的视觉特征）
 - 设计特点标签
 - 一键复制提示词（可直接喂给 AI 生图）
 - 详情弹窗
 
+## 核心能力 (v4.6 起)
+
+- 🌓 **深色模式**：右上角 🌙/☀️ 一键切换，默认跟随系统 `prefers-color-scheme`，状态记忆到 localStorage
+- 🔎 **全文搜索**：搜索范围覆盖卡片名称、副标题、标签、prompt 全文与分类（支持中英文混合）
+- ♿ **无障碍**：
+  - 所有交互元素配 `aria-label`，modal 配 `role="dialog"` + `aria-modal`
+  - 卡片支持键盘 Tab 聚焦，按 Enter / Space 触发详情
+  - 全局 `:focus-visible` 蓝色描边焦点提示
+  - 文字对比度满足 WCAG AA 4.5:1（`--text-tertiary` 从 #95A0B4 提到 #6F7B92）
+- 📱 **社交分享**：Open Graph + Twitter Card meta，分享到 IM / 社媒生成预览卡片
+- ✨ **过渡动画**：卡片筛选 fade-in 缓动，告别 display:none 硬切换
+- 📋 **剪贴板**：星标收藏 prompt → 一键复制全部 / 下载为 .md
+
 ## 技术栈
-单文件 `index.html`，零依赖、零构建。所有预览用 CSS 绘制以保证轻量。
+单文件 `index.html`，零依赖、零构建。所有预览用 CSS 绘制以保证轻量。GitHub Pages 静态托管。
+
+---
 
 ## Changelog / 优化记录
 
-### 2026-06-24 v1 → v2 风格 mock 增强
+### 2026-06-28 v4.6 体验深耕 + a11y + 暗色模式
 
-**目标**：解决"prompt 文本描述详尽，但 mock 实际渲染过于稀疏 / 不充分体现风格特征"的偏差问题。
+**目标**：从「展示型画廊」向「生产力工具」的第一步，补齐基础体验欠债（暗色模式 / 搜索覆盖 / a11y / 过渡动画）。
 
-**提交链**：
-- `7b3dd8f` baseline — 原始 15 张风格卡
-- `07a2c15` Stage 1 全局布局 — `.styles-grid` minmax 从 380px 降到 320px，平均每屏多容纳 1 列卡片
-- `c41b10b` Stage 2 P0 单卡（Fluent / Neumorphism / Gradient）
-- `e3c1b80` Stage 3 P1 单卡（Flat / Dark / SaaS）
-- `7ae593d` Fix 修复 Stage 2/3 并发 edit 丢失的 HTML / CSS 块
+**改动清单**：
+- ✅ **暗色模式**：新增 `[data-theme="dark"]` CSS 变量覆盖；header 加切换按钮；localStorage 持久化；默认跟随系统
+- ✅ **全文搜索**：搜索范围从 `name + features` 扩展到 `name + subtitle + features + prompt + category`，支持中英文混合
+- ✅ **a11y 基础补齐**：所有交互元素 `aria-label`；modal `role="dialog" aria-modal="true"`；卡片 `role="listitem" tabindex="0"`；全局 `:focus-visible`；`--text-tertiary` 对比度 #95A0B4 → #6F7B92（满足 AA 4.5:1）
+- ✅ **键盘交互**：卡片支持 Tab 聚焦 + Enter/Space 触发详情；modal Esc 关闭已存在
+- ✅ **卡片点击职责分工**：卡片整体 click → openModal（提升发现性）；底部 📋 按钮快速复制（stopPropagation）；⋯ 按钮显式触发详情
+- ✅ **过渡动画**：`.style-card` 加 `cardFadeIn` 入场动画（0.3s opacity + translateY）
+- ✅ **SEO / 社交分享**：`<head>` 增加 description / keywords / OG / Twitter Card / theme-color meta
+- ✅ **README 全面重写**：清掉积压 8 版的 changelog 技术债，重新说明 28 卡构成与新能力
 
-**6 张卡增强明细**：
-- **#3 Fluent**：加 Pivot 顶部 Tab + 双按钮（主 + Ghost）
-- **#4 Neumorphism**：加 rich card 内阴影 + label/value + inset 进度条
-- **#7 Gradient**：双 blob 渐变背景 + 玻璃 CTA 按钮
-- **#6 Flat**：emoji 图标（📋🔔✅）+ 大号数字（12 / 3 / 28）
-- **#10 Dark**：紫色 #bb86fc 发光点 + 98% 大数值统计
-- **#11 SaaS**：KPI 条（ARR $1.2M / 用户 +12%）
+**未做（按版本拆分到 v4.7+）**：
+- 场景化标签（每张卡补"适合场景"字段）→ v4.7
+- Prompt 参数化（主色调 / 视觉强度滑杆）→ v4.7
+- 风格对比视图（side-by-side）→ v4.8
+- 导出 Markdown / JSON → v4.8
+- 数据与代码分离（styles.json + 渲染函数）→ v5.0
 
-**9 张未动卡**：Apple / Material / Glass / Brutal / Minimal / 金融 / Ecommerce / Social / Gaming — mock 与 prompt 已基本对齐，强改反而破坏风格本意。
+### 2026-06-24 ~ 2026-06-25 v4.0 → v4.5 28 卡扩展
 
-**回退**：如需回到任意快照，`git reset --hard <commit-sha>` 即可。
+**总卡数**：21 → 28；新增 7 张潮流风格 + 文化变体卡。
+
+| 版本 | 风格 | 类别 | 视觉锚点 |
+|------|------|------|---------|
+| v4.0 | 3D Glass Type | trending | 厚玻璃挤出字体 + 折射高光 |
+| v4.1 | Bento Grid | trending | 不规则圆角卡片网格 + 巨数字 |
+| v4.2 | Anti-Design | trending | 故意错位 + 字体冲突 + 暴力配色 |
+| v4.3 | Y2K Aero | trending | 透明气泡 + 镜面玻璃 + 千禧光晕 |
+| v4.4 | Pastel Gradient Mesh | trending | 柔和糖果色网格渐变 |
+| v4.5 | Liquid Glass | trending | iOS 26 风格 + 流光液态玻璃 |
+| v4.5 | Solarpunk | culture | 苔藓绿 + 黄铜 + 太阳能板 + 攀缘植物 |
+| v4.5 | Frutiger Aero | trending | 2004-2013 风 + 草地天空 + 透明气泡 |
+
+每张卡独立 commit，可单点回退。
 
 ### 2026-06-24 v3.1 → v3.6 长期维护阶段 — 新增 6 张风格卡
 
-**目标**：在原 15 张基础上扩展风格语料库，新卡与老卡的视觉/语义相似度 ≤30%，覆盖此前未触及的设计语言维度（视觉趋势 / 历史经典 / 文化地域）。
-
 **总卡数**：15 → 21；新增分类：`culture`（首次引入）。
 
-**逐张 commit**（每张独立 commit 便于单点回退）：
+| 版本 | 风格 | 类别 | 视觉锚点 |
+|------|------|------|---------|
+| v3.1 | Claymorphism 黏土风 | mainstream | 三色彩泥圆角图标 + 厚重投影 |
+| v3.2 | Bauhaus 包豪斯 | mainstream | 红圆+蓝方+黄三角+黑横线 |
+| v3.3 | Memphis 孟菲斯 | mainstream | 奶油底+多色几何元素+影边框 |
+| v3.4 | Cyberpunk 赛博朋克 | mainstream | 紫粉霓虹+赛博网格+扫描线 |
+| v3.5 | Japanese Zen 日式和风 | **culture** | 奶白纸底+黑色Enso圆+竖排"静寂"+朱红印章 |
+| v3.6 | Skeuomorphism 拟物化 | mainstream | 木纹+皮革+LCD凹陷绿光+3D红按钮 |
 
-| 版本 | 风格 | 类别 | 视觉锚点 | Commit |
-|------|------|------|---------|--------|
-| v3.1 | Claymorphism 黏土风 | mainstream | 三色彩泥圆角图标 + 厚重投影 + 圆润胶囊按钮 | `d50f5eb8` |
-| v3.2 | Bauhaus 包豪斯 | mainstream | 红圆 + 蓝方 + 黄三角 + 黑横线 + "01" 巨数字 + 竖排 "FORM FOLLOWS FUNCTION" | `87b600a7` |
-| v3.3 | Memphis 孟菲斯 | mainstream | 奶油底 + 绿圆点 + 蓝斜条 + 黄豆子 + 粉锯齿 + 粉影边框 "RETRO 80s" | `711b1d52` |
-| v3.4 | Cyberpunk 赛博朋克 | mainstream | 紫粉霓虹渐变 + 赛博网格 + 发光太阳 + 扫描线 + 青色 "NEO TOKYO" + "// 2049 //" | `e9575960` |
-| v3.5 | Japanese Zen 日式和风 | **culture** | 奶白纸底 + 黑色 Enso 圆 + 竖排"静寂" + 红印章"禅" + "わび·さび" | `3eadd0df` |
-| v3.6 | Skeuomorphism 拟物化 | mainstream | 木纹外框 + 皮革内框 + LCD 凹陷绿光 "▶ 2:34 / 4:12" + 3D 红色按钮 PREV/PLAY/NEXT | `0a980356` |
+**踩坑教训（已沉淀）**：v3.1 首次 push 时使用 `gh api -f content="$(base64 -w 0 index.html)"` 因文件超 ARG_MAX 触发 `Argument list too long`，gh 返回空 blob SHA 但 tree+commit+ref 仍成功，导致线上 index.html 被替换成 14 字节空文件。已 `force=true` 回滚后改用 `python3` 写 JSON 临时文件 + `gh api --input` stdin 喂入。孤立污染 commit `cbac9e88` 仍存在 git 历史中。
 
-**相似度自评**：与原 15 张最高相似度 30%（Zen vs Minimal，留白哲学相近但 Zen 的竖排日文 + 朱红印章使其语义独立）；其余均 ≤25%。
+### 2026-06-24 v1 → v2 风格 mock 增强
 
-**踩坑教训**：v3.1 首次 push 时使用 `gh api -f content="$(base64 -w 0 index.html)"` 因文件超 ARG_MAX 触发 `Argument list too long`，gh 返回空 blob SHA 但 tree+commit+ref 仍成功，导致线上 index.html 被替换成 14 字节空文件。已 `force=true` 回滚到 `52682823` 后改用 `python3` 写 base64+JSON 临时文件 + `gh api --input` stdin 喂入的方式重发成功。孤立污染 commit `cbac9e88` 仍存在 git 历史中作为教训。
+**目标**：解决"prompt 文本描述详尽，但 mock 实际渲染过于稀疏"的偏差问题。
 
-**单卡回退命令**：
+6 张卡增强（Fluent / Neumorphism / Gradient / Flat / Dark / SaaS），9 张未动（已对齐）。
+
+---
+
+## 单卡 / 单版本回退命令
+
 ```bash
 gh api -X PATCH repos/kuntechnology/ui-style-gallery/git/refs/heads/main \
   --field sha=<目标 commit-sha> --field force=true
