@@ -1,0 +1,12 @@
+{
+  "name": "ui-style-gallery",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "UI 设计风格集锦 —— 可复用、可索引、可访问的 UI 主题参考库",
+  "scripts": {
+    "build": "node tools/render-static.mjs",
+    "test": "node tools/selftest.mjs",
+    "verify": "node tools/render-static.mjs && node tools/selftest.mjs"
+  }
+}

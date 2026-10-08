@@ -24,6 +24,7 @@
 // ============================================================
 
 import { PROMPTS } from './prompts.js';
+import { TAXONOMY } from './taxonomy.js';
 
 // 年代 / 分类 的中文标签映射（供 UI 渲染）
 export const ERA_LABELS = {
@@ -40,7 +41,8 @@ export const CATEGORY_LABELS = {
   creative: '创意风格',
 };
 
-export const STYLES = [
+// 原始字段（不含分类体系）；分类维度由 taxonomy.js 合并，保持单一数据源。
+const RAW_STYLES = [
   {
     id: 'apple',
     name: 'Apple/iOS 风格',
@@ -686,4 +688,52 @@ export const STYLES = [
     isNew: false,
   },
 ];
+
+// ---- 合并分类体系（taxonomy.js）后对外暴露 ----
+export const STYLES = RAW_STYLES.map((s) => ({ ...s, ...(TAXONOMY[s.id] || {}) }));
+
+// ---- P1 筛选体系：多选组合的 Chips 分组 ----
+export const PARADIGM_LABELS = {
+  os: '操作系统',
+  flat: '扁平',
+  glass: '玻璃拟物',
+  skeuo: '3D 拟物',
+  editorial: '编辑排版',
+  retrofuture: '复古未来',
+  other: '其他',
+};
+
+export const TONE_LABELS = {
+  light: '浅色',
+  dark: '深色',
+  vivid: '高饱和',
+  muted: '低饱和',
+};
+
+export const SCENE_LABELS = {
+  saas: 'SaaS',
+  finance: '金融',
+  ecommerce: '电商',
+  social: '消费社交',
+  gaming: '游戏电竞',
+  oriental: '文化东方',
+  tool: '工具效率',
+};
+
+// FILTER_GROUPS：驱动筛选栏渲染，可自由增减维度
+export const FILTER_GROUPS = [
+  { key: 'paradigm', label: '范式', multi: false, options: PARADIGM_LABELS },
+  { key: 'tone', label: '色调', multi: false, options: TONE_LABELS },
+  { key: 'era', label: '年代', multi: false, options: ERA_LABELS },
+  { key: 'scenes', label: '场景', multi: true, options: SCENE_LABELS },
+];
+
+// SORT_OPTIONS：驱动排序下拉
+export const SORT_OPTIONS = [
+  { key: 'default', label: '默认排序' },
+  { key: 'new', label: '最新收录' },
+  { key: 'name', label: '名称 A-Z' },
+  { key: 'era', label: '按年代' },
+];
+
 

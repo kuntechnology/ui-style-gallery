@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kuntechnology.github.io/ui-style-gallery/sitemap.xml
