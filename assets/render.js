@@ -38,7 +38,7 @@ export function cardHTML(style) {
                     <button class="card-star-btn" data-star-id="${style.id}" onclick="event.stopPropagation(); toggleClipboard('${style.id}', this);" title="加入剪贴板" aria-label="将 ${escapeHtml(style.name)} 加入提示词剪贴板">☆</button>
                     <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
                         <input type="checkbox" class="compare-check" data-compare-id="${style.id}" aria-label="选择 ${escapeHtml(style.name)} 加入对比">
-                        <span class="compare-mark" aria-hidden="true"></span>
+                        <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
                 <div class="card-preview">
