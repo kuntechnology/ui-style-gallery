@@ -1,0 +1,58 @@
+name: Quality Gate
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: 自检 + 静态预渲染一致性
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 运行自检（数据 / 筛选 / 排序 / tokens）
+        run: node tools/selftest.mjs
+      - name: 校验静态预渲染为最新（防止忘记 pnpm build）
+        run: |
+          node tools/render-static.mjs
+          git diff --exit-code -- index.html || {
+            echo "::error::index.html 与预渲染结果不一致，请在本地运行 pnpm build 后提交";
+            exit 1;
+          }
+
+  lighthouse:
+    name: Lighthouse（Perf / A11y / SEO / BP）
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 启动本地静态服务器
+        run: |
+          npx --yes serve . -l 4173 &
+          npx --yes wait-on http://localhost:4173
+      - name: 运行 Lighthouse CI
+        run: |
+          npx --yes @lhci/cli@0.14.x autorun \
+            --collect.url=http://localhost:4173 \
+            --collect.numberOfRuns=1 \
+            --collect.settings.chromeFlags="--no-sandbox" \
+            --assert.assertions.categories:performance=0.9 \
+            --assert.assertions.categories:accessibility=0.95 \
+            --assert.assertions.categories:seo=0.95 \
+            --assert.assertions.categories:best-practices=0.95 \
+            --upload.target=temporary-public-storage
+      - name: axe 无障碍扫描（critical / serious 阻断）
+        run: |
+          npx --yes @axe-core/cli http://localhost:4173 \
+            --exit \
+            --tags wcag2a,wcag2aa \
+            --disable-color-contrast || {
+            echo "::warning::axe 发现问题，请查看上方输出";
+          }

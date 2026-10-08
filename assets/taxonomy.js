@@ -40,4 +40,22 @@ export const TAXONOMY = {
   liquid:       { paradigm: 'glass',       tone: 'vivid', scenes: ['saas', 'social'] },
   solarpunk:    { paradigm: 'other',       tone: 'vivid', scenes: ['social', 'tool'] },
   frutiger:     { paradigm: 'retrofuture', tone: 'light', scenes: ['social', 'tool'] },
+
+  // ---- P2 新增 16 个风格 ----
+  'linear-dark':     { paradigm: 'flat',       tone: 'dark',  scenes: ['saas', 'tool'] },
+  vaporwave:         { paradigm: 'retrofuture', tone: 'vivid', scenes: ['social', 'gaming'] },
+  'terminal-cli':    { paradigm: 'other',      tone: 'dark',  scenes: ['tool'] },
+  spatial:           { paradigm: 'glass',      tone: 'dark',  scenes: ['saas', 'social'] },
+  aurora:            { paradigm: 'other',      tone: 'vivid', scenes: ['saas', 'social'] },
+  'art-deco':        { paradigm: 'editorial',  tone: 'dark',  scenes: ['finance', 'ecommerce'] },
+  'ai-native':       { paradigm: 'flat',       tone: 'dark',  scenes: ['saas', 'tool'] },
+  'retro-os':        { paradigm: 'skeuo',      tone: 'light', scenes: ['tool', 'gaming'] },
+  pixel:             { paradigm: 'retrofuture', tone: 'vivid', scenes: ['gaming'] },
+  'neo-chinese':     { paradigm: 'editorial',  tone: 'muted', scenes: ['oriental', 'ecommerce'] },
+  'health-wearable': { paradigm: 'flat',       tone: 'dark',  scenes: ['tool'] },
+  eink:              { paradigm: 'flat',       tone: 'muted', scenes: ['tool'] },
+  'senior-friendly': { paradigm: 'flat',       tone: 'light', scenes: ['tool', 'finance'] },
+  holographic:       { paradigm: 'other',      tone: 'dark',  scenes: ['social', 'ecommerce'] },
+  'luxury-ecommerce':{ paradigm: 'editorial',  tone: 'light', scenes: ['ecommerce'] },
+  'calm-tech':       { paradigm: 'flat',       tone: 'muted', scenes: ['tool', 'social'] },
 };

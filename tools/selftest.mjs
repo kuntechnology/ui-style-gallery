@@ -62,7 +62,9 @@ const UI = globalThis.window.UI_GALLERY;
 
 /* ---------- 1. 数据完整性 ---------- */
 console.log('\n[1] 数据完整性');
-ok('STYLES 数量为 28', UI.STYLES.length === 28, '实际 ' + UI.STYLES.length);
+const TOTAL = 44;
+ok('STYLES 数量为 ' + TOTAL, UI.STYLES.length === TOTAL, '实际 ' + UI.STYLES.length);
+ok('新增（isNew）风格数为 16', UI.STYLES.filter((s) => s.isNew).length === 16, '实际 ' + UI.STYLES.filter((s) => s.isNew).length);
 const REQUIRED = ['id','name','nameEn','era','category','tags','summary','description','features','tokens','bestFor','avoidFor','a11yNote','aiPrompt','demo','isNew','paradigm','tone','scenes'];
 ok('所有风格必备字段齐备', UI.STYLES.every((s) => REQUIRED.every((k) => s[k] !== undefined)));
 ok('id 唯一', new Set(UI.STYLES.map((s) => s.id)).size === UI.STYLES.length);
@@ -76,11 +78,11 @@ const visCount = () => Number(els['visibleCount'].textContent);
 
 reset();
 UI.applyState();
-ok('默认可见 = 28', visCount() === 28, '实际 ' + visCount());
+ok('默认可见 = ' + TOTAL, visCount() === TOTAL, '实际 ' + visCount());
 
 UI.state.filters.paradigm = 'os';
 UI.applyState();
-ok('范式=操作系统 命中数 > 0 且 < 28', visCount() > 0 && visCount() < 28, '实际 ' + visCount());
+ok('范式=操作系统 命中数 > 0 且 < ' + TOTAL, visCount() > 0 && visCount() < TOTAL, '实际 ' + visCount());
 
 reset();
 UI.state.filters.tone = 'dark';
@@ -98,7 +100,7 @@ UI.state.filters.paradigm = 'os';
 UI.state.filters.era = 'classic';
 UI.applyState();
 const combo = visCount();
-ok('范式+年代 组合筛选生效（≤ 单条件）', combo <= 28 && combo >= 0, '实际 ' + combo);
+ok('范式+年代 组合筛选生效（≤ 单条件）', combo <= TOTAL && combo >= 0, '实际 ' + combo);
 
 reset();
 UI.state.search = '玻璃';

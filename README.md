@@ -1,111 +1,178 @@
-# ui-style-gallery
+# UI Style Gallery · UI 设计风格集锦
 
-UI Design Style Gallery — **28 mainstream / industry / culture / trending UI design styles** with live mock previews. 现已支持深色模式、全文搜索与无障碍键盘导航。
+一个**可复用、可索引、可访问**的 UI 主题参考库：**44 种 UI 设计风格**，每种都带一个纯 CSS 绘制的微型 UI mock（无外部图片）、设计 tokens、适用/不适用场景、无障碍提示与一段可直接喂给 AI 的提示词。
 
-🌐 **Live demo:** https://kuntechnology.github.io/ui-style-gallery/
+🌐 **在线访问：** https://kuntechnology.github.io/ui-style-gallery/
 
-## What's inside
-
-**28 张风格卡全覆盖：**
-
-**主流风格 (10)** — Apple / iOS · Material Design · Fluent Design · Neumorphism · Glassmorphism · Flat Design · Gradient · Brutalism · Minimalism · Dark Mode
-
-**行业风格 (5)** — SaaS / 企业级 · 金融 / 银行 · 电商 / 零售 · 社交 / 社区 · 游戏 / 娱乐
-
-**趋势 / 视觉变体 (6)** — Claymorphism · Bauhaus · Memphis · Cyberpunk · Japanese Zen (culture) · Skeuomorphism
-
-**v4.x 浪潮 (7)** — 3D Glass Type · Bento Grid · Anti-Design · Y2K Aero · Pastel Gradient Mesh · Liquid Glass · Solarpunk · Frutiger Aero
-
-每张卡片：
-- 微型 UI mock 预览（纯 HTML+CSS，无图片依赖，精准体现该风格的视觉特征）
-- 设计特点标签
-- 一键复制提示词（可直接喂给 AI 生图）
-- 详情弹窗
-
-## 核心能力 (v4.6 起)
-
-- 🌓 **深色模式**：右上角 🌙/☀️ 一键切换，默认跟随系统 `prefers-color-scheme`，状态记忆到 localStorage
-- 🔎 **全文搜索**：搜索范围覆盖卡片名称、副标题、标签、prompt 全文与分类（支持中英文混合）
-- ♿ **无障碍**：
-  - 所有交互元素配 `aria-label`，modal 配 `role="dialog"` + `aria-modal`
-  - 卡片支持键盘 Tab 聚焦，按 Enter / Space 触发详情
-  - 全局 `:focus-visible` 蓝色描边焦点提示
-  - 文字对比度满足 WCAG AA 4.5:1（`--text-tertiary` 从 #95A0B4 提到 #6F7B92）
-- 📱 **社交分享**：Open Graph + Twitter Card meta，分享到 IM / 社媒生成预览卡片
-- ✨ **过渡动画**：卡片筛选 fade-in 缓动，告别 display:none 硬切换
-- 📋 **剪贴板**：星标收藏 prompt → 一键复制全部 / 下载为 .md
-
-## 技术栈
-单文件 `index.html`，零依赖、零构建。所有预览用 CSS 绘制以保证轻量。GitHub Pages 静态托管。
+> 单页设计：所有风格都在同一个页面通过 `#style-<slug>` 锚点 / 详情弹窗查看，不做多页跳转。
 
 ---
 
-## Changelog / 优化记录
+## 一、能力总览
 
-### 2026-06-28 v4.6 体验深耕 + a11y + 暗色模式
-
-**目标**：从「展示型画廊」向「生产力工具」的第一步，补齐基础体验欠债（暗色模式 / 搜索覆盖 / a11y / 过渡动画）。
-
-**改动清单**：
-- ✅ **暗色模式**：新增 `[data-theme="dark"]` CSS 变量覆盖；header 加切换按钮；localStorage 持久化；默认跟随系统
-- ✅ **全文搜索**：搜索范围从 `name + features` 扩展到 `name + subtitle + features + prompt + category`，支持中英文混合
-- ✅ **a11y 基础补齐**：所有交互元素 `aria-label`；modal `role="dialog" aria-modal="true"`；卡片 `role="listitem" tabindex="0"`；全局 `:focus-visible`；`--text-tertiary` 对比度 #95A0B4 → #6F7B92（满足 AA 4.5:1）
-- ✅ **键盘交互**：卡片支持 Tab 聚焦 + Enter/Space 触发详情；modal Esc 关闭已存在
-- ✅ **卡片点击职责分工**：卡片整体 click → openModal（提升发现性）；底部 📋 按钮快速复制（stopPropagation）；⋯ 按钮显式触发详情
-- ✅ **过渡动画**：`.style-card` 加 `cardFadeIn` 入场动画（0.3s opacity + translateY）
-- ✅ **SEO / 社交分享**：`<head>` 增加 description / keywords / OG / Twitter Card / theme-color meta
-- ✅ **README 全面重写**：清掉积压 8 版的 changelog 技术债，重新说明 28 卡构成与新能力
-
-**未做（按版本拆分到 v4.7+）**：
-- 场景化标签（每张卡补"适合场景"字段）→ v4.7
-- Prompt 参数化（主色调 / 视觉强度滑杆）→ v4.7
-- 风格对比视图（side-by-side）→ v4.8
-- 导出 Markdown / JSON → v4.8
-- 数据与代码分离（styles.json + 渲染函数）→ v5.0
-
-### 2026-06-24 ~ 2026-06-25 v4.0 → v4.5 28 卡扩展
-
-**总卡数**：21 → 28；新增 7 张潮流风格 + 文化变体卡。
-
-| 版本 | 风格 | 类别 | 视觉锚点 |
-|------|------|------|---------|
-| v4.0 | 3D Glass Type | trending | 厚玻璃挤出字体 + 折射高光 |
-| v4.1 | Bento Grid | trending | 不规则圆角卡片网格 + 巨数字 |
-| v4.2 | Anti-Design | trending | 故意错位 + 字体冲突 + 暴力配色 |
-| v4.3 | Y2K Aero | trending | 透明气泡 + 镜面玻璃 + 千禧光晕 |
-| v4.4 | Pastel Gradient Mesh | trending | 柔和糖果色网格渐变 |
-| v4.5 | Liquid Glass | trending | iOS 26 风格 + 流光液态玻璃 |
-| v4.5 | Solarpunk | culture | 苔藓绿 + 黄铜 + 太阳能板 + 攀缘植物 |
-| v4.5 | Frutiger Aero | trending | 2004-2013 风 + 草地天空 + 透明气泡 |
-
-每张卡独立 commit，可单点回退。
-
-### 2026-06-24 v3.1 → v3.6 长期维护阶段 — 新增 6 张风格卡
-
-**总卡数**：15 → 21；新增分类：`culture`（首次引入）。
-
-| 版本 | 风格 | 类别 | 视觉锚点 |
-|------|------|------|---------|
-| v3.1 | Claymorphism 黏土风 | mainstream | 三色彩泥圆角图标 + 厚重投影 |
-| v3.2 | Bauhaus 包豪斯 | mainstream | 红圆+蓝方+黄三角+黑横线 |
-| v3.3 | Memphis 孟菲斯 | mainstream | 奶油底+多色几何元素+影边框 |
-| v3.4 | Cyberpunk 赛博朋克 | mainstream | 紫粉霓虹+赛博网格+扫描线 |
-| v3.5 | Japanese Zen 日式和风 | **culture** | 奶白纸底+黑色Enso圆+竖排"静寂"+朱红印章 |
-| v3.6 | Skeuomorphism 拟物化 | mainstream | 木纹+皮革+LCD凹陷绿光+3D红按钮 |
-
-**踩坑教训（已沉淀）**：v3.1 首次 push 时使用 `gh api -f content="$(base64 -w 0 index.html)"` 因文件超 ARG_MAX 触发 `Argument list too long`，gh 返回空 blob SHA 但 tree+commit+ref 仍成功，导致线上 index.html 被替换成 14 字节空文件。已 `force=true` 回滚后改用 `python3` 写 JSON 临时文件 + `gh api --input` stdin 喂入。孤立污染 commit `cbac9e88` 仍存在 git 历史中。
-
-### 2026-06-24 v1 → v2 风格 mock 增强
-
-**目标**：解决"prompt 文本描述详尽，但 mock 实际渲染过于稀疏"的偏差问题。
-
-6 张卡增强（Fluent / Neumorphism / Gradient / Flat / Dark / SaaS），9 张未动（已对齐）。
+| 能力 | 说明 |
+|------|------|
+| 🔎 搜索 | 覆盖名称 / 英文名 / 概述 / 标签 / 特点 / 适用场景 / 提示词 |
+| 🧭 多维筛选 | **范式**（操作系统/扁平/玻璃拟物/3D拟物/编辑排版/复古未来/其他）· **色调**（浅色/深色/高饱和/低饱和）· **年代**（经典/现代/当代/未来）· **场景**（SaaS/金融/电商/消费社交/游戏电竞/文化东方/工具效率） |
+| ↕️ 排序 | 默认 / 最新收录 / 名称 / 年代 |
+| 🧩 对比模式 | 勾选 2–3 个风格 → tokens 表格 + 并排 mini demo |
+| ⭐ 收藏置顶 | localStorage 持久化，可置顶 |
+| 🎨 复制 CSS Variables | 一键把该风格 tokens 复制为 `:root { … }` 代码块 |
+| 💬 复制 AI 提示词 | 一键复制该风格的生成提示词 |
+| 🔗 URL 状态同步 | `?q=&paradigm=&tone=&era=&scenes=&sort=&cmp=&view=` + `#style-slug`，刷新/分享可还原 |
+| 🌓 深色模式 | 跟随系统，可手动切换，记忆到 localStorage |
+| 📋 剪贴板 | 收藏提示词 → 一键复制全部 / 下载 `.md` |
+| ♿ 无障碍 | 键盘可达、可见焦点环、aria 标注、44px 触控目标、`prefers-reduced-motion` 全站禁用动效 |
+| 🔍 SEO | 静态预渲染 44 张卡片 + JSON-LD（ItemList + 44 CreativeWork）、OG/Twitter、canonical、sitemap.xml、robots.txt |
 
 ---
 
-## 单卡 / 单版本回退命令
+## 二、项目结构
+
+```
+ui-style-gallery/
+├── index.html                 # 唯一入口页：结构 + 内联样式 + 静态预渲染内容 + 模块引用
+├── assets/
+│   ├── tokens.css             # 统一 design tokens（--radius-* / --shadow-* / --blur-* / --motion-* / --ease-*）
+│   ├── styles.config.js       # ★ 数据源：44 个风格的结构化配置 + 分类/排序定义
+│   ├── taxonomy.js            # 各风格的 范式/色调/场景 映射
+│   ├── previews.js            # 28 个基础 demo 标记（程序化提取）+ 合并新 demo
+│   ├── previews.extra.js      # P2 新增 16 个 demo 标记
+│   ├── prompts.js             # 既有 28 条提示词库
+│   ├── subtitles.js           # 卡片副标题映射
+│   ├── render.js              # 卡片渲染（浏览器与 Node 共用，保证 SSR 一致）
+│   └── app.js                 # 交互逻辑：筛选/排序/对比/收藏/URL 同步/详情/剪贴板/主题
+├── tools/
+│   ├── render-static.mjs      # 静态预渲染：把卡片与 JSON-LD 写进 index.html（SEO 首屏可爬取）
+│   └── selftest.mjs           # 无第三方依赖的自检（数据/筛选/排序/tokens/映射）
+├── sitemap.xml / robots.txt   # SEO
+├── package.json               # build / test / verify 脚本
+└── docs/ci-lighthouse.yml     # Lighthouse + axe 质量门禁模板（见下）
+```
+
+技术栈：**纯静态、零框架、零构建依赖**。JS 为原生 ES Modules，CSS 用自定义属性分层，托管于 GitHub Pages。
+
+---
+
+## 三、如何新增一个风格（三步）
+
+**Step 1 — 加配置**：在 `assets/styles.config.js` 的 `RAW_STYLES` 数组中追加一条（字段见下），并在 `assets/taxonomy.js` 补该 `id` 的分类映射。
+
+```js
+{
+  id: 'my-style', name: '我的风格', nameEn: 'My Style',
+  era: 'contemporary', category: 'creative',
+  tags: ['关键词1', '关键词2'],
+  summary: '一句话概述（≤40字）',
+  description: '2-3 句独特描述，用于 SEO 与详情页。',
+  features: ['特点1', /* 6-8 个 */],
+  tokens: { radius: '12px', shadow: '…', blur: '0px', motionDuration: '220ms',
+            motionEasing: 'cubic-bezier(.4,0,.2,1)',
+            palette: { primary: '#…', bg: '#…', text: '#…', accent: '#…' } },
+  bestFor: ['适合场景…'], avoidFor: ['不适用…'],
+  a11yNote: '对比度 / 动效注意事项。',
+  demo: 'preview-my-style',   // 对应 previews 里的 key
+  aiPrompt: 'A paragraph of English prompt usable for AI UI generation.',
+  isNew: true,
+}
+```
+
+**Step 2 — 写 demo**：在 `assets/previews.extra.js` 增加 `'preview-my-style'` 标记。要求：卡片大小的**静态场景**、**无外部图片**（emoji 或内联 SVG）、优先用内联样式；如需动画，类名前缀 `pv-` 并在 `index.html` 的样式块里加 `@media (prefers-reduced-motion: no-preference)` 包裹的 keyframes。
+
+**Step 3 — 跑验收**：
 
 ```bash
-gh api -X PATCH repos/kuntechnology/ui-style-gallery/git/refs/heads/main \
-  --field sha=<目标 commit-sha> --field force=true
+pnpm verify      # = build（静态预渲染）+ test（自检）
 ```
+
+两项全绿即完成。GitHub Pages 推送后自动更新。
+
+---
+
+## 四、本地开发与验收
+
+```bash
+# 本地预览（任意静态服务器即可）
+npx serve .
+
+# 静态预渲染（把 44 张卡片 + JSON-LD 写进 index.html）
+pnpm build
+
+# 数据/逻辑自检（在 Node 中用极简 DOM 桩执行 app.js）
+pnpm test
+
+# 两者一起
+pnpm verify
+```
+
+### Lighthouse 跑法
+
+```bash
+npx lighthouse https://kuntechnology.github.io/ui-style-gallery/ \
+  --preset=desktop --view
+# 移动端模拟（默认）
+npx lighthouse https://kuntechnology.github.io/ui-style-gallery/ \
+  --form-factor=mobile --throttling-method=simulate --view
+```
+
+**验收基线**：Performance ≥ 90（移动端模拟）、Accessibility ≥ 95、SEO ≥ 95、Best Practices ≥ 95。
+
+`docs/ci-lighthouse.yml` 同时提供 **Lighthouse CI + axe 扫描** 的 GitHub Actions 工作流模板（含上述阈值门禁）。启用方式：
+
+```bash
+mkdir -p .github/workflows
+cp docs/ci-lighthouse.yml .github/workflows/ci.yml
+```
+
+> 说明：该文件未直接放在 `.github/workflows/`，是因为当前自动化推送所用的 OAuth App 缺少 `workflow` 权限；你用自己的账号提交即可直接放入 `.github/workflows/`。
+
+### 无障碍扫描
+
+```bash
+npx @axe-core/cli https://kuntechnology.github.io/ui-style-gallery/
+```
+
+目标：**0 critical / 0 serious**。
+
+---
+
+## 五、设计原则
+
+1. **不破坏风格本身**：工程重构不改变任一 demo 的视觉本质。
+2. **数据驱动**：渲染层只读配置，新增风格 = 新增配置 + 一个 demo。
+3. **token 先行**：动效、圆角、阴影、模糊全部走 `:root` 令牌，无散落硬编码。
+4. **无障碍是默认值**：键盘可达、对比达标、尊重 `prefers-reduced-motion`。
+5. **渐进增强**：核心内容静态可爬取，交互能力由 JS 增强。
+
+---
+
+## 六、44 种风格一览
+
+**主流 (10)**：Apple HIG · Material Design · Fluent Design · Neumorphism · Glassmorphism · Flat · Gradient · Brutalism · Minimalism · Dark Mode
+
+**行业 (5)**：SaaS · 金融 · 电商 · 社交 · 游戏
+
+**趋势 / 视觉 (13)**：Claymorphism · Bauhaus · Memphis · Cyberpunk · 日式禅意 · Skeuomorphism · 3D Glass Type · Bento Grid · Anti-Design · Y2K Aero · Pastel Gradient Mesh · Liquid Glass · Solarpunk · Frutiger Aero
+
+**P2 新增 (16)**：Linear 深色 SaaS · Vaporwave 蒸汽波 · 终端/命令行 · 空间界面 · Aurora 极光渐变 · Art Deco 装饰艺术 · AI 原生界面 · 复古桌面系统 · 8-bit 像素 · 新中式/国潮 · 健康穿戴 · 电子墨水 · 适老化设计 · 全息镭射 · 奢侈品电商 · 平静科技
+
+---
+
+## 七、更新记录
+
+### P2 — 内容扩充与质量
+- 新增 16 个风格（数据 + 纯 CSS demo + do/don't + a11yNote + aiPrompt），总数 28 → **44**
+- 补齐全部风格的分类映射（范式/色调/场景）
+- README 重写：结构说明 / 新增风格三步 / Lighthouse 与 axe 跑法
+- 接入 Lighthouse CI + axe 质量门禁工作流
+
+### P1 — 信息架构 / SEO / 性能 / 无障碍
+- 四维分类体系与多选筛选、排序、对比模式、收藏置顶、列表视图、URL 状态同步
+- SEO：静态预渲染 + JSON-LD + OG/Twitter + sitemap + robots
+- 性能：`content-visibility`、固定 `aspect-ratio`、字体 .cn 优先并自动回退
+- 无障碍：焦点管理、aria、reduced-motion、44px 触控目标
+
+### P0 — 数据驱动重构
+- 抽出 `styles.config.js` / `previews.js` / `prompts.js` / `subtitles.js` / `tokens.css` / `app.js`
+- `index.html` 移除 2400+ 行内联脚本，改为 ES Modules 加载（259KB → 142KB）
+- 新增 `#style-<slug>` 可分享锚点与详情增强

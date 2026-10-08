@@ -3751,7 +3751,27 @@
         }
         body { padding-bottom: 84px; }
 
-    </style>
+    
+/* ================= P2 新增 demo 动效（尊重 prefers-reduced-motion） ================= */
+.pv-caret { display:inline-block; width:7px; height:13px; background:#4AF626; vertical-align:-2px; }
+.pv-aurora-blob { position:absolute; top:-30%; left:-20%; width:140%; height:150%;
+  background:
+    radial-gradient(40% 40% at 30% 35%, rgba(99,102,241,.95), transparent 70%),
+    radial-gradient(35% 35% at 72% 62%, rgba(34,211,238,.85), transparent 70%),
+    radial-gradient(45% 45% at 55% 18%, rgba(168,85,247,.8), transparent 70%);
+  filter: blur(28px); opacity:.95; }
+.pv-holo { position:absolute; inset:-40%;
+  background: conic-gradient(from 0deg, #84CCFF, #FFB3E6, #FFE9A8, #A9FFE0, #84CCFF);
+  filter: blur(24px) saturate(1.25); opacity:.55; mix-blend-mode: screen; }
+@media (prefers-reduced-motion: no-preference) {
+  .pv-caret { animation: pv-blink 1s steps(2, end) infinite; }
+  .pv-aurora-blob { animation: pv-drift 14s ease-in-out infinite alternate; }
+  .pv-holo { animation: pv-sheen 9s ease-in-out infinite alternate; }
+}
+@keyframes pv-blink { 0%,50% { opacity:1; } 50.01%,100% { opacity:0; } }
+@keyframes pv-drift { from { transform: translate3d(-6%,-4%,0) scale(1); } to { transform: translate3d(8%,6%,0) scale(1.18); } }
+@keyframes pv-sheen { from { transform: rotate(0deg); } to { transform: rotate(35deg); } }
+</style>
 <!-- JSONLD_START -->
     <script type="application/ld+json">
     {
@@ -3759,7 +3779,7 @@
       "@type": "ItemList",
       "name": "UI 设计风格集锦 | Design Style Gallery",
       "description": "UI 设计风格集锦：可复制的设计风格 Prompt 卡片库，为 AI 生图与前端设计提供精准提示词。",
-      "numberOfItems": 28,
+      "numberOfItems": 44,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -4067,6 +4087,182 @@
             "description": "Frutiger Aero 是 2004-2013 年间的设计记忆：清透的蓝绿、玻璃高光与水滴质感、贴合自然的意象，配合无衬线字体。它既是科技的乐观，也是 Z 世代宝贵的怀旧符号。",
             "url": "https://kuntechnology.github.io/ui-style-gallery/#style-frutiger",
             "keywords": "千禧,水感,光泽,复古未来,清透蓝绿,水感光泽,玻璃高光,自然意象,无衬线字体,千禧乐观,怀旧清新"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Linear 深色 SaaS / Linear Dark",
+            "description": "Linear 把深色做成了工作中的安静：近黑底 #0B0B0F、极细的 1px 分隔线与一个克制到几乎唯一的强调色。高密度信息被精心对齐，动效短促（120–160ms）如机械键盘般干脆。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-linear-dark",
+            "keywords": "深色,高密度,命令面板,克制强调,近黑底,高密度表格,单一强调色,命令面板,细线分隔,短促动效,键盘优先"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 30,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Vaporwave 蒸汽波 / Vaporwave",
+            "description": "Vaporwave 把 1980s 的商业美学抽离语境再拼贴：粉紫渐变天空、带扫描线的落日、向地平线消失的霓虹网格，以及带色差的等宽字体。它表达一种对旧时代的陌生感与乡愁。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-vaporwave",
+            "keywords": "80s怀旧,霓虹,网格地平线,故障艺术,粉紫渐变,霓虹网格地板,扫描线落日,色差故障,等宽标题,超现实怀旧"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 31,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "终端/命令行 / Terminal CLI",
+            "description": "终端美学把界面还原为文本：等宽网格、单色荧光强调、光标与命令历史构成全部交互。它效率极高、信息纯粹，但门槛也高，是\"给懂的人看\"的界面语言。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-terminal-cli",
+            "keywords": "等宽字体,键盘优先,命令历史,无圆角,等宽字体,光标闪烁,命令历史,荧光强调,纯文本层级,无圆角,键盘优先"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 32,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "空间界面 / Spatial / visionOS",
+            "description": "空间界面（visionOS 一脉）把窗口从平面抬入空间：悬浮的半透明材质、柔和的环境反射与顶部高光共同营造\"存在感\"。内容被大幅留白包围，交互以注视与手势为主，强调沉静与从容。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-spatial",
+            "keywords": "空间计算,深度材质,悬浮玻璃,大间距,悬浮玻璃面板,深度与视差,环境反射,顶部高光,大圆角,大间距,沉静氛围"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 33,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Aurora 极光渐变 / Aurora Gradient",
+            "description": "Aurora 用几个模糊到极致的彩色光斑在深色底上缓慢漂移，像极光一样为页面注入呼吸感。它是氛围优先的方案，代价是文字必须额外加半透明衬底才能保证可读。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-aurora",
+            "keywords": "流体光斑,柔和渐变,Hero 背景,防眩光,流体光斑,柔和多色渐变,深色画布,文字衬底,缓慢漂移,大留白,高级氛围"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 34,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Art Deco 装饰艺术 / Art Deco",
+            "description": "Art Deco 诞生于 1920s，用对称的扇形放射、平行细线与金黑对比表达工业时代的奢华。它天生适合庄重且昂贵的场合，用在日常工具上会显得过于仪式化。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-art-deco",
+            "keywords": "金黑配色,扇形放射,细线几何,奢华,金黑配色,扇形放射纹,细金线几何,对称构图,衬线标题,宽阔字距"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 35,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "AI 原生界面 / AI-Native / Copilot",
+            "description": "AI 原生界面把模型当作第一公民：输入框即入口、回答以流式逐字浮现、操作以建议芯片的形式就近给出。它改变了“人找功能”的旧范式，但也要求在不确定时清晰暴露 AI 的边界与来源。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-ai-native",
+            "keywords": "对话优先,生成式,建议式交互,内联辅助,对话优先,流式逐字输出,建议式操作芯片,内联辅助,来源标注,紫蓝强调,暂停/重播"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 36,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "复古桌面系统 / Retro macOS / Win95",
+            "description": "Retro OS 复刻 1990 年代的桌面隐喻：可拖动的窗口、1px 硬边立体阴影、像素字体与彩色标题栏渐变。它唤起强烈的怀旧感，但控件尺寸与信息密度与现代触屏习惯相冲突。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-retro-os",
+            "keywords": "窗口边框,像素字体,怀旧,凸起质感,窗口标题栏,3D 凸起边框,像素字体,灰白配色,彩色标题渐变,硬边阴影"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 37,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "8-bit 像素 / 8-bit Pixel Art",
+            "description": "8-bit 像素风用极少的颜色和硬边像素点复刻 1980s 游戏机的视觉限制。它的魅力正来自限制，但抗锯齿的缺失让它在细文字上几乎不可读。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-pixel",
+            "keywords": "有限色板,点阵,游戏 UI,硬边,有限色板,点阵字体,硬边像素,无抗锯齿,HUD 血条,复古游戏机"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 38,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "新中式/国潮 / Neo-Chinese",
+            "description": "新中式把传统符号翻译为现代界面：朱砂红、黛蓝、宣纸米白与克制的印章点缀。它真正的难点不是堆砌龙凤，而是用留白与比例传达东方气质。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-neo-chinese",
+            "keywords": "朱砂黛蓝,宣纸,印章,留白,朱砂与黛蓝,宣纸米白,印章元素,衬线标题,现代留白,横竖对比"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 39,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "健康穿戴 / Health Wearable",
+            "description": "健康穿戴界面强调一眼可读：环状进度、大号数字与低刺激的深色底，让状态在抬手间被理解。它克制提示、尊重隐私，把“少打扰”视为美德。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-health-wearable",
+            "keywords": "圆环进度,大数字,平静UI,隐私提示,圆环进度,大数字,深色护眼,平静动效,隐私状态提示,高对比"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 40,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "电子墨水 / E-ink / Low-power",
+            "description": "电子墨水界面为低刷新率与纸感阅读而设计：只用灰度层级、不做动画、强调长文可读性。它牺牲了炫技，换来内容本身的突出与极低的干扰。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-eink",
+            "keywords": "灰度层级,无动画,低功耗,阅读优先,灰度层级,零动画,衬线正文,低对比柔和,阅读优先,极简装饰"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 41,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "适老化设计 / Senior Friendly",
+            "description": "适老化设计把可读性与可操作性放在首位：18px 以上的正文、≥ 3:1 的大字对比、直接用动词描述动作的按钮，以及宽松的触控区域。它不是\"变丑\"，而是把清晰当作尊重。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-senior-friendly",
+            "keywords": "大字号,高对比,动词按钮,无障碍,大字号正文,高对比,动词化按钮,超大触控区,低信息密度,明确反馈"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 42,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "全息镭射 / Holographic",
+            "description": "全息镭射模拟薄膜干涉：随角度变化的青、品红、金多色光泽在深色底上流动，像卡牌或票券的反光。它极具未来感，但虹彩会吞掉文字，必须为内容准备不透明兜底层。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-holographic",
+            "keywords": "薄膜干涉,虹彩,金属光泽,文字兜底,虹彩渐变,金属光泽,角度变色,深色衬底,文字兜底层,限量感"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 43,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "奢侈品电商 / E-commerce Luxury",
+            "description": "奢侈品电商拒绝叫卖：用近乎画廊级的留白、优雅的衬线与克制的动效，让商品本身成为主角。价格与购买入口被有意淡化，转而营造\"值得等待\"的从容感。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-luxury-ecommerce",
+            "keywords": "大留白,衬线,克制动效,高单价,画廊级留白,优雅衬线,克制动效,中性色系,大图优先,低调价格"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 44,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "平静科技 / Calm Technology",
+            "description": "平静科技（Calm Technology）主张技术应退居环境边缘：只在信息真正必要时，用最轻的视觉或触觉方式提示。它把\"少打扰\"作为核心指标，克制到近乎沉默。",
+            "url": "https://kuntechnology.github.io/ui-style-gallery/#style-calm-tech",
+            "keywords": "低打扰,边缘呈现,只显必要,环境感知,低打扰,边缘化呈现,只显必要变化,柔和色调,慢节奏,环境感知"
           }
         }
       ]
@@ -5550,6 +5746,774 @@
                         📋 复制提示词
                     </button>
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('frutiger')" aria-label="查看 Frutiger Aero 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-linear-dark" data-id="linear-dark" data-category="industry" data-era="contemporary" data-paradigm="flat" data-tone="dark" data-scenes="saas tool" role="listitem" tabindex="0" aria-label="Linear 深色 SaaS 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="linear-dark" onclick="event.stopPropagation(); toggleClipboard('linear-dark', this);" title="加入剪贴板" aria-label="将 Linear 深色 SaaS 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="linear-dark" aria-label="选择 Linear 深色 SaaS 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-linear-dark">
+    <div style="position:absolute;inset:0;background:#0B0B0F;color:#E6E6E9;padding:14px;display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#8B8B94;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#5E6AD2;"></span> Linear · Inbox
+      </div>
+      <div style="background:#141418;border:1px solid #23232c;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;font-size:12px;">
+        <span style="color:#8B8B94;border:1px solid #2a2a34;border-radius:4px;padding:0 4px;font-size:10px;">⌘K</span>
+        <span style="color:#8B8B94;">命令面板…</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:11px;">
+        <div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:6px;background:#121216;">
+          <span>ENG-142 修复登录态</span><span style="color:#5E6AD2;">In&nbsp;Progress</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:6px;">
+          <span style="color:#C9C9D1;">ENG-138 优化查询</span><span style="color:#8B8B94;">Todo</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:6px;">
+          <span style="color:#C9C9D1;">ENG-131 文档站</span><span style="color:#3FB950;">Done</span>
+        </div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Linear 深色 SaaS</div>
+                        <div class="card-subtitle">Linear Dark</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-industry">行业风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">近黑底</span><span class="feature-item">高密度表格</span><span class="feature-item">单一强调色</span><span class="feature-item">命令面板</span><span class="feature-item">细线分隔</span><span class="feature-item">短促动效</span><span class="feature-item">键盘优先</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('linear-dark')" aria-label="复制 Linear 深色 SaaS 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('linear-dark')" aria-label="查看 Linear 深色 SaaS 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-vaporwave" data-id="vaporwave" data-category="creative" data-era="classic" data-paradigm="retrofuture" data-tone="vivid" data-scenes="social gaming" role="listitem" tabindex="0" aria-label="Vaporwave 蒸汽波 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="vaporwave" onclick="event.stopPropagation(); toggleClipboard('vaporwave', this);" title="加入剪贴板" aria-label="将 Vaporwave 蒸汽波 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="vaporwave" aria-label="选择 Vaporwave 蒸汽波 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-vaporwave">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1A0033 0%,#3B0A5A 55%,#FF6EC7 100%);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;">
+      <div style="position:absolute;left:0;right:0;top:50%;height:150px;background-image:linear-gradient(rgba(255,110,199,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,110,199,.6) 1px,transparent 1px);background-size:14px 14px;transform:perspective(120px) rotateX(58deg);transform-origin:top;"></div>
+      <div style="position:absolute;left:50%;top:26%;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#FFE45E,#FF6EC7 72%);box-shadow:0 0 32px #FF6EC7;"></div>
+      <div style="position:relative;font-size:20px;font-weight:800;letter-spacing:.24em;color:#EAEAEA;text-shadow:2px 0 #00E5FF,-2px 0 #FF2E88;">V A P O R</div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Vaporwave 蒸汽波</div>
+                        <div class="card-subtitle">Vaporwave</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-creative">创意风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">粉紫渐变</span><span class="feature-item">霓虹网格地板</span><span class="feature-item">扫描线落日</span><span class="feature-item">色差故障</span><span class="feature-item">等宽标题</span><span class="feature-item">超现实怀旧</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('vaporwave')" aria-label="复制 Vaporwave 蒸汽波 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('vaporwave')" aria-label="查看 Vaporwave 蒸汽波 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-terminal-cli" data-id="terminal-cli" data-category="industry" data-era="classic" data-paradigm="other" data-tone="dark" data-scenes="tool" role="listitem" tabindex="0" aria-label="终端/命令行 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="terminal-cli" onclick="event.stopPropagation(); toggleClipboard('terminal-cli', this);" title="加入剪贴板" aria-label="将 终端/命令行 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="terminal-cli" aria-label="选择 终端/命令行 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-terminal-cli">
+    <div style="position:absolute;inset:0;background:#0C0C0C;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.95;color:#D0D0D0;">
+      <div><span style="color:#4AF626;">➜</span> <span style="color:#6E6E6E;">~/app</span> npm run build</div>
+      <div style="color:#8A8A8A;">✓ built in 1.24s</div>
+      <div><span style="color:#4AF626;">➜</span> <span style="color:#6E6E6E;">~/app</span> deploy --prod</div>
+      <div style="color:#8A8A8A;">uploading 42 files…</div>
+      <div><span style="color:#4AF626;">➜</span> <span style="color:#6E6E6E;">~/app</span><span class="pv-caret">▍</span></div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">终端/命令行</div>
+                        <div class="card-subtitle">Terminal CLI</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-industry">行业风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">等宽字体</span><span class="feature-item">光标闪烁</span><span class="feature-item">命令历史</span><span class="feature-item">荧光强调</span><span class="feature-item">纯文本层级</span><span class="feature-item">无圆角</span><span class="feature-item">键盘优先</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('terminal-cli')" aria-label="复制 终端/命令行 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('terminal-cli')" aria-label="查看 终端/命令行 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-spatial" data-id="spatial" data-category="creative" data-era="future" data-paradigm="glass" data-tone="dark" data-scenes="saas social" role="listitem" tabindex="0" aria-label="空间界面 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="spatial" onclick="event.stopPropagation(); toggleClipboard('spatial', this);" title="加入剪贴板" aria-label="将 空间界面 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="spatial" aria-label="选择 空间界面 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-spatial">
+    <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 28%,#2A2D3A,#0C0D12 70%);display:flex;align-items:center;justify-content:center;">
+      <div style="width:74%;padding:16px;border-radius:24px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 50px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.45);color:#EDEFF5;text-align:center;">
+        <div style="width:56px;height:56px;margin:0 auto 10px;border-radius:16px;background:linear-gradient(135deg,#7C9CFF,#B18CFF);box-shadow:0 10px 24px rgba(124,156,255,.45);"></div>
+        <div style="font-size:12px;font-weight:700;">Spatial Window</div>
+        <div style="font-size:10px;opacity:.75;margin-top:4px;">depth · materials · presence</div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">空间界面</div>
+                        <div class="card-subtitle">Spatial / visionOS</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-creative">创意风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">悬浮玻璃面板</span><span class="feature-item">深度与视差</span><span class="feature-item">环境反射</span><span class="feature-item">顶部高光</span><span class="feature-item">大圆角</span><span class="feature-item">大间距</span><span class="feature-item">沉静氛围</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('spatial')" aria-label="复制 空间界面 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('spatial')" aria-label="查看 空间界面 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-aurora" data-id="aurora" data-category="creative" data-era="contemporary" data-paradigm="other" data-tone="vivid" data-scenes="saas social" role="listitem" tabindex="0" aria-label="Aurora 极光渐变 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="aurora" onclick="event.stopPropagation(); toggleClipboard('aurora', this);" title="加入剪贴板" aria-label="将 Aurora 极光渐变 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="aurora" aria-label="选择 Aurora 极光渐变 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-aurora">
+    <div style="position:absolute;inset:0;background:#0A0A1A;overflow:hidden;">
+      <div class="pv-aurora-blob"></div>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+        <div style="font-size:17px;font-weight:800;color:#F8FAFC;background:rgba(10,10,26,.45);padding:5px 14px;border-radius:12px;">Aurora</div>
+        <div style="font-size:11px;color:#C7D2FE;background:rgba(10,10,26,.4);padding:3px 11px;border-radius:9px;">柔和光斑 · 空间感</div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Aurora 极光渐变</div>
+                        <div class="card-subtitle">Aurora Gradient</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-creative">创意风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">流体光斑</span><span class="feature-item">柔和多色渐变</span><span class="feature-item">深色画布</span><span class="feature-item">文字衬底</span><span class="feature-item">缓慢漂移</span><span class="feature-item">大留白</span><span class="feature-item">高级氛围</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('aurora')" aria-label="复制 Aurora 极光渐变 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('aurora')" aria-label="查看 Aurora 极光渐变 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-art-deco" data-id="art-deco" data-category="culture" data-era="classic" data-paradigm="editorial" data-tone="dark" data-scenes="finance ecommerce" role="listitem" tabindex="0" aria-label="Art Deco 装饰艺术 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="art-deco" onclick="event.stopPropagation(); toggleClipboard('art-deco', this);" title="加入剪贴板" aria-label="将 Art Deco 装饰艺术 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="art-deco" aria-label="选择 Art Deco 装饰艺术 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-art-deco">
+    <div style="position:absolute;inset:0;background:#0E0E0E;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 130%, rgba(201,162,39,.22) 0deg 3deg, transparent 3deg 9deg);"></div>
+      <div style="position:relative;text-align:center;padding:18px 24px;border:1px solid rgba(201,162,39,.6);">
+        <div style="height:6px;border-top:1px solid #C9A227;border-bottom:1px solid #C9A227;margin-bottom:10px;"></div>
+        <div style="font-family:Georgia,'Times New Roman',serif;font-size:24px;letter-spacing:.2em;color:#C9A227;">DECO</div>
+        <div style="height:1px;background:#C9A227;margin:9px auto;width:64px;"></div>
+        <div style="font-size:10px;letter-spacing:.34em;color:#F2E9D8;">GRAND&nbsp;HÔTEL</div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Art Deco 装饰艺术</div>
+                        <div class="card-subtitle">Art Deco</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-culture">文化风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">金黑配色</span><span class="feature-item">扇形放射纹</span><span class="feature-item">细金线几何</span><span class="feature-item">对称构图</span><span class="feature-item">衬线标题</span><span class="feature-item">宽阔字距</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('art-deco')" aria-label="复制 Art Deco 装饰艺术 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('art-deco')" aria-label="查看 Art Deco 装饰艺术 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-ai-native" data-id="ai-native" data-category="industry" data-era="future" data-paradigm="flat" data-tone="dark" data-scenes="saas tool" role="listitem" tabindex="0" aria-label="AI 原生界面 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="ai-native" onclick="event.stopPropagation(); toggleClipboard('ai-native', this);" title="加入剪贴板" aria-label="将 AI 原生界面 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="ai-native" aria-label="选择 AI 原生界面 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-ai-native">
+    <div style="position:absolute;inset:0;background:#0D0D12;padding:14px;display:flex;flex-direction:column;justify-content:space-between;color:#EDEDF2;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#9AA0AE;">
+        <span style="width:16px;height:16px;border-radius:5px;background:linear-gradient(135deg,#6E8BFF,#C08BFF);"></span> Copilot
+      </div>
+      <div style="background:#161620;border:1px solid #262633;border-radius:12px;padding:10px;font-size:11.5px;line-height:1.7;">
+        <span style="color:#9AA0AE;">你：</span>帮我总结这份周报<br>
+        <span style="color:#8FA8FF;">✦ </span>本周完成 3 项关键任务，风险 1 项…
+      </div>
+      <div style="display:flex;gap:6px;">
+        <span style="font-size:10px;padding:4px 10px;border-radius:999px;background:#1E1E2A;border:1px solid #2A2A3A;color:#C7CCDA;">重新生成</span>
+        <span style="font-size:10px;padding:4px 10px;border-radius:999px;background:#1E1E2A;border:1px solid #2A2A3A;color:#C7CCDA;">插入正文</span>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">AI 原生界面</div>
+                        <div class="card-subtitle">AI-Native / Copilot</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-industry">行业风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">对话优先</span><span class="feature-item">流式逐字输出</span><span class="feature-item">建议式操作芯片</span><span class="feature-item">内联辅助</span><span class="feature-item">来源标注</span><span class="feature-item">紫蓝强调</span><span class="feature-item">暂停/重播</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('ai-native')" aria-label="复制 AI 原生界面 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('ai-native')" aria-label="查看 AI 原生界面 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-retro-os" data-id="retro-os" data-category="culture" data-era="classic" data-paradigm="skeuo" data-tone="light" data-scenes="tool gaming" role="listitem" tabindex="0" aria-label="复古桌面系统 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="retro-os" onclick="event.stopPropagation(); toggleClipboard('retro-os', this);" title="加入剪贴板" aria-label="将 复古桌面系统 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="retro-os" aria-label="选择 复古桌面系统 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-retro-os">
+    <div style="position:absolute;inset:0;background:#008080;padding:14px;display:flex;align-items:flex-start;">
+      <div style="width:100%;background:#C0C0C0;border:2px solid #FFFFFF;border-right-color:#808080;border-bottom-color:#808080;box-shadow:1px 1px 0 #000000;font-size:11px;color:#000000;">
+        <div style="background:linear-gradient(90deg,#000080,#1084D0);color:#FFFFFF;padding:3px 6px;display:flex;justify-content:space-between;align-items:center;">
+          <span>C:\WINDOWS</span>
+          <span style="background:#C0C0C0;color:#000000;border:1px solid #FFFFFF;border-right-color:#808080;border-bottom-color:#808080;padding:0 4px;">✕</span>
+        </div>
+        <div style="padding:9px;display:flex;flex-direction:column;gap:7px;">
+          <div>📁 My Computer</div>
+          <div>📄 readme.txt</div>
+          <div style="margin-top:3px;background:#C0C0C0;border:2px solid #FFFFFF;border-right-color:#808080;border-bottom-color:#808080;padding:2px 12px;width:fit-content;">OK</div>
+        </div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">复古桌面系统</div>
+                        <div class="card-subtitle">Retro macOS / Win95</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-culture">文化风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">窗口标题栏</span><span class="feature-item">3D 凸起边框</span><span class="feature-item">像素字体</span><span class="feature-item">灰白配色</span><span class="feature-item">彩色标题渐变</span><span class="feature-item">硬边阴影</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('retro-os')" aria-label="复制 复古桌面系统 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('retro-os')" aria-label="查看 复古桌面系统 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-pixel" data-id="pixel" data-category="creative" data-era="classic" data-paradigm="retrofuture" data-tone="vivid" data-scenes="gaming" role="listitem" tabindex="0" aria-label="8-bit 像素 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="pixel" onclick="event.stopPropagation(); toggleClipboard('pixel', this);" title="加入剪贴板" aria-label="将 8-bit 像素 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="pixel" aria-label="选择 8-bit 像素 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-pixel">
+    <div style="position:absolute;inset:0;background:#1A1C2C;padding:16px;display:flex;flex-direction:column;justify-content:space-between;font-family:ui-monospace,SFMono-Regular,monospace;">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.08em;color:#F4F4F4;">
+        <span>LV.7</span><span style="color:#F8D800;">◆ 1280</span>
+      </div>
+      <div>
+        <div style="font-size:10px;color:#F4F4F4;letter-spacing:.14em;margin-bottom:6px;">HP</div>
+        <div style="height:14px;background:#2A2E45;border:2px solid #111111;padding:2px;">
+          <div style="height:100%;width:62%;background:#41A6F6;"></div>
+        </div>
+        <div style="margin-top:10px;font-size:13px;color:#F8D800;letter-spacing:.14em;">PRESS&nbsp;START</div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">8-bit 像素</div>
+                        <div class="card-subtitle">8-bit Pixel Art</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-creative">创意风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">有限色板</span><span class="feature-item">点阵字体</span><span class="feature-item">硬边像素</span><span class="feature-item">无抗锯齿</span><span class="feature-item">HUD 血条</span><span class="feature-item">复古游戏机</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('pixel')" aria-label="复制 8-bit 像素 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('pixel')" aria-label="查看 8-bit 像素 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-neo-chinese" data-id="neo-chinese" data-category="culture" data-era="contemporary" data-paradigm="editorial" data-tone="muted" data-scenes="oriental ecommerce" role="listitem" tabindex="0" aria-label="新中式/国潮 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="neo-chinese" onclick="event.stopPropagation(); toggleClipboard('neo-chinese', this);" title="加入剪贴板" aria-label="将 新中式/国潮 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="neo-chinese" aria-label="选择 新中式/国潮 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-neo-chinese">
+    <div style="position:absolute;inset:0;background:#F5F1E8;padding:16px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div style="font-family:Georgia,'Times New Roman',serif;font-size:22px;color:#2B2B2B;letter-spacing:.06em;">新·中式</div>
+        <div style="width:26px;height:26px;background:#B03A2E;color:#F5F1E8;font-size:10px;display:flex;align-items:center;justify-content:center;border-radius:4px;">印</div>
+      </div>
+      <div>
+        <div style="height:1px;background:rgba(43,43,43,.25);margin-bottom:10px;"></div>
+        <div style="font-size:11px;color:#2E5A6B;letter-spacing:.22em;">ZHU&nbsp;SHA · DAI&nbsp;LAN</div>
+        <div style="font-size:11px;color:#6B6257;margin-top:5px;">留白 · 东方 · 当代</div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">新中式/国潮</div>
+                        <div class="card-subtitle">Neo-Chinese</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-culture">文化风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">朱砂与黛蓝</span><span class="feature-item">宣纸米白</span><span class="feature-item">印章元素</span><span class="feature-item">衬线标题</span><span class="feature-item">现代留白</span><span class="feature-item">横竖对比</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('neo-chinese')" aria-label="复制 新中式/国潮 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('neo-chinese')" aria-label="查看 新中式/国潮 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-health-wearable" data-id="health-wearable" data-category="industry" data-era="contemporary" data-paradigm="flat" data-tone="dark" data-scenes="tool" role="listitem" tabindex="0" aria-label="健康穿戴 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="health-wearable" onclick="event.stopPropagation(); toggleClipboard('health-wearable', this);" title="加入剪贴板" aria-label="将 健康穿戴 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="health-wearable" aria-label="选择 健康穿戴 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-health-wearable">
+    <div style="position:absolute;inset:0;background:#0B1220;padding:16px;display:flex;flex-direction:column;justify-content:space-between;color:#E8EEF9;">
+      <div style="font-size:11px;color:#8FA3BF;letter-spacing:.12em;">今日活动</div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:66px;height:66px;border-radius:50%;background:conic-gradient(#34D399 0 72%,rgba(255,255,255,.12) 72% 100%);display:flex;align-items:center;justify-content:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:#0B1220;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;">72%</div>
+        </div>
+        <div>
+          <div style="font-size:26px;font-weight:800;line-height:1;">8,420</div>
+          <div style="font-size:11px;color:#8FA3BF;margin-top:4px;">步 · 目标 12000</div>
+        </div>
+      </div>
+      <div style="font-size:10px;color:#5B7391;">🔒 健康数据仅存于本机</div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">健康穿戴</div>
+                        <div class="card-subtitle">Health Wearable</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-industry">行业风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">圆环进度</span><span class="feature-item">大数字</span><span class="feature-item">深色护眼</span><span class="feature-item">平静动效</span><span class="feature-item">隐私状态提示</span><span class="feature-item">高对比</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('health-wearable')" aria-label="复制 健康穿戴 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('health-wearable')" aria-label="查看 健康穿戴 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-eink" data-id="eink" data-category="industry" data-era="contemporary" data-paradigm="flat" data-tone="muted" data-scenes="tool" role="listitem" tabindex="0" aria-label="电子墨水 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="eink" onclick="event.stopPropagation(); toggleClipboard('eink', this);" title="加入剪贴板" aria-label="将 电子墨水 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="eink" aria-label="选择 电子墨水 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-eink">
+    <div style="position:absolute;inset:0;background:#EDEAE3;padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:#1F1F1F;font-family:Georgia,'Times New Roman',serif;">
+      <div style="font-size:11px;letter-spacing:.16em;color:#6B675E;font-family:ui-sans-serif,system-ui;">E-INK · 电子墨水</div>
+      <div style="font-size:17px;line-height:1.55;">灰度层级带来的<br>安静阅读体验</div>
+      <div style="display:flex;gap:5px;">
+        <span style="width:26px;height:9px;background:#1F1F1F;"></span>
+        <span style="width:26px;height:9px;background:#4A4A4A;"></span>
+        <span style="width:26px;height:9px;background:#7D7D7D;"></span>
+        <span style="width:26px;height:9px;background:#B4B4B4;"></span>
+        <span style="width:26px;height:9px;background:#D8D5CE;"></span>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">电子墨水</div>
+                        <div class="card-subtitle">E-ink / Low-power</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-industry">行业风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">灰度层级</span><span class="feature-item">零动画</span><span class="feature-item">衬线正文</span><span class="feature-item">低对比柔和</span><span class="feature-item">阅读优先</span><span class="feature-item">极简装饰</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('eink')" aria-label="复制 电子墨水 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('eink')" aria-label="查看 电子墨水 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-senior-friendly" data-id="senior-friendly" data-category="industry" data-era="contemporary" data-paradigm="flat" data-tone="light" data-scenes="tool finance" role="listitem" tabindex="0" aria-label="适老化设计 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="senior-friendly" onclick="event.stopPropagation(); toggleClipboard('senior-friendly', this);" title="加入剪贴板" aria-label="将 适老化设计 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="senior-friendly" aria-label="选择 适老化设计 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-senior-friendly">
+    <div style="position:absolute;inset:0;background:#FFFFFF;padding:16px;display:flex;flex-direction:column;justify-content:space-between;color:#111111;">
+      <div style="font-size:15px;font-weight:700;">早上好，王阿姨</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <button style="font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;border:none;background:#0B57D0;color:#FFFFFF;text-align:left;">👨⚕️ 联系我的医生</button>
+        <button style="font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;background:#FFFFFF;color:#111111;border:2px solid #111111;text-align:left;">💊 查看今天用药</button>
+      </div>
+      <div style="font-size:13px;color:#444444;">字体可放大至 200% 不横向滚动</div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">适老化设计</div>
+                        <div class="card-subtitle">Senior Friendly</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-industry">行业风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">大字号正文</span><span class="feature-item">高对比</span><span class="feature-item">动词化按钮</span><span class="feature-item">超大触控区</span><span class="feature-item">低信息密度</span><span class="feature-item">明确反馈</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('senior-friendly')" aria-label="复制 适老化设计 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('senior-friendly')" aria-label="查看 适老化设计 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-holographic" data-id="holographic" data-category="creative" data-era="future" data-paradigm="other" data-tone="dark" data-scenes="social ecommerce" role="listitem" tabindex="0" aria-label="全息镭射 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="holographic" onclick="event.stopPropagation(); toggleClipboard('holographic', this);" title="加入剪贴板" aria-label="将 全息镭射 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="holographic" aria-label="选择 全息镭射 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-holographic">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0E0B1A,#1B1030);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <div class="pv-holo"></div>
+      <div style="position:relative;text-align:center;">
+        <div style="font-size:20px;font-weight:800;letter-spacing:.04em;color:#F5F3FF;background:rgba(14,11,26,.55);padding:4px 13px;border-radius:10px;">HOLO</div>
+        <div style="margin-top:9px;font-size:11px;color:#D8CCFF;background:rgba(14,11,26,.5);padding:3px 11px;border-radius:8px;display:inline-block;">薄膜干涉 · 文字需衬底</div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">全息镭射</div>
+                        <div class="card-subtitle">Holographic</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-creative">创意风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">虹彩渐变</span><span class="feature-item">金属光泽</span><span class="feature-item">角度变色</span><span class="feature-item">深色衬底</span><span class="feature-item">文字兜底层</span><span class="feature-item">限量感</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('holographic')" aria-label="复制 全息镭射 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('holographic')" aria-label="查看 全息镭射 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-luxury-ecommerce" data-id="luxury-ecommerce" data-category="industry" data-era="modern" data-paradigm="editorial" data-tone="light" data-scenes="ecommerce" role="listitem" tabindex="0" aria-label="奢侈品电商 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="luxury-ecommerce" onclick="event.stopPropagation(); toggleClipboard('luxury-ecommerce', this);" title="加入剪贴板" aria-label="将 奢侈品电商 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="luxury-ecommerce" aria-label="选择 奢侈品电商 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-luxury-ecommerce">
+    <div style="position:absolute;inset:0;background:#FAF8F4;padding:16px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="font-size:10px;letter-spacing:.3em;color:#8A8378;">M&nbsp;A&nbsp;I&nbsp;S&nbsp;O&nbsp;N</div>
+      <div>
+        <div style="width:100%;height:72px;background:linear-gradient(135deg,#E7E1D6,#D7CEC0);border-radius:2px;"></div>
+        <div style="margin-top:11px;font-family:Georgia,'Times New Roman',serif;font-size:16px;color:#211E1A;">真丝长裙</div>
+        <div style="font-size:12px;color:#6B655B;margin-top:3px;letter-spacing:.04em;">¥&nbsp;12,800</div>
+      </div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">奢侈品电商</div>
+                        <div class="card-subtitle">E-commerce Luxury</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-industry">行业风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">画廊级留白</span><span class="feature-item">优雅衬线</span><span class="feature-item">克制动效</span><span class="feature-item">中性色系</span><span class="feature-item">大图优先</span><span class="feature-item">低调价格</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('luxury-ecommerce')" aria-label="复制 奢侈品电商 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('luxury-ecommerce')" aria-label="查看 奢侈品电商 详情" title="查看详情">
+                        ⋯
+                    </button>
+                </div>
+            </div>
+
+            <div class="style-card" id="style-calm-tech" data-id="calm-tech" data-category="creative" data-era="future" data-paradigm="flat" data-tone="muted" data-scenes="tool social" role="listitem" tabindex="0" aria-label="平静科技 设计风格卡片，按 Enter 查看详情">
+                <div class="card-toolbar">
+                    <button class="card-star-btn" data-star-id="calm-tech" onclick="event.stopPropagation(); toggleClipboard('calm-tech', this);" title="加入剪贴板" aria-label="将 平静科技 加入提示词剪贴板">☆</button>
+                    <label class="card-compare" title="勾选后可与其他风格对比" onclick="event.stopPropagation()">
+                        <input type="checkbox" class="compare-check" data-compare-id="calm-tech" aria-label="选择 平静科技 加入对比">
+                        <span class="compare-text" aria-hidden="true">对比</span>
+                    </label>
+                </div>
+                <div class="card-preview">
+                    <div class="preview-calm-tech">
+    <div style="position:absolute;inset:0;background:#121212;padding:18px;display:flex;flex-direction:column;justify-content:center;gap:15px;color:#E5E5E5;">
+      <div style="display:flex;align-items:center;gap:11px;font-size:12px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#4ADE80;"></span> 室内空气 · 优
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;font-size:12px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#FACC15;"></span> 路由器 · 建议重启
+      </div>
+      <div style="font-size:10px;color:#8A8A8A;margin-top:2px;">仅在状态变化时提示，其余保持沉默</div>
+    </div></div>
+                </div>
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">平静科技</div>
+                        <div class="card-subtitle">Calm Technology</div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-creative">创意风格</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-features">
+                        <h4>设计特点</h4>
+                        <div class="feature-list">
+                            <span class="feature-item">低打扰</span><span class="feature-item">边缘化呈现</span><span class="feature-item">只显必要变化</span><span class="feature-item">柔和色调</span><span class="feature-item">慢节奏</span><span class="feature-item">环境感知</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyPrompt('calm-tech')" aria-label="复制 平静科技 的提示词">
+                        📋 复制提示词
+                    </button>
+                    <button class="expand-btn" onclick="event.stopPropagation(); openModal('calm-tech')" aria-label="查看 平静科技 详情" title="查看详情">
                         ⋯
                     </button>
                 </div>
