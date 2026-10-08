@@ -1,0 +1,78 @@
+/* ============================================================
+   UI 设计风格集锦 · 统一 Design Tokens (P0)
+   ------------------------------------------------------------
+   本文件集中定义全局尺度令牌。既有 index.html 内联样式已提供
+   --radius-* / --shadow-* / 主题色，这里补齐 P0 要求的
+   --blur-* / --motion-* / --ease-* 以及语义化别名。
+   所有新代码必须引用令牌，不得散落硬编码尺寸/时长。
+   ============================================================ */
+
+:root {
+    /* ---- 圆角尺度（与既有令牌保持同值，新增 2xl 扩展） ---- */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-pill: 999px;
+
+    /* ---- 强调色（用于分类角标 / 焦点环） ---- */
+    --accent: #ec4899;
+
+    /* ---- 模糊尺度（毛玻璃 / 霓虹柔光） ---- */
+    --blur-none: 0px;
+    --blur-sm: 4px;
+    --blur-md: 10px;
+    --blur-lg: 18px;
+    --blur-xl: 28px;
+
+    /* ---- 动效时长 ---- */
+    --motion-instant: 80ms;
+    --motion-fast: 160ms;
+    --motion-base: 240ms;
+    --motion-slow: 400ms;
+    --motion-slower: 600ms;
+
+    /* ---- 缓动曲线 ---- */
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ---- 语义化组合令牌 ---- */
+    --transition-token: all var(--motion-base) var(--ease-standard);
+
+    /* ---- 结构尺寸（触控 / 焦点，满足 a11y 最小 44px） ---- */
+    --tap-target: 44px;
+    --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent, #6B7A8F) 45%, transparent);
+}
+
+/* ============================================================
+   全局无障碍：动效降级
+   1) 系统偏好 reduced-motion 时禁用全站过渡与动画；
+   2) 移动端 / reduced-transparency 时将毛玻璃降级为半透明纯色。
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 透明降级：供 html[data-transparency="reduced"] 使用（由 app.js 探测写入） */
+html[data-transparency="reduced"] .card-preview,
+html[data-transparency="reduced"] .modal {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* 统一可见焦点样式 */
+:where(a, button, input, [tabindex]):focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent, #6B7A8F) 70%, #000 0%);
+    outline-offset: 2px;
+}
