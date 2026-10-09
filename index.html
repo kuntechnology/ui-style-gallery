@@ -3619,12 +3619,20 @@
             background: var(--neu-bg, #fff); color: inherit; cursor: pointer;
         }
         .view-toggle { display: inline-flex; gap: 4px; padding: 4px; border-radius: 12px;
-            background: var(--neu-bg, #fff); border: 1px solid var(--border, rgba(0,0,0,0.1)); }
+            background: var(--neu-bg, #fff); border: 1px solid var(--border, rgba(0,0,0,0.1));
+            box-shadow: var(--shadow-inset-sm, inset 0 1px 3px rgba(0,0,0,0.08)); }
         .view-btn {
-            width: 44px; height: 36px; border: none; border-radius: 9px; cursor: pointer;
-            font-size: 16px; line-height: 1; background: transparent; color: inherit; opacity: 0.6;
+            display: inline-flex; align-items: center; gap: 6px;
+            min-height: 36px; padding: 0 14px; border: none; border-radius: 9px; cursor: pointer;
+            font-size: 13px; font-weight: 500; font-family: inherit;
+            background: transparent; color: inherit; opacity: 0.6;
+            transition: background-color 0.18s ease, color 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
         }
-        .view-btn.active { background: var(--primary, #2563eb); color: #fff; opacity: 1; }
+        .view-btn:hover { opacity: 0.95; }
+        .view-btn:focus-visible { outline: 2px solid var(--primary, #2563eb); outline-offset: 2px; }
+        .view-btn.active { background: var(--primary, #2563eb); color: #fff; opacity: 1; box-shadow: 0 2px 8px rgba(37,99,235,0.32); }
+        .view-btn .view-ico { font-size: 15px; line-height: 1; }
+        @media (max-width: 560px) { .view-btn .view-txt { display: none; } .view-btn { padding: 0 12px; } }
 
         /* ---- 多维筛选面板 ---- */
         .filter-panel { margin: 18px 0 8px; display: grid; gap: 12px; }
@@ -3695,17 +3703,76 @@
         .token-swatches { display: inline-flex; gap: 6px; flex-wrap: wrap; }
         .token-swatch { width: 18px; height: 18px; border-radius: 5px; border: 1px solid rgba(0,0,0,0.15); display: inline-block; }
 
-        /* ---- 列表视图 ---- */
+        /* ---- 提示词文本框（默认隐藏，仅列表视图展示；同时让提示词可被抓取） ---- */
+        .card-prompt-box {
+            display: none;
+            flex-direction: column;
+            background: rgba(224, 229, 236, 0.6);
+            border-radius: 12px;
+            padding: 10px 12px;
+            box-shadow: var(--shadow-inset-sm);
+            overflow: hidden;
+            text-align: left;
+        }
+        .card-prompt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+        .card-prompt-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); }
+        .card-prompt-copy {
+            font-size: 0.6875rem; padding: 3px 12px; min-height: 26px; border-radius: 999px; cursor: pointer;
+            border: 1px solid var(--border, rgba(0,0,0,0.14)); background: transparent; color: inherit;
+        }
+        .card-prompt-copy:hover { color: var(--primary); border-color: var(--primary); }
+        .card-prompt-text {
+            margin: 0; flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.72rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word;
+            color: var(--text-secondary);
+        }
+
+        /* ---- 列表视图：横向卡片（预览框体定高 + 右侧提示词文本框） ---- */
         .styles-grid.is-list { display: block; }
         .styles-grid.is-list .style-card {
-            display: grid; grid-template-columns: 200px 1fr auto; align-items: center; gap: 18px;
-            margin-bottom: 14px; padding: 14px;
+            display: grid;
+            grid-template-columns: 200px minmax(200px, 1fr) minmax(260px, 1.05fr);
+            grid-template-rows: auto auto auto 1fr;
+            gap: 4px 20px;
+            align-items: start;
+            padding: 16px;
+            margin-bottom: 14px;
         }
-        .styles-grid.is-list .card-preview { width: 200px; aspect-ratio: 16 / 10; }
-        .styles-grid.is-list .card-body { padding: 0; }
-        @media (max-width: 720px) {
+        .styles-grid.is-list .style-card:hover { transform: none; box-shadow: var(--shadow-md); }
+        .styles-grid.is-list .card-preview {
+            grid-column: 1; grid-row: 1 / -1;
+            width: 200px; height: 156px; min-height: 0; aspect-ratio: auto;
+            padding: 0.6rem; border-radius: 12px;
+        }
+        .styles-grid.is-list .card-toolbar {
+            position: static; grid-column: 2; grid-row: 1;
+            display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 2px;
+        }
+        .styles-grid.is-list .card-star-btn,
+        .styles-grid.is-list .card-compare { position: static; top: auto; left: auto; right: auto; }
+        .styles-grid.is-list .card-header {
+            grid-column: 2; grid-row: 2; padding: 0 0 10px; border-bottom: none;
+        }
+        .styles-grid.is-list .card-body { grid-column: 2; grid-row: 3; padding: 0 0 12px; }
+        .styles-grid.is-list .card-footer {
+            grid-column: 2; grid-row: 4; padding: 0; background: none; box-shadow: none; margin-top: auto;
+        }
+        .styles-grid.is-list .card-prompt-box { display: flex; grid-column: 3; grid-row: 1 / -1; height: 156px; }
+
+        @media (max-width: 900px) {
+            .styles-grid.is-list .style-card { grid-template-columns: 168px 1fr; grid-template-rows: auto auto auto 1fr; }
+            .styles-grid.is-list .card-preview { grid-column: 1; grid-row: 1 / span 2; width: 168px; height: 132px; }
+            .styles-grid.is-list .card-toolbar { grid-column: 2; grid-row: 1; }
+            .styles-grid.is-list .card-header { grid-column: 2; grid-row: 2; }
+            .styles-grid.is-list .card-body { grid-column: 1 / -1; grid-row: 3; }
+            .styles-grid.is-list .card-footer { grid-column: 1 / -1; grid-row: 4; }
+            .styles-grid.is-list .card-prompt-box { grid-column: 1 / -1; grid-row: 5; height: auto; max-height: 210px; margin-top: 10px; }
+        }
+        @media (max-width: 560px) {
             .styles-grid.is-list .style-card { grid-template-columns: 1fr; }
-            .styles-grid.is-list .card-preview { width: 100%; }
+            .styles-grid.is-list .card-preview { grid-column: 1; grid-row: 1; width: 100%; height: 150px; }
+            .styles-grid.is-list .card-toolbar { grid-column: 1; grid-row: 2; }
         }
 
         /* ---- 热门标签 / 空状态增强 ---- */
@@ -4309,8 +4376,8 @@
                         <select id="sortSelect" class="sort-select" aria-label="排序方式"></select>
                     </label>
                     <div class="view-toggle" role="group" aria-label="视图切换">
-                        <button class="view-btn active" data-view="grid" aria-label="网格视图" aria-pressed="true">⊞</button>
-                        <button class="view-btn" data-view="list" aria-label="列表视图" aria-pressed="false">☰</button>
+                        <button class="view-btn active" data-view="grid" aria-pressed="true" title="网格视图"><span class="view-ico" aria-hidden="true">▦</span><span class="view-txt">网格</span></button>
+                        <button class="view-btn" data-view="list" aria-pressed="false" title="列表视图（含提示词）"><span class="view-ico" aria-hidden="true">▤</span><span class="view-txt">列表</span></button>
                     </div>
                 </div>
             </div>
@@ -4381,6 +4448,46 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('apple')" aria-label="复制 Apple/iOS 风格 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Apple iOS风格 UI设计提示词】
+
+Design a clean, minimalist UI interface in Apple iOS style.
+
+## Style Overview
+Apple&#39;s iOS design language emphasizes clarity, deference, and depth. The interface uses subtle depth and translucency to communicate state changes and guide user attention.
+
+## Core Design Elements
+• Clean white/light gray background with subtle gradients
+• Rounded corners (16-24px radius for cards, 10-12px for buttons)
+• SF Pro font family with generous letter spacing
+• Subtle shadows creating depth hierarchy
+• Frosted glass (glassmorphism) effects for overlays and navigation
+• Smooth micro-animations and spring physics
+• High contrast between interactive and static elements
+• Generous white space (30-40% of layout)
+• SF Symbols for iconography
+• Bottom sheet navigation patterns
+
+## Color Palette
+• Primary: #007AFF (iOS Blue)
+• Background: #F5F5F7 to #FFFFFF gradient
+• Text Primary: #1D1D1F
+• Text Secondary: #86868B
+• System Colors: #FF3B30 (Red), #34C759 (Green), #FF9500 (Orange)
+
+## Typography
+• Font Family: SF Pro Display, SF Pro Text
+• Headings: 600-700 weight, -0.5% letter spacing
+• Body: 400 weight, 17px base size
+• Captions: 300 weight, 12-13px
+
+## Keywords
+iOS, Apple, minimalist, clean, premium, elegant, frosted glass, rounded, SF Pro, macOS, Apple Watch</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-material" data-id="material" data-category="mainstream" data-era="modern" data-paradigm="os" data-tone="light" data-scenes="saas social" role="listitem" tabindex="0" aria-label="Material Design 设计风格卡片，按 Enter 查看详情">
@@ -4434,6 +4541,48 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('material')" aria-label="查看 Material Design 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('material')" aria-label="复制 Material Design 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Material Design UI设计提示词】
+
+Design a modern UI interface following Google Material Design 3 principles.
+
+## Style Overview
+Material Design 3 (Material You) emphasizes personalization, inclusivity, and accessibility. It uses dynamic color schemes derived from wallpaper and emphasizes tone variation for hierarchy.
+
+## Core Design Elements
+• Card-based layout with consistent 8px grid system
+• Elevation shadows creating clear visual hierarchy
+• Dynamic color system based on user preference
+• Rounded corners (28px max for large containers)
+• M3 component shapes with medium emphasis
+• Surface tints instead of shadows for elevation
+• Responsive layouts adapting to screen size
+• FAB (Floating Action Button) as primary action
+• Top app bar with navigation and actions
+• Bottom navigation for primary destinations
+
+## Color Palette (M3 Tonal Palette)
+• Primary: Customizable based on brand
+• Secondary: #625B71
+• Tertiary: #7D5260
+• Surface: #FFFBFE
+• Error: #B3261E
+• Use tonal palettes for color harmony
+
+## Typography
+• Font Family: Roboto, Product Sans
+• Display: 57px, 400 weight
+• Headline: 32px, 400 weight
+• Body: 16px, 400 weight
+• Label: 14px, 500 weight
+
+## Keywords
+Material Design, Material You, Google, M3, cards, elevation, dynamic color, accessible, inclusive, modern, clean, Roboto</pre>
                 </div>
             </div>
 
@@ -4492,6 +4641,48 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('fluent')" aria-label="复制 Fluent Design 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Microsoft Fluent Design UI设计提示词】
+
+Design a UI interface using Microsoft Fluent Design System principles.
+
+## Style Overview
+Fluent Design emphasizes creating interfaces that feel native across all Windows devices and platforms. It uses depth, motion, and material to communicate hierarchy and state.
+
+## Core Design Elements
+• Acrylic material for backgrounds (60% opacity blur)
+• Reveal highlight effects on hover
+• Connected elements showing relationships
+• Light dismiss and pull-down menus
+• Motion as a design element, not decoration
+• Parallax viewing for depth perception
+• Screen-space ambient animation
+• Touch-first with precise pointer support
+• RTL (right-to-left) language support
+• Bold, readable typography at all sizes
+
+## Color Palette
+• Primary: #0078D4 (Windows Blue)
+• Accent: #50E6FF (Light Blue)
+• Background: #F3F3F3
+• Surface: rgba(255, 255, 255, 0.7) with acrylic
+• Text Primary: #1A1A1A
+• Text Secondary: #666666
+
+## Typography
+• Font Family: Segoe UI Variable, Segoe UI
+• Display: 60px, 300 weight
+• Headline: 28px, 600 weight
+• Body: 14px, 400 weight
+• Caption: 12px, 400 weight
+
+## Keywords
+Fluent, Microsoft, Windows, Acrylic, Reveal, Segoe, modern, depth, motion, cross-platform, desktop, touch</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-neumorphism" data-id="neumorphism" data-category="mainstream" data-era="contemporary" data-paradigm="skeuo" data-tone="light" data-scenes="saas tool" role="listitem" tabindex="0" aria-label="Neumorphism 设计风格卡片，按 Enter 查看详情">
@@ -4545,6 +4736,46 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('neumorphism')" aria-label="复制 Neumorphism 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Neumorphism 新拟态 UI设计提示词】
+
+Design a soft UI interface in Neumorphism (New Skorphism) style.
+
+## Style Overview
+Neumorphism creates a soft, extruded plastic look by using dual shadows - one light and one dark. Elements appear to emerge from or sink into the background, creating a tactile, soft appearance.
+
+## Core Design Elements
+• Monochromatic background matching element colors
+• Dual box shadows: light shadow (top-left) and dark shadow (bottom-right)
+• Soft shadows with 10-20px blur and spread
+• Rounded corners (16-20px for cards, full round for icons)
+• Subtle inset shadows for pressed states
+• Low contrast between background and elements
+• Soft, muted color palette
+• Minimalist iconography
+• Gentle hover and active state transitions
+• Touch-friendly large interaction areas
+
+## Color Palette
+• Background: #E0E5EC (typical)
+• Light Shadow: #FFFFFF
+• Dark Shadow: #A3B1C4
+• Text Primary: #4A5568
+• Accent: #6366F1 (subtle use)
+
+## Technical Specifications
+• Light shadow: inset 6-8px -6-8px 10-15px #FFFFFF
+• Dark shadow: inset 6-8px 6-8px 10-15px #A3B1C4
+• Background blur (if using glass): 10-20px
+• Border radius: 16-24px for containers
+
+## Keywords
+Neumorphism, soft UI, new skomorphism, extruded, tactile, soft shadows, minimal, modern, 3D, subtle, gentle</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-glass" data-id="glass" data-category="mainstream" data-era="contemporary" data-paradigm="glass" data-tone="light" data-scenes="saas social" role="listitem" tabindex="0" aria-label="Glassmorphism 设计风格卡片，按 Enter 查看详情">
@@ -4588,6 +4819,46 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('glass')" aria-label="查看 Glassmorphism 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('glass')" aria-label="复制 Glassmorphism 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Glassmorphism 玻璃态 UI设计提示词】
+
+Design a modern UI interface with Glassmorphism aesthetic.
+
+## Style Overview
+Glassmorphism uses frosted glass effects with blur, transparency, and subtle borders to create layered, depth-rich interfaces. It&#39;s commonly seen in macOS Big Sur, iOS, and modern web designs.
+
+## Core Design Elements
+• Frosted glass effect using backdrop-filter blur
+• Semi-transparent backgrounds (10-30% opacity)
+• Subtle white borders (1px, 10-20% opacity)
+• Vibrant gradient backgrounds behind glass elements
+• Soft shadows for depth separation
+• Border-radius: 16-24px for glass panels
+• Layered z-index hierarchy
+• Subtle inner glow effects
+• High color contrast between glass and content
+• Blur radius: 10-25px for glass effect
+
+## Color Palette
+• Background Gradient: #667EEA to #764BA2 (or any vibrant gradient)
+• Glass Fill: rgba(255, 255, 255, 0.1-0.25)
+• Glass Border: rgba(255, 255, 255, 0.2-0.4)
+• Shadow: rgba(0, 0, 0, 0.1)
+• Text: #FFFFFF (primary), rgba(255, 255, 255, 0.7) (secondary)
+
+## Technical Implementation
+• backdrop-filter: blur(20px) saturate(180%)
+• background: rgba(255, 255, 255, 0.1)
+• border: 1px solid rgba(255, 255, 255, 0.2)
+• box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1)
+
+## Keywords
+Glassmorphism, glass, frosted, blur, transparent, modern, glass effect, depth, layers, iOS, macOS, backdrop blur, dreamy</pre>
                 </div>
             </div>
 
@@ -4643,6 +4914,48 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('flat')" aria-label="复制 Flat Design 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Flat Design 扁平化 UI设计提示词】
+
+Design a clean UI interface in Flat Design style.
+
+## Style Overview
+Flat Design eliminates all 3D effects like gradients, shadows, and textures. It uses solid colors, simple shapes, and clear typography to create clean, functional interfaces with excellent readability.
+
+## Core Design Elements
+• No gradients, shadows, or textures
+• Solid, bold color blocks
+• Simple geometric shapes
+• Clear visual hierarchy through color contrast
+• Two-dimensional appearance
+• Clean, sans-serif typography
+• Simple iconography with solid fills
+• Minimalist approach to decoration
+• Focus on functionality over embellishment
+• High contrast for accessibility
+
+## Color Palette
+• Use 3-4 bold, contrasting colors
+• Primary: #3498DB (Blue)
+• Secondary: #E74C3C (Red)
+• Accent: #2ECC71 (Green)
+• Neutral: #2C3E50 (Dark Blue-Gray)
+• Background: #FFFFFF or #ECF0F1
+
+## Typography
+• Font Family: Helvetica, Arial, Roboto
+• Simple, clean sans-serif
+• Bold weights for headings
+• Clear size hierarchy
+• Sufficient line height (1.4-1.6)
+
+## Keywords
+Flat Design, flat, minimalist, clean, solid colors, no shadows, geometric, simple, modern, Windows 8, Metro, UI, 2D</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-gradient" data-id="gradient" data-category="mainstream" data-era="contemporary" data-paradigm="other" data-tone="vivid" data-scenes="social ecommerce" role="listitem" tabindex="0" aria-label="Gradient Design 设计风格卡片，按 Enter 查看详情">
@@ -4691,6 +5004,47 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('gradient')" aria-label="复制 Gradient Design 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Gradient Design 渐变风 UI设计提示词】
+
+Design a vibrant UI interface featuring bold gradient aesthetics.
+
+## Style Overview
+Gradient Design uses smooth color transitions to create depth, energy, and visual interest. It has evolved from subtle background gradients to bold, eye-catching full-gradient interfaces popular in modern apps like Instagram and Spotify.
+
+## Core Design Elements
+• Smooth color gradients as primary visual element
+• Gradient mesh and complex gradient backgrounds
+• Gradient text effects
+• Gradient icons and buttons
+• Soft, glowing shadows matching gradient colors
+• Color harmony through analogous or complementary palettes
+• Rounded corners (16-24px) for friendly feel
+• Glass elements layered over gradients
+• Dark mode pairs well with vibrant gradients
+• Subtle grain texture for premium feel
+
+## Color Palette - Popular Gradients
+• Purple-Pink: #667EEA → #764BA2 → #F093FB
+• Sunset: #F12711 → #F5AF19
+• Ocean: #1A2980 → #26D0CE
+• Aurora: #00C9FF → #92FE9D
+• Fire: #FF416C → #FF4B2B
+• Cosmic: #FF00CC → #333399
+
+## Typography
+• Font Family: Inter, Poppins, SF Pro Display
+• White or gradient text on dark backgrounds
+• Bold weights for impact
+• Letter spacing: -0.02em
+
+## Keywords
+Gradient, gradients, colorful, vibrant, mesh gradient, color transition, modern, Instagram style, Spotify, bold, energetic, dreamy, aurora</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-brutal" data-id="brutal" data-category="mainstream" data-era="contemporary" data-paradigm="flat" data-tone="vivid" data-scenes="social ecommerce gaming" role="listitem" tabindex="0" aria-label="Brutalism 设计风格卡片，按 Enter 查看详情">
@@ -4735,6 +5089,47 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('brutal')" aria-label="复制 Brutalism 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Brutalism 粗野主义 UI设计提示词】
+
+Design a bold UI interface in Web Brutalism style.
+
+## Style Overview
+Brutalism in digital design rejects conventional aesthetics in favor of raw, unpolished, and intentionally &quot;ugly&quot; interfaces. It emphasizes function over form and often uses unconventional layouts, harsh colors, and industrial typography.
+
+## Core Design Elements
+• Heavy black borders (2-4px solid)
+• Stark color contrasts (often yellow, black, white)
+• Raw, industrial aesthetic
+• Monospace or bold sans-serif typography
+• Visible, unstyled HTML elements sometimes
+• Unconventional, asymmetric layouts
+• Deliberately &quot;ugly&quot; or jarring combinations
+• Minimal or no border-radius
+• Uppercase text for headers
+• Harsh box shadows (solid color, not blur)
+
+## Color Palette
+• Primary: #FFFF00 (Yellow)
+• Secondary: #000000 (Black)
+• Background: #FFFFFF or #F5F5F5
+• Accent: #FF0000 (Red)
+• Sometimes: Pastel backgrounds with harsh black text
+
+## Typography
+• Font Family: Arial Black, Impact, Courier New, Space Mono
+• Large, bold headings (uppercase)
+• Monospace for body text sometimes
+• No letter spacing (or very tight)
+• Large font sizes for emphasis
+
+## Keywords
+Brutalism, brutal, raw, harsh, bold, industrial, web brutalism, unconventional, anti-design, ugly, honest, brutalist, punk, hacker</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-minimal" data-id="minimal" data-category="mainstream" data-era="modern" data-paradigm="flat" data-tone="muted" data-scenes="saas tool ecommerce" role="listitem" tabindex="0" aria-label="Minimalism 设计风格卡片，按 Enter 查看详情">
@@ -4776,6 +5171,48 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('minimal')" aria-label="查看 Minimalism 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('minimal')" aria-label="复制 Minimalism 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Minimalism 极简主义 UI设计提示词】
+
+Design a sophisticated UI interface in Ultra Minimal style.
+
+## Style Overview
+Minimalism strips away everything non-essential, leaving only what&#39;s necessary. It uses extensive white space, restrained color palettes, and meticulous typography to create serene, high-end experiences.
+
+## Core Design Elements
+• Extensive white space (50%+ of layout)
+• Minimal color palette (1-2 colors max)
+• Simple, clean typography
+• No decorative elements
+• Strong visual hierarchy
+• Rounded corners (very subtle, 4-8px)
+• Thin, light borders or none at all
+• Small, precise icons or none
+• Subtle micro-interactions
+• Focus on content over decoration
+
+## Color Palette
+• Background: #FFFFFF or #FAFAFA
+• Primary: #000000 or #1A1A1A
+• Secondary: #888888 or #999999
+• Accent: #0066FF (used sparingly)
+• No gradients
+
+## Typography
+• Font Family: Inter, SF Pro Text, or elegant serif
+• Light to medium weights (300-500)
+• Generous letter spacing (0.05-0.2em for headings)
+• Small but readable body text
+• Generous line height (1.6-2.0)
+• Text alignment: often center or left
+
+## Keywords
+Minimalism, minimal, clean, white space, ultra minimal, luxury, premium, serene, Japanese, zen, simple, refined, elegant, restrained</pre>
                 </div>
             </div>
 
@@ -4824,6 +5261,48 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('dark')" aria-label="查看 Dark Mode 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('dark')" aria-label="复制 Dark Mode 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Dark Mode 深色模式 UI设计提示词】
+
+Design a modern UI interface optimized for dark mode viewing.
+
+## Style Overview
+Dark Mode uses dark color schemes as the primary interface, reducing eye strain in low-light environments, saving battery on OLED screens, and creating a sleek, modern aesthetic popular in developer tools and media apps.
+
+## Core Design Elements
+• Dark backgrounds (not pure black, #121212 or similar)
+• Elevated surfaces use slightly lighter shades
+• High contrast text for readability
+• Muted, desaturated accent colors
+• Subtle glow effects for focus states
+• No pure white (#FFFFFF) text, use off-white
+• Bottom navigation for thumb-friendly access
+• Ambient icons that don&#39;t strain eyes
+• Smooth transitions between dark/light
+• Elevation through lightness, not shadows
+
+## Color Palette
+• Background: #121212 (surface), #1E1E1E (elevated)
+• Surface: #2D2D2D (cards), #383838 (modals)
+• Primary: #BB86FC (purple accent)
+• Secondary: #03DAC6 (teal)
+• Text Primary: #E1E1E1
+• Text Secondary: #A0A0A0
+• Text Disabled: #666666
+
+## Typography
+• Font Family: System fonts optimized for dark
+• Slightly increased font weight for readability
+• Avoid pure black text on dark backgrounds
+• Use semi-transparent overlays
+
+## Keywords
+Dark Mode, dark theme, night mode, dark UI, OLED, black, night-friendly, eye comfort, developer tools, sleek, modern, Spotify style, YouTube Dark</pre>
                 </div>
             </div>
 
@@ -4900,6 +5379,59 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('saas')" aria-label="复制 B2B SaaS 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【SaaS/企业级 UI设计提示词】
+
+Design a professional SaaS dashboard interface for B2B software.
+
+## Style Overview
+SaaS interfaces prioritize efficiency, clarity, and task completion. They use clean layouts, clear data visualization, and consistent patterns to help users accomplish complex workflows quickly.
+
+## Core Design Elements
+• Clean sidebar navigation with clear hierarchy
+• Dashboard with key metrics and KPIs
+• Card-based content organization
+• Consistent component library
+• Clear data tables with sorting/filtering
+• Form layouts with inline validation
+• Toast notifications for feedback
+• Modal dialogs for focused tasks
+• Breadcrumb navigation for context
+• User avatar and settings in header
+
+## Color Palette
+• Primary: #6366F1 (Indigo) or #2563EB (Blue)
+• Secondary: #8B5CF6 (Purple)
+• Success: #10B981
+• Warning: #F59E0B
+• Error: #EF4444
+• Background: #F8FAFC
+• Surface: #FFFFFF
+• Text: #1E293B
+• Muted: #64748B
+
+## Typography
+• Font Family: Inter, SF Pro, system-ui
+• Headings: 600-700 weight
+• Body: 400 weight, 14-16px
+• Code/Data: Monospace (JetBrains Mono)
+
+## Common Components
+• Data tables with pagination
+• Charts: line, bar, pie, area
+• Status badges and tags
+• Avatar and user menu
+• Search with filters
+• Tabs for content sections
+• Empty states with CTAs
+
+## Keywords
+SaaS, dashboard, enterprise, B2B, admin panel, data visualization, metrics, KPIs, tables, forms, professional, clean, organized, efficient</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-finance" data-id="finance" data-category="industry" data-era="modern" data-paradigm="flat" data-tone="muted" data-scenes="finance" role="listitem" tabindex="0" aria-label="Finance 设计风格卡片，按 Enter 查看详情">
@@ -4954,6 +5486,60 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('finance')" aria-label="查看 Finance 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('finance')" aria-label="复制 Finance 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【金融/银行 UI设计提示词】
+
+Design a trustworthy financial services interface for banking or fintech applications.
+
+## Style Overview
+Financial interfaces must communicate trust, security, and professionalism while making complex financial data accessible and actionable. They balance regulatory requirements with modern, approachable design.
+
+## Core Design Elements
+• Deep blue or navy primary color (trustworthy)
+• Clean data presentation with clear typography
+• Prominent security indicators (lock icons, verification)
+• Balance between information density and clarity
+• Accessible contrast ratios (WCAG AA minimum)
+• Transaction history with clear categorization
+• Account summaries with prominent balances
+• Progress indicators for goals
+• Clear call-to-action buttons
+• Multi-factor authentication flows
+
+## Color Palette
+• Primary: #1A365D (Navy Blue)
+• Secondary: #2D3748 (Dark Gray)
+• Accent: #48BB78 (Green for positive)
+• Warning: #ED8936 (Orange)
+• Danger: #E53E3E (Red for negative)
+• Background: #F7FAFC
+• Card: #FFFFFF
+• Text: #1A202C
+• Muted: #718096
+
+## Typography
+• Font Family: Inter, Roboto, or proprietary banking fonts
+• Numbers: Tabular figures, monospace for amounts
+• Large, clear balance displays
+• Consistent decimal places for currency
+• Weight: 500-700 for important numbers
+
+## Key Features
+• Account overview dashboard
+• Transaction list with filters
+• Fund transfer flow
+• Bill payment interface
+• Investment portfolio view
+• Credit card management
+• Budget tracking tools
+
+## Keywords
+Finance, banking, fintech, money, secure, trustworthy, professional, data visualization, charts, transactions, account, investment, payment, compliance</pre>
                 </div>
             </div>
 
@@ -5013,6 +5599,58 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('ecommerce')" aria-label="复制 E-commerce 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【电商/零售 UI设计提示词】
+
+Design a conversion-focused e-commerce interface for online shopping platforms.
+
+## Style Overview
+E-commerce design prioritizes product discovery, trust building, and frictionless purchase flows. Every element serves the goal of converting visitors into customers while creating an enjoyable shopping experience.
+
+## Core Design Elements
+• Hero banners with promotional content
+• Clear product cards with images, prices, ratings
+• Prominent search with filters
+• Category navigation (mega menu)
+• Shopping cart always accessible
+• Trust badges and security seals
+• User reviews and ratings display
+• Flash sales and countdown timers
+• Related product recommendations
+• Guest checkout option
+
+## Color Palette
+• Primary: #FF4757 (Action Red) or #6C5CE7 (Brand Purple)
+• Secondary: #2ED573 (Success Green)
+• Sale: #FF6B6B, #FECA57
+• Background: #F5F5F5 or #FFFFFF
+• Text: #2D3436
+• Muted: #636E72
+• Accent: #00CEC9 (Teal)
+
+## Typography
+• Font Family: Inter, Poppins
+• Sale prices: Bold, red, strikethrough original
+• Product titles: 500 weight, clear
+• Prices: Monospace for alignment
+• Promotional text: Bold, uppercase
+
+## Key Components
+• Product grid with quick-view
+• Size/color selectors
+• Add to cart button (sticky on mobile)
+• Checkout progress indicator
+• Order tracking interface
+• Wishlist and favorites
+• Recently viewed products
+
+## Keywords
+E-commerce, shopping, retail, product, cart, checkout, sale, discount, store, online store, marketplace, conversion, purchase, buy</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-social" data-id="social" data-category="industry" data-era="modern" data-paradigm="flat" data-tone="vivid" data-scenes="social" role="listitem" tabindex="0" aria-label="Social Media 设计风格卡片，按 Enter 查看详情">
@@ -5069,6 +5707,58 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('social')" aria-label="复制 Social Media 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【社交/社区 UI设计提示词】
+
+Design an engaging social platform interface for community and social networking apps.
+
+## Style Overview
+Social interfaces prioritize content consumption, user interaction, and social connections. They use visual-heavy layouts, clear user presence indicators, and intuitive interaction patterns to encourage engagement.
+
+## Core Design Elements
+• User profile photos prominent
+• Stories/reels vertical feed
+• Infinite scroll content stream
+• Like, comment, share actions visible
+• Real-time notifications
+• Following/follower counts
+• Content creator badges
+• Hashtag and mention highlighting
+• Emoji reactions
+• Pull-to-refresh interaction
+
+## Color Palette
+• Primary: #E1306C (Instagram Pink) or #1DA1F2 (Twitter Blue)
+• Secondary: #833AB4 (Purple gradient)
+• Background: #FFFFFF or #F0F2F5
+• Text: #050505
+• Secondary Text: #65676B
+• Accent gradients for stories
+
+## Typography
+• Font Family: Inter, SF Pro, system-ui
+• Usernames: 600 weight
+• Bio: 400 weight, 14px
+• Post content: 400 weight, 15-16px
+• Comments: 400 weight, 13px
+
+## Key Features
+• Feed with posts/stories
+• User profile pages
+• Direct messaging
+• Notification center
+• Search and discovery
+• Trending topics
+• Content creation tools
+• Live streaming interface
+
+## Keywords
+Social, social media, community, feed, posts, stories, profile, followers, likes, comments, share, engagement, networking, Instagram, Twitter, TikTok</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-gaming" data-id="gaming" data-category="industry" data-era="contemporary" data-paradigm="other" data-tone="dark" data-scenes="gaming" role="listitem" tabindex="0" aria-label="Gaming 设计风格卡片，按 Enter 查看详情">
@@ -5119,6 +5809,59 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('gaming')" aria-label="复制 Gaming 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【游戏/娱乐 UI设计提示词】
+
+Design a visually striking gaming interface with futuristic and immersive aesthetics.
+
+## Style Overview
+Gaming interfaces embrace bold visuals, dynamic animations, and immersive elements. They often feature sci-fi aesthetics, neon accents, and responsive feedback that enhance the gaming experience.
+
+## Core Design Elements
+• Dark backgrounds with neon accents
+• RGB color effects and glows
+• Cyberpunk/sci-fi typography
+• Animated particles and effects
+• Glass panels with blur
+• Dynamic loading animations
+• Health bars and progress indicators
+• Achievement and badge displays
+• Leaderboard rankings
+• In-game chat interfaces
+
+## Color Palette
+• Background: #0C0C1D, #1A1A2E (Deep space blues)
+• Primary: #00D4FF (Cyan neon)
+• Secondary: #7B2CBF (Purple)
+• Accent: #FF00CC (Magenta)
+• Warning: #FFD700 (Gold)
+• Success: #00FF88 (Neon green)
+• Text: #FFFFFF, rgba(255,255,255,0.7)
+
+## Typography
+• Font Family: Orbitron, Rajdhani, Exo 2
+• Headings: Bold, uppercase, letter-spaced
+• Text glow effects
+• Monospace for stats/numbers
+• Sci-fi inspired letterforms
+
+## Key Features
+• Game launcher interface
+• Character/avatar customization
+• Inventory management
+• Matchmaking lobby
+• Leaderboards and rankings
+• Achievement system
+• Live streaming overlay
+• Esports tournament brackets
+
+## Keywords
+Gaming, game UI, esports, cyberpunk, sci-fi, neon, RGB, futuristic, dark theme, particles, effects, leaderboard, achievement, streamer, Twitch</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-clay" data-id="clay" data-category="creative" data-era="contemporary" data-paradigm="skeuo" data-tone="vivid" data-scenes="social ecommerce" role="listitem" tabindex="0" aria-label="Claymorphism 设计风格卡片，按 Enter 查看详情">
@@ -5168,6 +5911,53 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('clay')" aria-label="复制 Claymorphism 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Claymorphism 黏土风 UI设计提示词】
+
+Design a playful, three-dimensional UI in Claymorphism style.
+
+## Style Overview
+Claymorphism makes interface elements look like soft, rounded clay or plastic objects. It combines exaggerated rounded corners, multi-layer shadows (both outer drop shadows and inner highlights), and pastel color palettes to create a friendly, toy-like feeling.
+
+## Core Design Elements
+• Extreme rounded corners (24-40px radius for cards, 16-24px for buttons)
+• Multi-layer shadow system:
+  - Outer drop shadow (offset 8-12px, blur 20-30px) using a darker tint of the base color
+  - Top-left inner highlight (white, low opacity) simulating soft 3D bulge
+  - Bottom-right inner shadow (color tint) adding depth
+• Pastel multi-color palette — never flat monochrome
+• Solid backgrounds (not transparent like Glassmorphism)
+• Icons housed in colorful rounded squares with same 3D treatment
+• Chunky pressable buttons
+
+## Color Palette
+• Background: pastel gradient (pink #ffe6f0, peach #fff5e0, sky #e0f5ff)
+• Card: solid pastel pink #ffd6e8, mint #d9ffe6, lavender #e6d9ff
+• Accents: hot pink #ff85b3, baby blue #9ed1ff, lime #c9f09e
+• Text: muted plum #8b4863, dusty purple #b56b89
+
+## Typography
+• Font Family: Nunito, Quicksand, Poppins, DM Sans (rounded sans-serif only)
+• Weight: 700-800 (chunky)
+• Avoid thin or serif fonts; avoid all-caps brutalist text
+
+## Difference From Neumorphism
+• Neumorphism = single base color, monochrome inset/outset bumps
+• Claymorphism = multi-color, solid 3D blobs, much more playful and saturated
+
+## Key Features
+• Onboarding screens for kids / education / wellness apps
+• Toy-like dashboards for fitness and habit tracking
+• Friendly 404 / empty states / loading screens
+• Trendy Dribbble-style hero sections
+
+## Keywords
+Claymorphism, clay, 3D, plastic, pastel, soft shadows, rounded, playful, toy, friendly, chunky, multi-color, Nunito, kid-friendly, Dribbble trend 2023, 2024</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-bauhaus" data-id="bauhaus" data-category="culture" data-era="classic" data-paradigm="editorial" data-tone="vivid" data-scenes="social ecommerce" role="listitem" tabindex="0" aria-label="Bauhaus 设计风格卡片，按 Enter 查看详情">
@@ -5215,6 +6005,51 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('bauhaus')" aria-label="复制 Bauhaus 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Bauhaus 包豪斯 UI设计提示词】
+
+Design a UI based on Bauhaus / Swiss International Style — geometric constructivism, primary colors, and strict typographic grid.
+
+## Style Overview
+The Bauhaus design system emphasizes &quot;form follows function&quot;. Use a strict typographic grid, primary colors (red, yellow, blue) plus black/white, and pure geometric primitives (circle / square / triangle) as the only decoration. Composition is asymmetric but mathematically balanced.
+
+## Core Design Elements
+• Three pure geometric shapes only: circle, square, triangle (no organic shapes)
+• Primary palette: red #d62828, blue #1d3557, yellow #fcbf49, plus black + warm off-white #fefcf3
+• Black hairlines (1-2px) as compositional dividers
+• Helvetica / Akzidenz-Grotesk / Univers — sans-serif only, weight 700-900
+• Extreme size contrast: massive numerals (60-200px) next to tiny captions (10-12px)
+• Vertical typography rotation acceptable
+• Asymmetric grid composition, but balanced by visual weight
+• No shadows, no gradients, no decoration beyond shape and type
+• Off-white paper-feel background, not pure white
+
+## Difference From Flat / Minimal / Brutalism
+• Flat = modern flat solids, often soft blue/green/pink
+• Minimal = whitespace + black/white + serif optional
+• Brutalism = chaos, raw, anti-grid
+• Bauhaus = rigorous grid + primary triad + geometric primitives + teaching-poster feel
+
+## Typography
+• Helvetica Neue / Akzidenz-Grotesk / Univers / Inter Bold
+• ALL CAPS for short labels, mixed case for body
+• Letter-spacing 0.1-0.2em on captions
+• Numerals as visual hero
+
+## Key Features
+• Museum / gallery / art-school websites
+• Editorial poster covers
+• Type-driven hero sections
+• Brand identity for design studios and architecture firms
+• Educational / pedagogical interfaces
+
+## Keywords
+Bauhaus, Swiss design, International Style, constructivism, geometric, primary colors, Helvetica, grid, typography, poster, form follows function, Mondrian, Müller-Brockmann</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-memphis" data-id="memphis" data-category="culture" data-era="classic" data-paradigm="other" data-tone="vivid" data-scenes="social ecommerce" role="listitem" tabindex="0" aria-label="Memphis 设计风格卡片，按 Enter 查看详情">
@@ -5260,6 +6095,60 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('memphis')" aria-label="查看 Memphis 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('memphis')" aria-label="复制 Memphis 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Memphis Design 孟菲斯 UI设计提示词】
+
+Design a UI in 1980s Memphis Group style — bold, irreverent, anti-modernist, with chaotic geometric decoration and clashing colors.
+
+## Style Overview
+The Memphis Group (Milan, 1981) rejected good taste in favor of playful clashes. The interface should look like a vintage MTV graphic or an 80s Saved-By-The-Bell title card: hot pink dots, electric teal zigzags, mustard squiggles, on warm cream backgrounds. Composition is intentionally &quot;off&quot;—nothing aligns to grid.
+
+## Core Design Elements
+• Cream / off-white background (#f9f5e8) — never pure white
+• Pattern fragments scattered across canvas (not centered):
+  - Polka dots (radial gradient)
+  - Diagonal stripes
+  - Zigzag triangle waves
+  - Squiggle / blob shapes
+  - Confetti / terrazzo speckles
+• Hard black 2px outline on text bubbles
+• Sharp solid-color drop shadow (offset 4px, no blur)
+• Hand-drawn-feel monospace or condensed type
+• Slight rotation on all elements (-3° to +12°)
+• Loud color clashes: hot pink + teal + mustard + cobalt + black
+
+## Color Palette
+• Background: #f9f5e8 (warm cream)
+• Hot pink: #ff6b9d
+• Electric teal: #1a936f
+• Mustard yellow: #f5d547
+• Cobalt blue: #2a9df4
+• Black: #1a1a1a (outlines + text)
+
+## Difference From Gradient / Brutalism
+• Gradient = smooth multi-color blends
+• Brutalism = harsh and aggressive
+• Memphis = playful chaotic decoration with cream warmth, MTV / 80s nostalgia
+
+## Typography
+• &#39;Courier New&#39; or condensed sans
+• Bold, often in outlined text bubbles
+• ALL CAPS short phrases
+
+## Key Features
+• Streetwear / sneaker drop landing pages
+• Music festival posters
+• Gen-Z brand identity
+• Throwback editorial features
+• Toy / collectible product pages
+
+## Keywords
+Memphis Group, 80s, retro, Ettore Sottsass, terrazzo, postmodern, anti-design, clash, playful, polka dots, zigzag, squiggle, MTV, Saved By the Bell, Y2K-adjacent</pre>
                 </div>
             </div>
 
@@ -5309,6 +6198,54 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('cyber')" aria-label="复制 Cyberpunk 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Cyberpunk / Synthwave UI设计提示词】
+
+Design a UI in 1980s Synthwave / Cyberpunk style — neon-drenched retro-future visual language inspired by Blade Runner, Tron, Outrun, and Vaporwave.
+
+## Style Overview
+The interface evokes a CRT screen looking out over a synthetic horizon at night: deep violet gradient sky, hot magenta-pink at the bottom, an infinite glowing grid receding to a vanishing point, and a giant pixelated sun on the horizon. Text glows in cyan and pink neon, with subtle scanlines overlay for that VHS / CRT feel.
+
+## Core Design Elements
+• Deep gradient sky: #1a0033 (top) → #2d0066 (mid) → #ff006e (bottom)
+• Perspective grid floor: 1px hot-pink lines (rgba 255,0,110,0.6) on transparent, rotated rotateX(35-40°)
+• Pixelated retro sun: vertical gradient sphere (yellow → orange → pink → violet), with horizontal dark stripe mask creating the &quot;venetian blind&quot; sun effect
+• CRT scanline overlay: repeating 2px horizontal dark lines at ~15-20% opacity
+• Glowing neon text: cyan (#00f0ff) or magenta (#ff6ec7) with text-shadow 0 0 8-16px in same color
+• Monospace / terminal font: Courier New, JetBrains Mono, VT323
+• Optional glitch / chromatic aberration: red+blue offset by 1-2px on key headings
+
+## Color Palette
+• Sky violet deep: #1a0033, #2d0066
+• Magenta horizon: #ff006e
+• Sun gradient: #ffeb00 → #ff8c00 → #ff006e → #2d0066
+• Neon cyan: #00f0ff
+• Hot pink text: #ff6ec7
+• Black scanline: rgba(0,0,0,0.18)
+
+## Difference From Dark Mode / Gaming
+• Dark Mode = neutral dark grey/black with a single accent — productivity feel
+• Gaming = modern RGB rainbow + cartoon esports vibe
+• Cyberpunk/Synthwave = specifically 80s retro-future, neon pink + violet + scanlines, nostalgic VHS aesthetic
+
+## Typography
+• Headings: Courier New / Press Start 2P / VT323, 700-900, all-caps, letter-spacing 0.15-0.25em
+• Body: monospace, often with glitch decorations like &quot;//&quot; or &quot;[]&quot;
+
+## Key Features
+• Game launchers (especially indie retro-style)
+• Music streaming for synthwave / electronic
+• Crypto / Web3 dashboards
+• Cyberpunk fiction / film websites
+• Tech conference branding (e.g. retro-futurist hackathon)
+
+## Keywords
+Cyberpunk, Synthwave, Outrun, Vaporwave, retro-future, neon, CRT scanlines, magenta, cyan, grid floor, pixelated sun, 80s, Blade Runner, Tron, VT323, Press Start 2P, glow, glitch</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-zen" data-id="zen" data-category="culture" data-era="classic" data-paradigm="editorial" data-tone="muted" data-scenes="oriental tool" role="listitem" tabindex="0" aria-label="Zen 设计风格卡片，按 Enter 查看详情">
@@ -5356,6 +6293,58 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('zen')" aria-label="复制 Zen 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Japanese Zen 日式和风 UI设计提示词】
+
+Design a UI rooted in Japanese aesthetic principles of Zen Buddhism — Wabi-sabi (侘寂), Ma (間, negative space), and Mono no aware (物の哀れ).
+
+## Style Overview
+Inspired by sumi-e ink painting, kaiseki menu design, and traditional washi paper. The interface uses an Enso (一円相) brushed circle as visual anchor, generous off-white &quot;ma&quot; emptiness, a single hot red hanko stamp as accent, and serif type set vertically. Every element earns its place; nothing is decorative for decoration&#39;s sake.
+
+## Core Design Elements
+• Warm off-white washi paper background: #f4ede4 (not pure white)
+• Single Enso brush circle as hero element (transparent fill, 3-4px black border, asymmetric gap at top-right to suggest brushstroke)
+• Vertical typography (writing-mode: vertical-rl) for titles
+• Hanko 印 stamp: small red square (#c41e3a) with single kanji in white, slight offset shadow
+• Hiragana / Kanji subtext, letter-spacing 0.3em+
+• Massive negative space (60-70% of canvas empty)
+• No drop shadows, no gradients, no rounded corners on cards
+• Serif typography only (Songti / Mincho / Noto Serif JP)
+• Optional faint horizon or ink wash texture in background
+
+## Color Palette
+• Washi cream: #f4ede4 (background — never pure white)
+• Sumi black: #1a1a1a (ink + body text)
+• Akané red 茜: #c41e3a (hanko stamp accent only)
+• Cha brown 茶: #5c5048 (secondary text)
+• Indigo ai 藍: #1d3557 (optional cool accent)
+• Bamboo green 竹: #4a7c59 (optional natural accent)
+
+## Typography
+• Songti SC / Mincho / Noto Serif JP / STSong — serif only
+• Vertical writing mode for headings
+• Letter-spacing 0.3em on Latin/kana captions
+• Weight 500-600 — never bold/black
+
+## Difference From Minimalism
+• Minimalism = Western reductive design, pure white, black sans-serif, geometric grid
+• Japanese Zen = warm cream washi background, vertical serif text, Enso circle, hanko stamp, deeply rooted in Wabi-sabi aesthetics
+
+## Key Features
+• Tea ceremony / kaiseki restaurant websites
+• Traditional Japanese product pages (sake, ceramics, kimono, washi paper)
+• Mindfulness / meditation apps
+• Boutique ryokan booking pages
+• Editorial / curatorial museum pages
+• Zen wallpaper / wellness apps
+
+## Keywords
+Japanese, Zen, Wabi-sabi, Enso, Ma, hanko, kaiseki, sumi-e, washi paper, vertical typography, Songti, Mincho, Noto Serif JP, kimono, ryokan, tea ceremony, mindfulness, negative space, akané red, 侘寂, 静寂, 禅</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-skeuo" data-id="skeuo" data-category="creative" data-era="classic" data-paradigm="skeuo" data-tone="light" data-scenes="tool gaming" role="listitem" tabindex="0" aria-label="Skeuomorphism 设计风格卡片，按 Enter 查看详情">
@@ -5402,6 +6391,58 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('skeuo')" aria-label="查看 Skeuomorphism 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('skeuo')" aria-label="复制 Skeuomorphism 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Skeuomorphism 拟物化 UI设计提示词】
+
+Design a UI in classic Skeuomorphism style — interface elements that visually mimic real-world materials and physical objects, popular in iOS 1-6 era (2007-2013).
+
+## Style Overview
+Every interface element should look like a tangible object — leather notebook, brushed aluminum, polished wood, paper page, glass screen, plastic button. Heavy use of gradients to simulate light direction, multi-layer inner/outer shadows to suggest depth, and material textures (leather grain, wood veneer, denim weave, paper fiber).
+
+## Core Design Elements
+• Container frames look like physical devices: wooden case, leather-bound book, brushed metal
+• Inset &quot;LCD&quot; screens: dark gradient interior, inset shadow simulating recessed glass, glowing monospace digits with text-shadow
+• 3D pushable buttons: vertical color gradient (light top → dark bottom), inset highlight at top, drop shadow below, 1px darker border simulating bevel
+• Real material textures: wood grain (repeating linear gradient), leather stitching (dashed border), denim (cross-hatch), paper (faint fiber pattern)
+• Reflective highlights on glossy surfaces
+• Stitched edges on &quot;leather&quot; panels (dashed 2px line)
+• Realistic icons that depict their function (camera icon = actual camera, notes = yellow legal pad)
+
+## Color Palette
+• Wood / leather frames: #8b6f47, #6b5435, #d4b585, #f8e8c8 (tan-brown gradients)
+• LCD screen: #2d3e50 → #1a2530 (dark gradient interior)
+• LCD glow text: #7cfc00 (neon green) or #ffaa00 (amber) with text-shadow glow
+• Red button: linear-gradient #e63946 → #a01829, dark border #6b1018
+• Green button: linear-gradient #4caf50 → #2e7d32
+• Glass screen reflection: rgba(255,255,255,0.15) gradient overlay
+
+## Difference From Neumorphism and Claymorphism
+• Neumorphism = abstract single-color soft bumps, no material reference
+• Claymorphism = colorful plastic-like 3D blobs, playful
+• Skeuomorphism = explicit imitation of REAL materials (wood, leather, glass, paper, metal), with realistic textures, stitching, screws, reflections
+
+## Typography
+• Serif for &quot;paper&quot; surfaces (notebook, journal apps)
+• Monospace LCD font for digital displays (Courier New, VT323)
+• Slab serif for &quot;leather-bound&quot; book covers
+• Drop shadows on text to simulate engraved or printed effect
+
+## Key Features
+• Old-school music players (iPod/Podcasts skin)
+• Calculator apps with realistic button bevels
+• Notebook / journal apps (leather + paper)
+• Camera apps with realistic shutter / lens controls
+• Voice recorder with vintage cassette graphics
+• Compass / clock apps mimicking real watches
+• Retro accounting / ledger software
+
+## Keywords
+Skeuomorphism, skeuomorphic, iOS 6, leather, wood, brushed metal, stitching, bevel, gradient, inset shadow, LCD, realistic, photoreal, material design (NOT Google Material), Apple Forstall era, nostalgia, physical metaphor</pre>
                 </div>
             </div>
 
@@ -5461,6 +6502,60 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('bento')" aria-label="复制 Bento Grid 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Bento Grid 便当网格 UI设计提示词】
+
+Design a UI in the Bento Grid layout style — a modular, asymmetric card system inspired by Japanese bento boxes, popularized by Apple&#39;s product pages and modern SaaS dashboards from 2023-2026.
+
+## Style Overview
+Content is split into rounded-rectangle cards of varying proportions (square, wide, tall, hero). Each card carries ONE message — a number, a chart, an icon, a quote. The grid feels orderly yet asymmetric, dense yet breathable. It is the layout language of 2024-2026 Apple Keynote, Vercel, Linear, and Raycast.
+
+## Core Design Elements
+• Modular cards with large border-radius (12-24px), filling the viewport in a CSS Grid layout
+• Asymmetric proportions: one or two &quot;hero&quot; cards span 2 columns or 2 rows, surrounded by smaller satellite cards
+• ONE message per card: a giant number, a sparkline, a single icon, a one-line quote
+• Subtle elevation: hairline border (1px rgba white 0.05) or very soft drop shadow (no heavy shadows)
+• Dark-mode-first palette (premium feel) but works in light mode too
+• Generous internal padding; cards never feel cramped
+• Optional gradient accent on hero cards (Apple blue, indigo, emerald, rose)
+
+## Color Palette
+• Dark variant: background #0a0a0a, card #18181b, hero linear-gradient(135deg, #0071e3 → #0050b3), success #34d399, muted text #a1a1aa
+• Light variant: background #f4f4f5, card #ffffff, hairline border #e4e4e7, accents same as dark
+• Accent gradients: Apple blue (#0071e3 → #0050b3), indigo (#6366f1 → #4338ca), emerald (#10b981 → #047857), rose (#f43f5e → #be123c)
+
+## Typography
+• Font Family: SF Pro Display, Inter, Geist, system-ui (NEVER serif)
+• Display numbers: 700-800 weight, -0.04em letter-spacing, large (3-6rem for hero)
+• Labels: 0.7rem uppercase, +0.1em letter-spacing, muted color
+• Body: 0.95rem regular for one-line quotes or descriptions
+
+## Grid Patterns
+• 3-column / 2-row classic bento (Apple Watch product page)
+• 4-column / 3-row dense dashboard (Linear roadmap, Stripe dashboard)
+• Asymmetric editorial bento (one tall + three short)
+• Use CSS Grid + grid-row/grid-column span, with subgrid for nested layouts
+
+## Key Features
+• SaaS landing pages with feature highlights
+• Product launch pages (Apple, Vercel, Linear, Raycast)
+• Analytics dashboards with at-a-glance KPIs
+• Portfolio &quot;selected work&quot; grids
+• Marketing pages where each card is a stat or testimonial
+• AI tool homepages (Anthropic, OpenAI, Perplexity)
+
+## Difference From Standard Card Grids
+• Bento = INTENTIONALLY asymmetric, varying card sizes, one message per card
+• Card grid = uniform card sizes, multiple data points per card
+• Bento prioritizes visual rhythm and information hierarchy over uniformity
+
+## Keywords
+Bento Grid, modular, asymmetric, Apple Keynote, Vercel, Linear, Raycast, dashboard, CSS Grid, asymmetric layout, hero card, big numbers, hairline border, dark mode, 2024-2026 trend, premium SaaS, one-message-per-card</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-editorial" data-id="editorial" data-category="culture" data-era="classic" data-paradigm="editorial" data-tone="muted" data-scenes="oriental ecommerce" role="listitem" tabindex="0" aria-label="Editorial 设计风格卡片，按 Enter 查看详情">
@@ -5516,6 +6611,63 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('editorial')" aria-label="复制 Editorial 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Editorial 编辑杂志风 UI设计提示词】
+
+Design a UI in Editorial Magazine style — a print-inspired aesthetic with serif typography, strict grid discipline, generous white space, and the quiet authority of a well-designed magazine like The New Yorker, Wallpaper*, or Monocle.
+
+## Style Overview
+The interface reads like a printed page. Serif headlines anchor the hierarchy, hairline rules separate sections, two- or three-column text flows justify naturally, and a single accent color (almost always crimson red) draws the eye to issue numbers or pull quotes. Restraint is the dominant feeling — every element earns its place.
+
+## Core Design Elements
+• Serif typography for headlines (Playfair Display, Cormorant Garamond, GT Sectra, Times New Roman, 思源宋体)
+• Sans-serif for captions and labels (Inter, Söhne, or system sans)
+• Hairline horizontal rules (1px solid) separating masthead, headline, and body
+• Multi-column body text (2-3 columns), justified alignment with hyphens
+• Drop caps on lead paragraphs (3-line drop, bold serif)
+• Issue number / volume / date in uppercase with wide letter-spacing
+• Italic for subtitles, captions, and pull quotes
+• A single accent color (deep red #c7001a or burgundy) used sparingly
+
+## Color Palette
+• Background: warm ivory #f7f3ed or cream #faf6ee (never pure white)
+• Body text: near-black #1a1a1a, never #000
+• Captions / metadata: muted gray #6b6b6b
+• Accent: crimson red #c7001a or oxblood #8b1e1e
+• Optional second accent: midnight blue #1a2547 or forest green #2a4a32
+
+## Typography Pairing
+• Headline serif (Playfair / Cormorant / GT Sectra) + body serif (Charter / Source Serif / Tisa)
+• Or: bold sans display (Söhne Breit) + serif body for a more modern editorial feel
+• Caption sans (Inter Caption / Söhne Mono) for metadata and folios
+• Generous line-height (1.5-1.7) on body text
+
+## Layout Principles
+• Strict baseline grid — every element aligns to a vertical rhythm
+• Asymmetric column widths (wide-narrow-wide) inspired by magazine spreads
+• Pull quotes at 1.5-2x body size, in italic serif, flanked by hairlines
+• Liberal use of white space — the page breathes
+• Page numbers, kickers, and section labels in tiny uppercase
+
+## Key Features
+• Long-form journalism sites (The New Yorker, The Atlantic, n+1)
+• Cultural institutions (museums, biennials, literary magazines)
+• Premium brand storytelling pages
+• Newsletter and essay platforms (Substack premium, Every)
+• Architecture, design, and fashion publications
+• shadcn/ui &quot;Sera&quot; style — editorial weight with modern app structure
+
+## Difference From Minimal
+• Minimal = sparse sans-serif, lots of negative space, no decoration
+• Editorial = print discipline, serif type, accent colors, hairlines, drop caps — restrained but not empty
+
+## Keywords
+Editorial, magazine, print, serif, Playfair, Cormorant Garamond, GT Sectra, drop cap, hairline rule, justified text, crimson accent, ivory background, masthead, pull quote, baseline grid, The New Yorker, Wallpaper, Monocle, shadcn Sera, long-form, authoritative, kicker, folio</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-y3k" data-id="y3k" data-category="creative" data-era="future" data-paradigm="retrofuture" data-tone="dark" data-scenes="gaming social" role="listitem" tabindex="0" aria-label="Y3K 设计风格卡片，按 Enter 查看详情">
@@ -5561,6 +6713,57 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('y3k')" aria-label="查看 Y3K 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('y3k')" aria-label="复制 Y3K 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Y3K 复古未来主义 UI设计提示词】
+
+Design a UI in Y3K / Retro-Futurism style — the year-2000 imagination of the year-3000, revived for the 2020s. Liquid chrome surfaces, holographic gradients, dreamy starfields, and rounded sci-fi typography evoke the optimistic futurism of Y2K-era club flyers, early Apple product photography, Frutiger Aero, and Sailor Moon transformation sequences.
+
+## Style Overview
+Surfaces are reflective, iridescent, and weightless. A conic-gradient chrome blob hovers at the center, catching purple, pink, cyan, and pale gold highlights. The background drifts between deep indigo and aubergine with nebula-like radial glows. Typography is wide, rounded, and metallic — think Eurostile, Microgramma, or chunky Arial Black with chrome-gradient fill. Everything feels like a freeze-frame from a 1999 Pantone trend forecast for the year 3000.
+
+## Core Design Elements
+• Liquid chrome blobs: conic-gradient (lavender → pink → cyan → gold) with soft outer glow and inner specular highlight
+• Holographic gradients: shifting hues that suggest oil-on-water iridescence (use conic-gradient or animated linear-gradient)
+• Nebula backgrounds: deep indigo (#0c0a1f) with radial-gradient glows of purple (#a855f7) and cyan (#38bdf8)
+• Wide-track rounded sans display fonts (Eurostile, Microgramma, Aldrich, Orbitron, Arial Black with letter-spacing 0.15-0.2em)
+• Chrome-text effect: linear-gradient white → lavender → indigo, background-clip text
+• Sparse 4-point star decorations (sailor-moon style sparkles using ✦ ✧)
+• Tiny diamond / lozenge accents, vertical centered composition
+• Glow text-shadow on all metallic text for the &quot;screen-printed&quot; feel
+
+## Color Palette
+• Background: deep indigo #0c0a1f, aubergine #1a1235, midnight purple #1e1b4b
+• Nebula glow: violet #a855f7, magenta #ec4899, sky cyan #38bdf8
+• Chrome highlights: lavender #c4b5fd, baby blue #93c5fd, pale pink #fda4af, pearl #f5d0fe, mint #a5f3fc
+• Text gradient: ivory #f5f3ff → lavender #ddd6fe → indigo #818cf8
+
+## Typography
+• Display: Eurostile Extended, Microgramma, Aldrich, Orbitron, Arial Black (very wide tracking 0.15-0.3em)
+• Body: Geist Mono, Space Mono, or rounded sans (Nunito)
+• ALL CAPS for display headlines; numerals styled with tabular figures
+• Apply chrome gradient via background-clip: text and -webkit-text-fill-color: transparent
+
+## Difference From Cyberpunk
+• Cyberpunk = high-contrast black + neon, dystopian, glitch, terminal aesthetic, Blade Runner
+• Y3K = optimistic future, chrome + iridescence, soft glows, dreamy, Sailor Moon
+• Cyberpunk says &quot;the future is broken&quot;. Y3K says &quot;the future is shiny and pink&quot;
+
+## Key Features
+• Fashion brand landing pages (Heaven by Marc Jacobs, Diesel, Mowalola)
+• Music streaming for synth / hyperpop / electronic
+• Crypto / NFT galleries (the ones that didn&#39;t age badly)
+• Festival microsites, club night flyers
+• Digital art portfolios, generative art tools
+• Apple Vision Pro era spatial UI experiments
+• Beauty / fragrance / skincare gen-Z products
+
+## Keywords
+Y3K, Y2K, retro-futurism, chrome, liquid metal, holographic, iridescent, nebula, Eurostile, Microgramma, Aldrich, sparkle, four-point star, lavender, lilac, mint, aubergine, conic-gradient, oil-on-water, Frutiger Aero, blobjects, Sailor Moon, iMac G3, 1999, 3000, future nostalgia, chrome-text, mirror finish</pre>
                 </div>
             </div>
 
@@ -5608,6 +6811,67 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('scrapbook')" aria-label="复制 Scrapbook 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Scrapbook 拼贴剪贴簿 / Anti-Design UI设计提示词】
+
+Design a UI in Scrapbook / Anti-Design style — handmade, imperfect, tactile, and deliberately resistant to the AI-generated polish that floods 2026 design. Think washi tape, kraft paper, polaroid corners, hand-lettered notes, postal stamps, doodles, and the deliberate wobble of a human hand. This is the 2026 counter-trend identified by Adobe, Canva, Figma, and Shopify trend reports.
+
+## Style Overview
+The interface looks like a page torn from someone&#39;s journal — cream paper background with subtle fiber texture, sticky notes rotated -4 degrees, washi tape holding things in place, a red rubber stamp dated this week, a green tag, and the occasional doodle of a star or wobbly heart. Nothing aligns to a perfect grid. Typefaces mix handwriting scripts with typewriter mono. Imperfection is the point.
+
+## Core Design Elements
+• Kraft paper or cream background with subtle paper-fiber noise (repeating-linear-gradient at 4-5% opacity)
+• Sticky notes: pastel yellow / mint / pink rectangles, rotated -6° to +8°, drop shadow 3-6px
+• Washi tape strips: pastel gradient + dashed border on the edges, rotated, covering corners and overlaps
+• Rubber stamps: 2-3px solid red/blue ring + monospace text inside, rotated -12°, 80% opacity for &quot;ink fade&quot;
+• Polaroid frames: white border-bottom 32px, photo on top, hand-written caption below
+• Hand-lettered fonts: Caveat, Shadows Into Light, Bradley Hand, Permanent Marker, Indie Flower (mix 2-3)
+• Typewriter mono for stamps and tags: Courier New, Special Elite, IBM Plex Mono
+• Doodle decorations: wobbly circles, four-point stars (✦), arrows, hearts (all 1.5-2px stroke, slightly off-perfect)
+• Torn paper edges (zigzag clip-path or jagged border)
+• Tags / labels: rectangle with rotated -6°, monospace text, hole + string optional
+
+## Color Palette
+• Background: cream #f7efd9, kraft #f0e3c8, manila #ead7b3
+• Sticky notes: butter yellow #fffceb, mint #d8f0d0, dusty pink #fce4ec
+• Stamp red: #c7001a (faded to 80% for ink-fade)
+• Tag green: olive #6b8e4e
+• Pen color: near-black #2a2a2a (never pure black — feels handwritten)
+• Washi tape: pastel coral #ffc8b4, sage #c0d9a0, lavender #d4c5e2
+
+## Typography
+• Handwriting display: Caveat / Permanent Marker / Bradley Hand / Indie Flower (rotate ±2° for liveliness)
+• Mono for stamps / receipts / tags: Courier New / Special Elite (uppercase, +0.1em tracking)
+• Mix sizes wildly — handwriting can be 1.5x body, mono is always small
+• Never use clean geometric sans like Helvetica
+
+## Layout Principles
+• Asymmetric, slightly off-grid — elements rotate ±4° to ±12°
+• Layer 4-6 elements per composition with overlapping z-index
+• Drop shadows are noticeable (3-6px blur, low opacity) to suggest physical depth
+• White space is intentional but uneven — like a real scrapbook page
+• Date stamps and tiny captions add &quot;evidence of authorship&quot;
+
+## Difference From Memphis
+• Memphis = bright geometric shapes, primary colors, abstract 80s graphic design
+• Scrapbook = handmade craft materials, muted natural palette, tactile and personal
+• Memphis is graphic design. Scrapbook is craft journaling.
+
+## Key Features
+• Personal blogs and indie portfolios
+• Wedding / event invitations
+• Small-batch brand storytelling (artisan food, handmade goods)
+• Cultural zines and independent publications
+• Anti-AI counter-aesthetic statements
+• Slow-living / wellness / journaling apps
+
+## Keywords
+Scrapbook, anti-design, handmade, washi tape, sticky note, kraft paper, rubber stamp, polaroid, hand-lettered, Caveat, Permanent Marker, Bradley Hand, typewriter, Special Elite, doodle, imperfection, tactile, craft, journal, zine, indie, slow, anti-AI, 2026 counter-trend, Adobe Canva Figma trend report, hyper-color resistance</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-liquid" data-id="liquid" data-category="mainstream" data-era="contemporary" data-paradigm="glass" data-tone="vivid" data-scenes="saas social" role="listitem" tabindex="0" aria-label="Liquid Glass 设计风格卡片，按 Enter 查看详情">
@@ -5654,6 +6918,69 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('liquid')" aria-label="查看 Liquid Glass 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('liquid')" aria-label="复制 Liquid Glass 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Liquid Glass 液态玻璃 UI设计提示词】
+
+Design a UI in Apple&#39;s Liquid Glass language — the material system introduced by Alan Dye at WWDC 2025 and deployed across iOS 26, iPadOS 26, macOS Tahoe 26, watchOS 26, tvOS 26 and visionOS 26. Liquid Glass is not a theme; it is a real-time refractive material that bends light from content behind it, reacts to motion, and adapts between light and dark modes automatically. Three principles drive it: content leads, controls float above on glass layers; hardware-aligned geometry, rounded corners mirror device edges; cross-platform harmony, the same material across watch, phone, tablet, desktop, TV, and spatial.
+
+## Style Overview
+The interface is built in two layers — a rich, photographic content layer below and a translucent floating glass layer above. Controls live on glass: pill-shaped tab bars, capsule toggles, floating toolbars, modal sheets — all with subtle refraction, specular highlights at the top edge, and a soft hairline border. As the user scrolls or moves the device, the glass picks up color from the content beneath. The tab bar shrinks when scrolling and expands on return. Nothing sits in a solid box anymore.
+
+## Core Design Elements
+• Translucent surfaces with backdrop-filter: blur(20-30px) saturate(180%)
+• Specular highlight: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 100%) along the top 40-50% of each glass element
+• Hairline border: 1px solid rgba(255,255,255,0.3-0.4)
+• Inner shadow: inset 0 1px 0 rgba(255,255,255,0.6) for top-edge gleam
+• Drop shadow: 0 8-12px 24-32px rgba(0,0,0,0.3-0.4) for floating depth
+• Pill / capsule geometry: border-radius 100px for tab bars and controls
+• Rounded squircles for cards: border-radius matches device corner radius
+• Active indicator: linear-gradient(90deg, system-color-start, system-color-end) instead of solid fill
+• Floating orbs / lens elements with radial-gradient highlights
+• Content layer underneath uses photographic imagery, vibrant gradients, or rich illustration
+
+## Color Palette
+• Dark mode primary background: #0a1124 to #1a1f3d (deep space blue)
+• Light mode primary background: #f5f5f7 to #ffffff
+• Glass tint dark: rgba(255,255,255,0.15-0.22)
+• Glass tint light: rgba(255,255,255,0.55-0.7)
+• Apple accent colors retained: system blue #007aff, indigo #5e5ce6, pink #ff2d55, orange #ff9500
+• Refraction tints in content layer: pink #ff9a8b, blue #6ec1ff, purple #c084fc, mint #6ee7c7
+
+## Typography
+• San Francisco Pro / SF Pro Display (Apple system) for all interface text
+• Semibold or Bold for primary actions, Regular for body
+• Letter-spacing slightly tighter than default at large sizes
+• Text on glass uses pure white #ffffff or pure black #000000 with sufficient contrast
+• Never use semi-transparent text — readability over aesthetic
+
+## Layout Principles
+• Two-layer thinking: content layer below, controls floating above on glass
+• Controls shrink and expand based on scroll context (adaptive density)
+• Edge-to-edge content, controls hover inside safe areas
+• Modal sheets present from bottom with backdrop blur
+• Sidebars extend to window edge with seamless refraction
+• Icons retain original colors — never tint them to match the glass
+
+## Difference From Glassmorphism
+• Classic glassmorphism = static frosted backdrop-filter blur
+• Liquid Glass = dynamic real-time refraction + specular highlights + light/dark auto-adapt + hardware-aligned geometry
+• Glassmorphism is a CSS effect. Liquid Glass is a material system.
+• Glass cards sit flat against the page. Liquid Glass floats above content and bends light through it.
+
+## Key Features
+• Next-generation iOS / macOS / iPadOS / visionOS applications
+• Premium SaaS dashboards (Vercel, Linear, Raycast style)
+• Music players, photo apps, video apps where content is hero
+• Spatial computing interfaces (Vision Pro pattern)
+• High-end portfolio sites and Apple-adjacent products
+
+## Keywords
+Liquid Glass, Apple WWDC 2025, iOS 26, macOS Tahoe, visionOS, material system, real-time refraction, specular highlight, backdrop-filter, dynamic blur, content leads, hardware-aligned geometry, pill tab bar, capsule toggle, floating toolbar, depth layer, Alan Dye, next-decade iOS, light-dark adaptive, spatial computing</pre>
                 </div>
             </div>
 
@@ -5703,6 +7030,76 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('solarpunk')" aria-label="复制 Solarpunk 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Solarpunk 太阳朋克 UI设计提示词】
+
+Design a UI in Solarpunk style — the optimistic counter to Cyberpunk. Where cyberpunk imagines a dystopian neon-drenched future of corporate decay, solarpunk imagines a sustainable, plant-integrated, sunlit world after the climate transition. Named explicitly around 2008 in opposition to cyberpunk, the aesthetic has escaped speculative fiction into mainstream design by 2026, identified by Solarpunk Magazine and Retrowave as one of the two leading &quot;future aesthetics&quot; of the decade.
+
+## Style Overview
+The interface feels like a page from a beautifully printed nature journal: cream paper background with subtle fiber texture, warm soft sunlight from the upper right, hand-drawn leaves and vines framing the content, small icons of solar panels and wind turbines as decorative elements, a serif typeface used in italics for the main heading, and monospace uppercase for tags. The palette is rooted in nature — moss green, oak brown, ivory cream, sunset orange — never neon, never digital. Hope, not hype.
+
+## Core Design Elements
+• Cream / kraft paper background with paper-fiber noise (repeating-linear-gradient at 3-5% opacity)
+• Soft warm radial gradient in upper right corner simulating sunlight
+• Hand-drawn or organic-shaped leaves and vines as decoration (border-radius 0 100% 0 100%)
+• Solar panel icons rendered as small isometric/perspective rectangles with grid pattern
+• Cards with thin warm-brown borders (1.5-2px solid) and offset solid shadow (3-4px, no blur)
+• Botanical illustrations or leaf silhouettes as accent
+• Serif italic display typography for emotional headlines
+• Monospace uppercase for labels, tags, dates (&quot;evidence of intentional craft&quot;)
+• Olive green tags with sand-colored text, slightly rotated for handcrafted feel
+• Subtle solid drop shadows in warm brown (never pure black, never blurred)
+
+## Color Palette
+• Ivory cream background: #f4ead0, #fbf5e3
+• Kraft paper: #ead7b3
+• Moss green / sage: #5a8a3e, #7ab055, #95c46f
+• Oak brown: #a07555, #6b4a30
+• Sunset orange / amber: #e8a153, #f5b347
+• Ink: #3a2a1a (warm dark brown, never pure black)
+• Accent for tech elements: deep navy #1a3a5a (solar panel framing)
+
+## Typography
+• Display: Playfair Display Italic, Lora, Source Serif Pro, Cormorant Garamond
+• Body: serif at 14-15px with generous line-height (1.6+)
+• Labels / tags: Courier New / IBM Plex Mono uppercase with +0.16em tracking
+• Mix serif italic and monospace deliberately — handcraft meets engineering
+• Never use clean geometric sans like Helvetica or Inter
+
+## Layout Principles
+• Generous warm whitespace — like the margins of a printed botanical book
+• Asymmetric placement of natural elements (leaves in opposite corners)
+• Cards have visible weight and texture, sit on the page rather than floating
+• Solid shadows offset 3-4px down-right (printing-press feel)
+• Decorative botanical elements rotated slightly off-axis (±15-25°)
+• Embedded &quot;tech&quot; elements (solar panels, wind turbines) integrated tastefully, not dominating
+
+## Difference From Cyber
+• Cyber = black background, neon magenta/cyan, scanlines, glitch, corporate dystopia
+• Solarpunk = cream background, moss/oak/sunset, hand-drawn botanicals, post-climate utopia
+• Cyber is &quot;high tech, low life.&quot; Solarpunk is &quot;high tech, high life with plants.&quot;
+• Cyber rebels against the system. Solarpunk imagines what comes after we win.
+
+## Difference From Scrapbook
+• Scrapbook = handmade craft journaling, washi tape, sticky notes, deliberate imperfection
+• Solarpunk = published botanical journal, intentional typography, integrated tech-with-nature
+• Scrapbook is personal craft. Solarpunk is curated ecological design.
+
+## Key Features
+• Sustainability and climate-tech startups
+• Community gardens, vertical farms, renewable energy platforms
+• Wellness and slow-living applications
+• Eco-conscious e-commerce (artisan, organic, fair-trade)
+• Speculative fiction publications, ecological journals
+• Anti-AI / anti-dystopia design statements
+
+## Keywords
+Solarpunk, post-cyberpunk, climate optimism, sustainability, vertical garden, solar panel, wind turbine, plant-integrated technology, Becky Chambers, Kim Stanley Robinson, vine, leaf, cream paper, kraft, moss green, oak brown, sunset, Playfair Display italic, botanical, ecological, utopia, hope, hopepunk, Solarpunk Magazine, future aesthetic 2026, post-climate transition</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-frutiger" data-id="frutiger" data-category="creative" data-era="classic" data-paradigm="retrofuture" data-tone="light" data-scenes="social tool" role="listitem" tabindex="0" aria-label="Frutiger Aero 设计风格卡片，按 Enter 查看详情">
@@ -5748,6 +7145,82 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('frutiger')" aria-label="查看 Frutiger Aero 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('frutiger')" aria-label="复制 Frutiger Aero 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">【Frutiger Aero 千禧水汽 UI设计提示词】
+
+Design a UI in Frutiger Aero style — the optimistic blue-green glassy aesthetic that defined Windows Vista (2007), Windows 7 (2009), early iOS, Nintendo Wii, and consumer electronics packaging from 2003 to 2013. After being dormant for a decade, Frutiger Aero exploded on TikTok in 2024-2026 under the #frutigeraero tag as the next major nostalgia wave following Y2K. It is the visual language of &quot;the future as imagined in 2007&quot; — clean, glossy, optimistic, full of bubbles, water, and nature.
+
+## Style Overview
+The interface is bathed in sky blue and aqua green vertical gradient, with semi-transparent floating bubbles drifting across the surface. A central glossy capsule button gleams with a strong upper highlight reflection — the signature Aero glass effect. Small natural elements (a green leaf, a water droplet, fish, dolphins, clouds) anchor the composition. Everything is round, soft, and inviting. There is no edge anywhere; every shape is a curve. The future, in 2007, was supposed to look like this.
+
+## Core Design Elements
+• Vertical gradient background: sky blue top → aqua mid → mint green bottom
+• Strong white radiance from the top simulating sky-light
+• Semi-transparent bubbles of varying sizes (20px to 60px), with radial gradient highlights
+• Aero glass button: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, transparent 50%, color-tint 50%, color-darker 100%) — the iconic Vista 50/50 split
+• Inset top highlight: inset 0 1px 0 rgba(255,255,255,0.9) on every button and pill
+• Outer glow: 0 4-8px 16px rgba(blue/green, 0.35) for floating presence
+• Rounded capsules and pills (border-radius: 100px) for all interactive elements
+• Natural decorative elements: leaves, water droplets, fish silhouettes, clouds, grass blades
+• Window chrome: thick white border with rounded corners and subtle reflections
+• Backdrop-filter: blur(4-8px) on glass elements
+
+## Color Palette
+• Sky blue: #87ceeb, #6dd5ed, #4a9fd1
+• Aqua / teal: #4ecdc4, #6ec1ff
+• Mint green: #95e1d3, #b8e8a5
+• Deep ocean accent: #0a4a7a, #1a6a9a
+• Leaf green: #2ea44f, #137a3a
+• Highlight white: rgba(255, 255, 255, 0.7-0.9)
+• Text on glass: deep ocean #0a4a7a with white text-shadow
+
+## Typography
+• Display: Segoe UI (Microsoft signature) — the Vista/Windows 7 default
+• Alternative: Frutiger (the typeface that named the aesthetic), Helvetica Neue
+• Bold weight for buttons with letter-spacing +0.03 to +0.05em
+• White text-shadow: 0 1px 0 rgba(255,255,255,0.8) for that engraved glass look
+• Never use serifs — Frutiger Aero is exclusively sans-serif
+
+## Layout Principles
+• Soft, rounded, never sharp — every corner is at least 8px radius
+• Central focus with decorative elements drifting in periphery
+• Multiple layers of transparency stacked (Vista famously called this &quot;Aero&quot;)
+• Strong vertical light source from top (sky metaphor)
+• Bubbles and natural elements add ambient motion, not literal content
+• Buttons have weight — they look pressable, glossy, almost edible
+• Generous breathing room between elements (optimistic, not cramped)
+
+## Difference From Y3K
+• Y3K = chrome metal, holographic iridescence, dark space backgrounds, Sailor Moon energy
+• Frutiger Aero = sky blue/green water, clear bubbles, sunlight optimism, Wii/Vista energy
+• Y3K is the cool kid&#39;s mall in 2002. Frutiger Aero is the science museum gift shop in 2007.
+
+## Difference From Skeuomorphism
+• Skeuomorphism = pretend digital objects are real physical objects (leather, wood, paper)
+• Frutiger Aero = celebrate the digital glass surface itself, plus natural references
+• Skeuo is &quot;make it look like a thing.&quot; Frutiger Aero is &quot;make it look like the future of glass.&quot;
+
+## Difference From Glassmorphism / Glass
+• Classic glass = flat semi-transparent frosted card on dark background
+• Frutiger Aero = full glossy ecosystem with bubbles, sky, leaves, water — a complete world
+• Glass is a CSS effect. Frutiger Aero is a worldview.
+
+## Key Features
+• Nostalgia-driven consumer brands (Y2K-adjacent fashion, retro gaming)
+• Wellness, water, ecology, aquatic theme products
+• Music players (iTunes 7 / 8 era revival)
+• Children and family applications
+• TikTok-era nostalgic content platforms
+• Operating system theme packs and customization tools
+• 2026 anti-AI nostalgia statements (real human optimism vs AI sterility)
+
+## Keywords
+Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7, Wii, Y2K nostalgia, TikTok #frutigeraero, sky blue, aqua, bubble, gloss, glassy, optimistic future, 2007 aesthetic, 2024-2026 revival, natural element, leaf, water drop, fish, dolphin, clouds, gradient background, capsule button, vertical light, semi-transparent</pre>
                 </div>
             </div>
 
@@ -5807,6 +7280,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('linear-dark')" aria-label="复制 Linear 深色 SaaS 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a modern dark-mode B2B SaaS dashboard for a developer tool, inspired by Linear. Near-black background #0B0B0F, high information density, ultra-thin 1px dividers, a single restrained indigo accent #5E6AD2, small 8px radii, subtle status pills, and a keyboard-first command palette with Cmd-K. Crisp 12-13px sans labels, short 120-160ms transitions, no decorative gradients or glass.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-vaporwave" data-id="vaporwave" data-category="creative" data-era="classic" data-paradigm="retrofuture" data-tone="vivid" data-scenes="social gaming" role="listitem" tabindex="0" aria-label="Vaporwave 蒸汽波 设计风格卡片，按 Enter 查看详情">
@@ -5849,6 +7329,13 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('vaporwave')" aria-label="查看 Vaporwave 蒸汽波 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('vaporwave')" aria-label="复制 Vaporwave 蒸汽波 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Create a Vaporwave retro-80s aesthetic hero: deep purple to hot-pink gradient sky, a glowing sun with horizontal scanlines, a neon perspective grid floor receding to the horizon, chrome and neon pink/cyan accents, monospace typography with slight chromatic aberration. Dreamy, nostalgic, surreal, corporate-nostalgia mood.</pre>
                 </div>
             </div>
 
@@ -5895,6 +7382,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('terminal-cli')" aria-label="复制 终端/命令行 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a terminal / CLI style developer interface: pure black background #0C0C0C, monospace font, phosphor-green or cyan prompt, command history list, a blinking block caret, ASCII-friendly layout, no rounded corners, no images. Keyboard-first, text-only hierarchy, subtle path breadcrumbs. Utilitarian hacker aesthetic.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-spatial" data-id="spatial" data-category="creative" data-era="future" data-paradigm="glass" data-tone="dark" data-scenes="saas social" role="listitem" tabindex="0" aria-label="空间界面 设计风格卡片，按 Enter 查看详情">
@@ -5940,6 +7434,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('spatial')" aria-label="复制 空间界面 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a spatial-computing (visionOS-like) UI: a floating translucent glass panel with deep rounded corners and soft depth, layered over a dark blurred environment, subtle cool-to-violet gradient reflections, a gentle specular highlight on the top edge, generous padding and calm centered content. Emphasize depth, materials and presence. Minimal text, large tap targets.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-aurora" data-id="aurora" data-category="creative" data-era="contemporary" data-paradigm="other" data-tone="vivid" data-scenes="saas social" role="listitem" tabindex="0" aria-label="Aurora 极光渐变 设计风格卡片，按 Enter 查看详情">
@@ -5984,6 +7485,13 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('aurora')" aria-label="查看 Aurora 极光渐变 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('aurora')" aria-label="复制 Aurora 极光渐变 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Create an Aurora gradient hero background: several hugely blurred flowing light blobs in indigo, cyan and violet drifting slowly over a near-black canvas, giving an aurora-like sense of depth. Any text must sit on a semi-transparent dark scrim for readability. Soft, ambient, premium, generous negative space, no hard edges.</pre>
                 </div>
             </div>
 
@@ -6031,6 +7539,13 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('art-deco')" aria-label="查看 Art Deco 装饰艺术 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('art-deco')" aria-label="复制 Art Deco 装饰艺术 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design an Art Deco luxury brand card: deep black background with gold #C9A227 thin-line geometry, symmetric fan / sunburst radiants, stacked parallel lines, an elegant serif logotype with wide letter spacing, and a fine gold border. Ornamental, symmetrical, opulent 1920s Gatsby hotel aesthetic, gold and cream on black.</pre>
                 </div>
             </div>
 
@@ -6083,6 +7598,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('ai-native')" aria-label="复制 AI 原生界面 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design an AI-native productivity UI with a copilot sidebar: dark near-black canvas, a chat thread where the assistant answer streams token by token, inline suggestion chips (regenerate, insert), subtle purple-blue gradient accents #6E8BFF to #C08BFF, clear AI-origin labeling, smooth 200ms transitions, rounded 12px surfaces, calm and trustworthy.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-retro-os" data-id="retro-os" data-category="culture" data-era="classic" data-paradigm="skeuo" data-tone="light" data-scenes="tool gaming" role="listitem" tabindex="0" aria-label="复古桌面系统 设计风格卡片，按 Enter 查看详情">
@@ -6134,6 +7656,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('retro-os')" aria-label="复制 复古桌面系统 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a nostalgic 1990s desktop OS UI (Windows 95 / classic Mac style): gray #C0C0C0 panels, pixel/bitmap typography, beveled 3D borders with 1px white and dark-gray edges, a navy gradient title bar, tiny system icons, and a chunky default button. Retro, utilitarian, pixel-crisp, nostalgic.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-pixel" data-id="pixel" data-category="creative" data-era="classic" data-paradigm="retrofuture" data-tone="vivid" data-scenes="gaming" role="listitem" tabindex="0" aria-label="8-bit 像素 设计风格卡片，按 Enter 查看详情">
@@ -6184,6 +7713,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('pixel')" aria-label="复制 8-bit 像素 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design an 8-bit pixel-art game UI: limited palette on a dark #1A1C2C background, hard-edged pixels with no anti-aliasing, a chunky HP bar, blocky monospace pixel font, small HUD icons, and a bright yellow #F8D800 accent. Retro 8/16-bit console aesthetic, crisp and playful.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-neo-chinese" data-id="neo-chinese" data-category="culture" data-era="contemporary" data-paradigm="editorial" data-tone="muted" data-scenes="oriental ecommerce" role="listitem" tabindex="0" aria-label="新中式/国潮 设计风格卡片，按 Enter 查看详情">
@@ -6232,6 +7768,13 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('neo-chinese')" aria-label="查看 新中式/国潮 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('neo-chinese')" aria-label="复制 新中式/国潮 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a modern Neo-Chinese (Guochao) brand page: warm rice-paper background #F5F1E8, cinnabar red #B03A2E and dai-blue #2E5A6B accents, a restrained seal-stamp motif, an elegant serif headline, generous negative space, and a thin horizontal rule. Modern oriental, refined and calm, avoid cluttered dragon/phoenix decoration.</pre>
                 </div>
             </div>
 
@@ -6284,6 +7827,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('health-wearable')" aria-label="复制 健康穿戴 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a health and fitness wearable UI: dark navy background #0B1220, a large circular progress ring with a calm green accent, one oversized number (steps today), small muted labels, low-stimulation pacing, and a subtle privacy indicator. Glanceable, calm, high-contrast.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-eink" data-id="eink" data-category="industry" data-era="contemporary" data-paradigm="flat" data-tone="muted" data-scenes="tool" role="listitem" tabindex="0" aria-label="电子墨水 设计风格卡片，按 Enter 查看详情">
@@ -6333,6 +7883,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('eink')" aria-label="复制 电子墨水 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design an e-ink / low-power reading UI: warm paper-gray background #EDEAE3, pure grayscale hierarchy (five grey steps), a serif body typeface, zero animation, no gradients, no shadows, generous line height and margins. Calm, paper-like, reading-first, minimal ornament.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-senior-friendly" data-id="senior-friendly" data-category="industry" data-era="contemporary" data-paradigm="flat" data-tone="light" data-scenes="tool finance" role="listitem" tabindex="0" aria-label="适老化设计 设计风格卡片，按 Enter 查看详情">
@@ -6379,6 +7936,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('senior-friendly')" aria-label="复制 适老化设计 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design an accessible senior-friendly mobile UI: white background, body text at least 18px, very high contrast dark text, large 48px+ touch targets, generous spacing, low information density, and buttons labelled with clear verbs (Pay bill now, Call family). Simple, reassuring, unmistakably readable.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-holographic" data-id="holographic" data-category="creative" data-era="future" data-paradigm="other" data-tone="dark" data-scenes="social ecommerce" role="listitem" tabindex="0" aria-label="全息镭射 设计风格卡片，按 Enter 查看详情">
@@ -6423,6 +7987,13 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('holographic')" aria-label="查看 全息镭射 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('holographic')" aria-label="复制 全息镭射 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a holographic iridescent card UI: a dark deep-space background with a card surface showing thin-film interference gradients (cyan, magenta, gold) that shift with angle, metallic sheen, a frosted highlight, and perfectly legible light text placed on an opaque scrim. Futuristic, collectible, premium, like a trading card.</pre>
                 </div>
             </div>
 
@@ -6470,6 +8041,13 @@
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('luxury-ecommerce')" aria-label="复制 奢侈品电商 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a luxury e-commerce product page: warm off-white background #FBF9F6, an elegant serif headline, one large product image given generous negative space, thin gray hairlines, a discreet price line, and a minimal text link rather than a loud buy button. Restrained, gallery-like, high-end fashion mood.</pre>
+                </div>
             </div>
 
             <div class="style-card" id="style-calm-tech" data-id="calm-tech" data-category="creative" data-era="future" data-paradigm="flat" data-tone="muted" data-scenes="tool social" role="listitem" tabindex="0" aria-label="平静科技 设计风格卡片，按 Enter 查看详情">
@@ -6516,6 +8094,13 @@
                     <button class="expand-btn" onclick="event.stopPropagation(); openModal('calm-tech')" aria-label="查看 平静科技 详情" title="查看详情">
                         ⋯
                     </button>
+                </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('calm-tech')" aria-label="复制 平静科技 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">Design a calm-technology ambient UI: a soft warm-grey background, a single subtle status dot in the corner, minimal text, slow gentle 900ms easing, muted sage and sand tones, and only the one piece of information that matters right now. Quiet, unobtrusive, at the periphery of attention.</pre>
                 </div>
             </div>
 <!-- STATIC_CARDS_END -->

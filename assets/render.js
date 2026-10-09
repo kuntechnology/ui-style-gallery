@@ -69,6 +69,13 @@ export function cardHTML(style) {
                         ⋯
                     </button>
                 </div>
+                <div class="card-prompt-box">
+                    <div class="card-prompt-head">
+                        <span class="card-prompt-label">AI 提示词</span>
+                        <button class="card-prompt-copy" onclick="event.stopPropagation(); copyPrompt('${style.id}')" aria-label="复制 ${escapeHtml(style.name)} 的提示词">复制</button>
+                    </div>
+                    <pre class="card-prompt-text">${escapeHtml(style.aiPrompt || '')}</pre>
+                </div>
             </div>`;
 }
 
