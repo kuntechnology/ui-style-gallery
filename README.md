@@ -1,6 +1,6 @@
 # UI Style Gallery · UI 设计风格集锦
 
-一个**可复用、可索引、可访问**的 UI 主题参考库：**44 种 UI 设计风格**，每种都带一个纯 CSS 绘制的微型 UI mock（无外部图片）、设计 tokens、适用/不适用场景、无障碍提示与一段可直接喂给 AI 的提示词。
+一个**可复用、可索引、可访问**的 UI 主题参考库：**50 种 UI 设计风格**，每种都带一个纯 CSS 绘制的微型 UI mock（无外部图片）、设计 tokens、适用/不适用场景、无障碍提示与一段可直接喂给 AI 的提示词。
 
 🌐 **在线访问：** https://kuntechnology.github.io/ui-style-gallery/
 
@@ -23,7 +23,7 @@
 | 🌓 深色模式 | 跟随系统，可手动切换，记忆到 localStorage |
 | 📋 剪贴板 | 收藏提示词 → 一键复制全部 / 下载 `.md` |
 | ♿ 无障碍 | 键盘可达、可见焦点环、aria 标注、44px 触控目标、`prefers-reduced-motion` 全站禁用动效 |
-| 🔍 SEO | 静态预渲染 44 张卡片 + JSON-LD（ItemList + 44 CreativeWork）、OG/Twitter、canonical、sitemap.xml、robots.txt |
+| 🔍 SEO | 静态预渲染 50 张卡片 + JSON-LD（ItemList + 50 CreativeWork）、OG/Twitter、canonical、sitemap.xml、robots.txt |
 
 ---
 
@@ -33,21 +33,23 @@
 ui-style-gallery/
 ├── index.html                 # 唯一入口页：结构 + 内联样式 + 静态预渲染内容 + 模块引用
 ├── assets/
-│   ├── tokens.css             # 统一 design tokens（--radius-* / --shadow-* / --blur-* / --motion-* / --ease-*）
-│   ├── styles.config.js       # ★ 数据源：44 个风格的结构化配置 + 分类/排序定义
-│   ├── taxonomy.js            # 各风格的 范式/色调/场景 映射
-│   ├── previews.js            # 28 个基础 demo 标记（程序化提取）+ 合并新 demo
-│   ├── previews.extra.js      # P2 新增 16 个 demo 标记
-│   ├── prompts.js             # 既有 28 条提示词库
+│   ├── tokens.css             # 统一 design tokens（--font-sans / --radius-* / --blur-* / --motion-* / --ease-*）
+│   ├── styles.config.js       # ★ 数据源：50 个风格的结构化配置 + 分类/排序定义
+│   ├── taxonomy.js            # 各风格的 范式/色调/场景 映射（新增风格必须在此登记）
+│   ├── previews.js            # 合并后的全量 demo 标记（28 个基础 + 引入 EXTRA_PREVIEWS）
+│   ├── previews.extra.js      # P2 的 16 个 + P3 的 6 个 demo 标记
+│   ├── prompts.js             # 最早一批 28 条提示词库（其余写在条目内的 aiPrompt）
 │   ├── subtitles.js           # 卡片副标题映射
 │   ├── render.js              # 卡片渲染（浏览器与 Node 共用，保证 SSR 一致）
 │   └── app.js                 # 交互逻辑：筛选/排序/对比/收藏/URL 同步/详情/剪贴板/主题
 ├── tools/
 │   ├── render-static.mjs      # 静态预渲染：把卡片与 JSON-LD 写进 index.html（SEO 首屏可爬取）
-│   └── selftest.mjs           # 无第三方依赖的自检（数据/筛选/排序/tokens/映射）
+│   ├── selftest.mjs           # 无第三方依赖的自检（数据/筛选/排序/tokens/映射）
+│   └── contrast.mjs           # 对比度断言：明暗两套 token 逐对校验 ≥4.5:1
+├── .github/workflows/ci.yml   # 质量门禁：自检 + 对比度 + 预渲染一致性 + axe 阻断 + Lighthouse 报告
+├── lighthouserc.json          # Lighthouse 阈值（perf/a11y 警告，seo/best-practices 阻断）
 ├── sitemap.xml / robots.txt   # SEO
-├── package.json               # build / test / verify 脚本
-└── docs/ci-lighthouse.yml     # Lighthouse + axe 质量门禁模板（见下）
+└── package.json               # build / test / verify 脚本
 ```
 
 技术栈：**纯静态、零框架、零构建依赖**。JS 为原生 ES Modules，CSS 用自定义属性分层，托管于 GitHub Pages。
@@ -82,7 +84,7 @@ ui-style-gallery/
 **Step 3 — 跑验收**：
 
 ```bash
-pnpm verify      # = build（静态预渲染）+ test（自检）
+npm run verify      # = build（静态预渲染）+ test（自检）
 ```
 
 两项全绿即完成。GitHub Pages 推送后自动更新。
@@ -95,14 +97,14 @@ pnpm verify      # = build（静态预渲染）+ test（自检）
 # 本地预览（任意静态服务器即可）
 npx serve .
 
-# 静态预渲染（把 44 张卡片 + JSON-LD 写进 index.html）
-pnpm build
+# 静态预渲染（把全部卡片 + JSON-LD 写进 index.html）
+npm run build
 
 # 数据/逻辑自检（在 Node 中用极简 DOM 桩执行 app.js）
-pnpm test
+npm run test
 
 # 两者一起
-pnpm verify
+npm run verify
 ```
 
 ### Lighthouse 跑法
@@ -115,16 +117,19 @@ npx lighthouse https://kuntechnology.github.io/ui-style-gallery/ \
   --form-factor=mobile --throttling-method=simulate --view
 ```
 
-**验收基线**：Performance ≥ 90（移动端模拟）、Accessibility ≥ 95、SEO ≥ 95、Best Practices ≥ 95。
+**验收基线**：SEO ≥ 95、Best Practices ≥ 95 为硬门槛；Performance / Accessibility 先按警告线（0.90 / 0.95）观察。无障碍的真正硬门槛是 axe 扫描的 critical/serious 归零。
 
-`docs/ci-lighthouse.yml` 同时提供 **Lighthouse CI + axe 扫描** 的 GitHub Actions 工作流模板（含上述阈值门禁）。启用方式：
+`.github/workflows/ci.yml` 已启用，随 push 自动运行三件事：
 
-```bash
-mkdir -p .github/workflows
-cp docs/ci-lighthouse.yml .github/workflows/ci.yml
-```
+| job | 内容 | 失败即阻断 |
+|---|---|---|
+| `verify` | `selftest.mjs` → `contrast.mjs` → 重跑预渲染并 `git diff` 比对 | 是 |
+| `a11y` | `@axe-core/cli` 扫 WCAG 2.0/2.1 A+AA | 是 |
+| `lighthouse` | `@lhci/cli` 出报告并上传 | 仅 seo / best-practices |
 
-> 说明：该文件未直接放在 `.github/workflows/`，是因为当前自动化推送所用的 OAuth App 缺少 `workflow` 权限；你用自己的账号提交即可直接放入 `.github/workflows/`。
+**为什么 axe 排除 `.card-preview`**：卡片里的 mini 界面是「如实复刻各家设计规范」的示意图，Ant Design 主按钮 `#1677FF` 配白字在现实中就是 4.04:1、Element Plus 是 2.76:1。把它们调到 4.5:1 等于让参考本身失真，而这个站的用途正是对照真实规范。这些 mockup 已标为 `role="img"` + `aria-label`，对辅助技术是一张图；站点自身的功能 UI（导航、筛选、卡片正文、按钮、弹窗）不排除，必须全绿。
+
+**为什么 Lighthouse 的 perf/a11y 只作警告**：Lighthouse 的 a11y 分会把上述 mockup 的配色算进去，天然低于 0.95；性能分也无法在 CI 里稳定复现。没有基线就先设阈值，只会训练大家忽略红灯。积累几次运行、有了稳定区间再收紧。
 
 ### 无障碍扫描
 
@@ -146,19 +151,30 @@ npx @axe-core/cli https://kuntechnology.github.io/ui-style-gallery/
 
 ---
 
-## 六、44 种风格一览
+## 六、50 种风格一览
 
-**主流 (10)**：Apple HIG · Material Design · Fluent Design · Neumorphism · Glassmorphism · Flat · Gradient · Brutalism · Minimalism · Dark Mode
+> 以下分类与数量由 `assets/styles.config.js` 实测导出，不是手写维护的（原先这份清单与实际数据不符，已修正）。
 
-**行业 (5)**：SaaS · 金融 · 电商 · 社交 · 游戏
+**主流 (18)**：Apple/iOS 风格 · Material Design · Fluent Design · Neumorphism · Glassmorphism · Flat Design · Gradient Design · Brutalism · Minimalism · Dark Mode · Bento Grid · Liquid Glass · **Ant Design · Arco Design · TDesign · Element Plus · GOV.UK 设计系统 · IBM Carbon**
 
-**趋势 / 视觉 (13)**：Claymorphism · Bauhaus · Memphis · Cyberpunk · 日式禅意 · Skeuomorphism · 3D Glass Type · Bento Grid · Anti-Design · Y2K Aero · Pastel Gradient Mesh · Liquid Glass · Solarpunk · Frutiger Aero
+**行业 (12)**：B2B SaaS · Finance · E-commerce · Social Media · Gaming · Linear 深色 SaaS · 终端/命令行 · AI 原生界面 · 健康穿戴 · 电子墨水 · 适老化设计 · 奢侈品电商
 
-**P2 新增 (16)**：Linear 深色 SaaS · Vaporwave 蒸汽波 · 终端/命令行 · 空间界面 · Aurora 极光渐变 · Art Deco 装饰艺术 · AI 原生界面 · 复古桌面系统 · 8-bit 像素 · 新中式/国潮 · 健康穿戴 · 电子墨水 · 适老化设计 · 全息镭射 · 奢侈品电商 · 平静科技
+**文化 (7)**：Bauhaus · Memphis · Zen · Editorial · Art Deco 装饰艺术 · 复古桌面系统 · 新中式/国潮
+
+**创意 (13)**：Claymorphism · Cyberpunk · Skeuomorphism · Y3K · Scrapbook · Solarpunk · Frutiger Aero · Vaporwave 蒸汽波 · 空间界面 · Aurora 极光渐变 · 8-bit 像素 · 全息镭射 · 平静科技
 
 ---
 
 ## 七、更新记录
+
+### P3 — 企业级设计系统补齐 + 质量门禁落地
+- 新增 6 个 B 端设计系统风格（Ant Design / Arco Design / TDesign / Element Plus / GOV.UK / IBM Carbon），总数 44 → **50**；各自按真实规范落 tokens，a11yNote 写实测对比度而非套话
+- 质量门禁真正启用：自检 + 对比度断言 + 预渲染一致性 + axe 阻断（详见上节），模板文件 `docs/ci-lighthouse.yml` 已收敛为 `.github/workflows/ci.yml`
+- 对比度系统修复：`--text-secondary/tertiary` 实测仅 3.45/3.37:1（原注释声称达标，是错的）；分类标签文字色低至 1.70:1；新增 `--*-ink` 文字级语义色，明暗两套 14 组断言全绿
+- 性能：移除 Google Fonts webfont（CSS 单文件 464KB / gzip 125KB / 439 条 `@font-face`），改用系统字体栈，零网络请求
+- 无障碍：toast 加 live region、新增 skip-link、卡片标题语义化（h4 跳级 → h1/h2/h3）、复制失败有反馈、关闭态抽屉加 `inert`
+- 交互修复：详情弹窗改用 `pushState` + `popstate`，返回键终于能关弹窗（此前会直接退出站点），并还原焦点
+- 修正 README 多处与代码不符的描述（分类数量、`tokens.css` 实际含有的令牌、pnpm 命令等）
 
 ### P2 — 内容扩充与质量
 - 新增 16 个风格（数据 + 纯 CSS demo + do/don't + a11yNote + aiPrompt），总数 28 → **44**
