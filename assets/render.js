@@ -46,7 +46,7 @@ export function cardHTML(style) {
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">${escapeHtml(style.name)}</div>
+                        <h2 class="card-title">${escapeHtml(style.name)}</h2>
                         <div class="card-subtitle">${subtitle}</div>
                     </div>
                     <div class="card-tags">
@@ -55,7 +55,7 @@ export function cardHTML(style) {
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             ${(style.features || []).map((f) => `<span class="feature-item">${escapeHtml(f)}</span>`).join('')}
                         </div>

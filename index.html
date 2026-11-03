@@ -113,6 +113,25 @@
             background: var(--neu-bg);
         }
 
+        /* ==================== Accessibility: skip link (v4.7) ==================== */
+        /* 键盘用户按第一下 Tab 即可跳过 50 张卡片直达筛选区与结果列表 */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 8px;
+            z-index: 3000;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .skip-link:focus {
+            left: 8px;
+        }
+
         /* ==================== Accessibility: focus-visible (v4.6) ==================== */
         *:focus { outline: none; }
         *:focus-visible {
@@ -901,7 +920,7 @@
             margin-bottom: 1.25rem;
         }
 
-        .card-features h4 {
+        .card-features :is(h3, h4) {
             font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-tertiary);
@@ -4388,6 +4407,7 @@
 <!-- JSONLD_END -->
 </head>
 <body>
+    <a class="skip-link" href="#mainContent">跳到主内容</a>
     <!-- Header -->
     <header class="header">
         <div class="header-content">
@@ -4413,7 +4433,7 @@
     </header>
 
     <!-- Main Container -->
-    <main class="main-container">
+    <main class="main-container" id="mainContent" tabindex="-1">
         <!-- Content Area -->
         <div class="content">
             <div class="content-header">
@@ -4475,7 +4495,7 @@
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Apple/iOS 风格</div>
+                        <h2 class="card-title">Apple/iOS 风格</h2>
                         <div class="card-subtitle">Apple Human Interface Guidelines</div>
                     </div>
                     <div class="card-tags">
@@ -4484,7 +4504,7 @@
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">简洁留白</span><span class="feature-item">毛玻璃效果</span><span class="feature-item">大圆角</span><span class="feature-item">SF Pro字体</span><span class="feature-item">微妙阴影</span><span class="feature-item">高对比度</span><span class="feature-item">动效流畅</span>
                         </div>
@@ -4569,7 +4589,7 @@ iOS, Apple, minimalist, clean, premium, elegant, frosted glass, rounded, SF Pro,
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Material Design</div>
+                        <h2 class="card-title">Material Design</h2>
                         <div class="card-subtitle">Google Material Design 3</div>
                     </div>
                     <div class="card-tags">
@@ -4578,7 +4598,7 @@ iOS, Apple, minimalist, clean, premium, elegant, frosted glass, rounded, SF Pro,
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">卡片布局</span><span class="feature-item">层级阴影</span><span class="feature-item">品牌色彩</span><span class="feature-item">图标系统</span><span class="feature-item">动效反馈</span><span class="feature-item">响应式</span><span class="feature-item">组件化</span>
                         </div>
@@ -4668,7 +4688,7 @@ Material Design, Material You, Google, M3, cards, elevation, dynamic color, acce
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Fluent Design</div>
+                        <h2 class="card-title">Fluent Design</h2>
                         <div class="card-subtitle">Microsoft Fluent Design System</div>
                     </div>
                     <div class="card-tags">
@@ -4677,7 +4697,7 @@ Material Design, Material You, Google, M3, cards, elevation, dynamic color, acce
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">亚克力背景</span><span class="feature-item">光效层次</span><span class="feature-item">Insider风格</span><span class="feature-item">动效设计</span><span class="feature-item">响应式</span><span class="feature-item">触感触控</span><span class="feature-item">多设备</span>
                         </div>
@@ -4763,7 +4783,7 @@ Fluent, Microsoft, Windows, Acrylic, Reveal, Segoe, modern, depth, motion, cross
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Neumorphism</div>
+                        <h2 class="card-title">Neumorphism</h2>
                         <div class="card-subtitle">新拟态设计风格</div>
                     </div>
                     <div class="card-tags">
@@ -4772,7 +4792,7 @@ Fluent, Microsoft, Windows, Acrylic, Reveal, Segoe, modern, depth, motion, cross
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">柔和阴影</span><span class="feature-item">浮雕效果</span><span class="feature-item">单色系</span><span class="feature-item">凸起凹陷</span><span class="feature-item">触感UI</span><span class="feature-item">轻量感</span><span class="feature-item">创新性</span>
                         </div>
@@ -4847,7 +4867,7 @@ Neumorphism, soft UI, new skomorphism, extruded, tactile, soft shadows, minimal,
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Glassmorphism</div>
+                        <h2 class="card-title">Glassmorphism</h2>
                         <div class="card-subtitle">玻璃拟态设计风格</div>
                     </div>
                     <div class="card-tags">
@@ -4856,7 +4876,7 @@ Neumorphism, soft UI, new skomorphism, extruded, tactile, soft shadows, minimal,
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">毛玻璃</span><span class="feature-item">透明背景</span><span class="feature-item">模糊效果</span><span class="feature-item">边框高光</span><span class="feature-item">渐变底</span><span class="feature-item">现代感</span><span class="feature-item">层次感</span>
                         </div>
@@ -4941,7 +4961,7 @@ Glassmorphism, glass, frosted, blur, transparent, modern, glass effect, depth, l
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Flat Design</div>
+                        <h2 class="card-title">Flat Design</h2>
                         <div class="card-subtitle">扁平化设计风格</div>
                     </div>
                     <div class="card-tags">
@@ -4950,7 +4970,7 @@ Glassmorphism, glass, frosted, blur, transparent, modern, glass effect, depth, l
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">无阴影</span><span class="feature-item">纯色块</span><span class="feature-item">简洁图形</span><span class="feature-item">二维感</span><span class="feature-item">清晰易读</span><span class="feature-item">加载快速</span><span class="feature-item">响应式</span>
                         </div>
@@ -5031,7 +5051,7 @@ Flat Design, flat, minimalist, clean, solid colors, no shadows, geometric, simpl
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Gradient Design</div>
+                        <h2 class="card-title">Gradient Design</h2>
                         <div class="card-subtitle">渐变设计风格</div>
                     </div>
                     <div class="card-tags">
@@ -5040,7 +5060,7 @@ Flat Design, flat, minimalist, clean, solid colors, no shadows, geometric, simpl
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">色彩渐变</span><span class="feature-item">流动感</span><span class="feature-item">活力感</span><span class="feature-item">品牌识别</span><span class="feature-item">现代感</span><span class="feature-item">梦幻感</span><span class="feature-item">渐变叠加</span>
                         </div>
@@ -5116,7 +5136,7 @@ Gradient, gradients, colorful, vibrant, mesh gradient, color transition, modern,
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Brutalism</div>
+                        <h2 class="card-title">Brutalism</h2>
                         <div class="card-subtitle">粗野主义设计风格</div>
                     </div>
                     <div class="card-tags">
@@ -5125,7 +5145,7 @@ Gradient, gradients, colorful, vibrant, mesh gradient, color transition, modern,
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">粗犷原始</span><span class="feature-item">高对比</span><span class="feature-item">大胆排版</span><span class="feature-item">不妥协</span><span class="feature-item">功能直白</span><span class="feature-item">反美观</span><span class="feature-item">独特个性</span>
                         </div>
@@ -5199,7 +5219,7 @@ Brutalism, brutal, raw, harsh, bold, industrial, web brutalism, unconventional, 
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Minimalism</div>
+                        <h2 class="card-title">Minimalism</h2>
                         <div class="card-subtitle">极简主义设计风格</div>
                     </div>
                     <div class="card-tags">
@@ -5208,7 +5228,7 @@ Brutalism, brutal, raw, harsh, bold, industrial, web brutalism, unconventional, 
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">极少元素</span><span class="feature-item">大量留白</span><span class="feature-item">单色/少色</span><span class="feature-item">精致排版</span><span class="feature-item">安静感</span><span class="feature-item">高端感</span><span class="feature-item">功能至上</span>
                         </div>
@@ -5289,7 +5309,7 @@ Minimalism, minimal, clean, white space, ultra minimal, luxury, premium, serene,
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Dark Mode</div>
+                        <h2 class="card-title">Dark Mode</h2>
                         <div class="card-subtitle">深色模式设计风格</div>
                     </div>
                     <div class="card-tags">
@@ -5298,7 +5318,7 @@ Minimalism, minimal, clean, white space, ultra minimal, luxury, premium, serene,
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">深色背景</span><span class="feature-item">低眩光</span><span class="feature-item">高亮强调</span><span class="feature-item">沉浸体验</span><span class="feature-item">层次用明度</span><span class="feature-item">护眼</span><span class="feature-item">OLED 省电</span>
                         </div>
@@ -5406,7 +5426,7 @@ Dark Mode, dark theme, night mode, dark UI, OLED, black, night-friendly, eye com
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">B2B SaaS</div>
+                        <h2 class="card-title">B2B SaaS</h2>
                         <div class="card-subtitle">B2B软件界面设计</div>
                     </div>
                     <div class="card-tags">
@@ -5415,7 +5435,7 @@ Dark Mode, dark theme, night mode, dark UI, OLED, black, night-friendly, eye com
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">数据密集</span><span class="feature-item">克制的强调色</span><span class="feature-item">清晰层级</span><span class="feature-item">组件统一</span><span class="feature-item">高信息效率</span><span class="feature-item">可预测</span><span class="feature-item">专业可信</span>
                         </div>
@@ -5514,7 +5534,7 @@ SaaS, dashboard, enterprise, B2B, admin panel, data visualization, metrics, KPIs
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Finance</div>
+                        <h2 class="card-title">Finance</h2>
                         <div class="card-subtitle">金融科技界面设计</div>
                     </div>
                     <div class="card-tags">
@@ -5523,7 +5543,7 @@ SaaS, dashboard, enterprise, B2B, admin panel, data visualization, metrics, KPIs
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">稳重配色</span><span class="feature-item">精确数字排版</span><span class="feature-item">安全徽章</span><span class="feature-item">清晰状态</span><span class="feature-item">克制动效</span><span class="feature-item">专业严谨</span><span class="feature-item">信任感</span>
                         </div>
@@ -5626,7 +5646,7 @@ Finance, banking, fintech, money, secure, trustworthy, professional, data visual
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">E-commerce</div>
+                        <h2 class="card-title">E-commerce</h2>
                         <div class="card-subtitle">电商平台界面设计</div>
                     </div>
                     <div class="card-tags">
@@ -5635,7 +5655,7 @@ Finance, banking, fintech, money, secure, trustworthy, professional, data visual
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">商品聚焦</span><span class="feature-item">醒目价格</span><span class="feature-item">强转化按钮</span><span class="feature-item">促销标签</span><span class="feature-item">清晰动线</span><span class="feature-item">移动优先</span><span class="feature-item">信任元素</span>
                         </div>
@@ -5734,7 +5754,7 @@ E-commerce, shopping, retail, product, cart, checkout, sale, discount, store, on
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Social Media</div>
+                        <h2 class="card-title">Social Media</h2>
                         <div class="card-subtitle">社交平台界面设计</div>
                     </div>
                     <div class="card-tags">
@@ -5743,7 +5763,7 @@ E-commerce, shopping, retail, product, cart, checkout, sale, discount, store, on
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">内容信息流</span><span class="feature-item">卡片化</span><span class="feature-item">互动按钮</span><span class="feature-item">圆润亲和</span><span class="feature-item">即时反馈</span><span class="feature-item">头像主导</span><span class="feature-item">轻松氛围</span>
                         </div>
@@ -5836,7 +5856,7 @@ Social, social media, community, feed, posts, stories, profile, followers, likes
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Gaming</div>
+                        <h2 class="card-title">Gaming</h2>
                         <div class="card-subtitle">游戏界面设计</div>
                     </div>
                     <div class="card-tags">
@@ -5845,7 +5865,7 @@ Social, social media, community, feed, posts, stories, profile, followers, likes
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">高饱和霓虹</span><span class="feature-item">发光描边</span><span class="feature-item">斜切几何</span><span class="feature-item">粒子动效</span><span class="feature-item">等级视觉</span><span class="feature-item">沉浸暗底</span><span class="feature-item">热血氛围</span>
                         </div>
@@ -5938,7 +5958,7 @@ Gaming, game UI, esports, cyberpunk, sci-fi, neon, RGB, futuristic, dark theme, 
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Claymorphism</div>
+                        <h2 class="card-title">Claymorphism</h2>
                         <div class="card-subtitle">3D塑料质感设计</div>
                     </div>
                     <div class="card-tags">
@@ -5947,7 +5967,7 @@ Gaming, game UI, esports, cyberpunk, sci-fi, neon, RGB, futuristic, dark theme, 
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">超大圆角</span><span class="feature-item">厚实体积感</span><span class="feature-item">内外双阴影</span><span class="feature-item">糖果配色</span><span class="feature-item">软萌亲和</span><span class="feature-item">3D 感</span><span class="feature-item">童趣</span>
                         </div>
@@ -6032,7 +6052,7 @@ Claymorphism, clay, 3D, plastic, pastel, soft shadows, rounded, playful, toy, fr
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Bauhaus</div>
+                        <h2 class="card-title">Bauhaus</h2>
                         <div class="card-subtitle">几何构成主义 · 三原色</div>
                     </div>
                     <div class="card-tags">
@@ -6041,7 +6061,7 @@ Claymorphism, clay, 3D, plastic, pastel, soft shadows, rounded, playful, toy, fr
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">几何基本形</span><span class="feature-item">红黄蓝三原色</span><span class="feature-item">功能网格</span><span class="feature-item">无装饰</span><span class="feature-item">理性排版</span><span class="feature-item">秩序感</span><span class="feature-item">现代主义</span>
                         </div>
@@ -6123,7 +6143,7 @@ Bauhaus, Swiss design, International Style, constructivism, geometric, primary c
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Memphis</div>
+                        <h2 class="card-title">Memphis</h2>
                         <div class="card-subtitle">80年代复古撞色拼贴</div>
                     </div>
                     <div class="card-tags">
@@ -6132,7 +6152,7 @@ Bauhaus, Swiss design, International Style, constructivism, geometric, primary c
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">碎形几何</span><span class="feature-item">高明度撞色</span><span class="feature-item">反网格</span><span class="feature-item">波点/锯齿</span><span class="feature-item">玩世不恭</span><span class="feature-item">活泼</span><span class="feature-item">复古波普</span>
                         </div>
@@ -6225,7 +6245,7 @@ Memphis Group, 80s, retro, Ettore Sottsass, terrazzo, postmodern, anti-design, c
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Cyberpunk</div>
+                        <h2 class="card-title">Cyberpunk</h2>
                         <div class="card-subtitle">Synthwave · 霓虹未来</div>
                     </div>
                     <div class="card-tags">
@@ -6234,7 +6254,7 @@ Memphis Group, 80s, retro, Ettore Sottsass, terrazzo, postmodern, anti-design, c
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">青紫霓虹</span><span class="feature-item">扫描线</span><span class="feature-item">故障噪点</span><span class="feature-item">全息投影</span><span class="feature-item">等宽字体</span><span class="feature-item">暗黑都市</span><span class="feature-item">黑客感</span>
                         </div>
@@ -6320,7 +6340,7 @@ Cyberpunk, Synthwave, Outrun, Vaporwave, retro-future, neon, CRT scanlines, mage
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Zen</div>
+                        <h2 class="card-title">Zen</h2>
                         <div class="card-subtitle">侘寂 · 留白 · 和色</div>
                     </div>
                     <div class="card-tags">
@@ -6329,7 +6349,7 @@ Cyberpunk, Synthwave, Outrun, Vaporwave, retro-future, neon, CRT scanlines, mage
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">大量留白</span><span class="feature-item">素净底色</span><span class="feature-item">朱砂点睛</span><span class="feature-item">自然材质</span><span class="feature-item">舒缓节奏</span><span class="feature-item">静气</span><span class="feature-item">东方意境</span>
                         </div>
@@ -6419,7 +6439,7 @@ Japanese, Zen, Wabi-sabi, Enso, Ma, hanko, kaiseki, sumi-e, washi paper, vertica
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Skeuomorphism</div>
+                        <h2 class="card-title">Skeuomorphism</h2>
                         <div class="card-subtitle">模仿真实材质 · iOS 6 时代经典</div>
                     </div>
                     <div class="card-tags">
@@ -6428,7 +6448,7 @@ Japanese, Zen, Wabi-sabi, Enso, Ma, hanko, kaiseki, sumi-e, washi paper, vertica
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">真实材质</span><span class="feature-item">拟真光影</span><span class="feature-item">内阴影高光</span><span class="feature-item">纹理细节</span><span class="feature-item">物理隐喻</span><span class="feature-item">温暖触感</span><span class="feature-item">精致拟真</span>
                         </div>
@@ -6529,7 +6549,7 @@ Skeuomorphism, skeuomorphic, iOS 6, leather, wood, brushed metal, stitching, bev
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Bento Grid</div>
+                        <h2 class="card-title">Bento Grid</h2>
                         <div class="card-subtitle">模块化非对称卡片 · Apple 范式</div>
                     </div>
                     <div class="card-tags">
@@ -6538,7 +6558,7 @@ Skeuomorphism, skeuomorphic, iOS 6, leather, wood, brushed metal, stitching, bev
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">模块化卡片</span><span class="feature-item">非对称网格</span><span class="feature-item">圆角分格</span><span class="feature-item">一屏概览</span><span class="feature-item">可组合</span><span class="feature-item">清晰层级</span><span class="feature-item">现代感</span>
                         </div>
@@ -6638,7 +6658,7 @@ Bento Grid, modular, asymmetric, Apple Keynote, Vercel, Linear, Raycast, dashboa
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Editorial</div>
+                        <h2 class="card-title">Editorial</h2>
                         <div class="card-subtitle">印刷感网格排版 · 衬线字体</div>
                     </div>
                     <div class="card-tags">
@@ -6647,7 +6667,7 @@ Bento Grid, modular, asymmetric, Apple Keynote, Vercel, Linear, Raycast, dashboa
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">强字体层级</span><span class="feature-item">衬线标题</span><span class="feature-item">讲究行距</span><span class="feature-item">图文混排</span><span class="feature-item">引文/首字下沉</span><span class="feature-item">叙事节奏</span><span class="feature-item">纸质质感</span>
                         </div>
@@ -6741,7 +6761,7 @@ Editorial, magazine, print, serif, Playfair, Cormorant Garamond, GT Sectra, drop
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Y3K</div>
+                        <h2 class="card-title">Y3K</h2>
                         <div class="card-subtitle">铬金属 · 全息渐变 · 千禧感</div>
                     </div>
                     <div class="card-tags">
@@ -6750,7 +6770,7 @@ Editorial, magazine, print, serif, Playfair, Cormorant Garamond, GT Sectra, drop
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">液态金属</span><span class="feature-item">冷光高光</span><span class="feature-item">非欧几何</span><span class="feature-item">冷色渐变</span><span class="feature-item">未来字体</span><span class="feature-item">异质科技感</span><span class="feature-item">潮流先锋</span>
                         </div>
@@ -6838,7 +6858,7 @@ Y3K, Y2K, retro-futurism, chrome, liquid metal, holographic, iridescent, nebula,
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Scrapbook</div>
+                        <h2 class="card-title">Scrapbook</h2>
                         <div class="card-subtitle">手作纸艺 · 反 AI 真实感</div>
                     </div>
                     <div class="card-tags">
@@ -6847,7 +6867,7 @@ Y3K, Y2K, retro-futurism, chrome, liquid metal, holographic, iridescent, nebula,
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">拼贴纸片</span><span class="feature-item">微旋转</span><span class="feature-item">胶带/回形针</span><span class="feature-item">手写批注</span><span class="feature-item">叠层阴影</span><span class="feature-item">手工温度</span><span class="feature-item">随性感</span>
                         </div>
@@ -6946,7 +6966,7 @@ Scrapbook, anti-design, handmade, washi tape, sticky note, kraft paper, rubber s
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Liquid Glass</div>
+                        <h2 class="card-title">Liquid Glass</h2>
                         <div class="card-subtitle">Apple WWDC 2025 · 下一个十年 iOS 范式</div>
                     </div>
                     <div class="card-tags">
@@ -6955,7 +6975,7 @@ Scrapbook, anti-design, handmade, washi tape, sticky note, kraft paper, rubber s
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">液态折射</span><span class="feature-item">动态高光</span><span class="feature-item">强透视</span><span class="feature-item">流体质感</span><span class="feature-item">通透层次</span><span class="feature-item">随内容流动</span><span class="feature-item">梦幻</span>
                         </div>
@@ -7057,7 +7077,7 @@ Liquid Glass, Apple WWDC 2025, iOS 26, macOS Tahoe, visionOS, material system, r
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Solarpunk</div>
+                        <h2 class="card-title">Solarpunk</h2>
                         <div class="card-subtitle">Cyber 的乐观对立面 · 阳光乌托邦</div>
                     </div>
                     <div class="card-tags">
@@ -7066,7 +7086,7 @@ Liquid Glass, Apple WWDC 2025, iOS 26, macOS Tahoe, visionOS, material system, r
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">自然与科技共生</span><span class="feature-item">暖金青绿</span><span class="feature-item">有机曲线</span><span class="feature-item">植物元素</span><span class="feature-item">乐观希望</span><span class="feature-item">可持续叙事</span><span class="feature-item">明亮生机</span>
                         </div>
@@ -7173,7 +7193,7 @@ Solarpunk, post-cyberpunk, climate optimism, sustainability, vertical garden, so
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Frutiger Aero</div>
+                        <h2 class="card-title">Frutiger Aero</h2>
                         <div class="card-subtitle">2003-2013 Vista 复刻 · TikTok 怀旧大爆发</div>
                     </div>
                     <div class="card-tags">
@@ -7182,7 +7202,7 @@ Solarpunk, post-cyberpunk, climate optimism, sustainability, vertical garden, so
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">清透蓝绿</span><span class="feature-item">水感光泽</span><span class="feature-item">玻璃高光</span><span class="feature-item">自然意象</span><span class="feature-item">无衬线字体</span><span class="feature-item">千禧乐观</span><span class="feature-item">怀旧清新</span>
                         </div>
@@ -7307,7 +7327,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Linear 深色 SaaS</div>
+                        <h2 class="card-title">Linear 深色 SaaS</h2>
                         <div class="card-subtitle">Linear Dark</div>
                     </div>
                     <div class="card-tags">
@@ -7316,7 +7336,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">近黑底</span><span class="feature-item">高密度表格</span><span class="feature-item">单一强调色</span><span class="feature-item">命令面板</span><span class="feature-item">细线分隔</span><span class="feature-item">短促动效</span><span class="feature-item">键盘优先</span>
                         </div>
@@ -7357,7 +7377,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Vaporwave 蒸汽波</div>
+                        <h2 class="card-title">Vaporwave 蒸汽波</h2>
                         <div class="card-subtitle">Vaporwave</div>
                     </div>
                     <div class="card-tags">
@@ -7366,7 +7386,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">粉紫渐变</span><span class="feature-item">霓虹网格地板</span><span class="feature-item">扫描线落日</span><span class="feature-item">色差故障</span><span class="feature-item">等宽标题</span><span class="feature-item">超现实怀旧</span>
                         </div>
@@ -7409,7 +7429,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">终端/命令行</div>
+                        <h2 class="card-title">终端/命令行</h2>
                         <div class="card-subtitle">Terminal CLI</div>
                     </div>
                     <div class="card-tags">
@@ -7418,7 +7438,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">等宽字体</span><span class="feature-item">光标闪烁</span><span class="feature-item">命令历史</span><span class="feature-item">荧光强调</span><span class="feature-item">纯文本层级</span><span class="feature-item">无圆角</span><span class="feature-item">键盘优先</span>
                         </div>
@@ -7461,7 +7481,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">空间界面</div>
+                        <h2 class="card-title">空间界面</h2>
                         <div class="card-subtitle">Spatial / visionOS</div>
                     </div>
                     <div class="card-tags">
@@ -7470,7 +7490,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">悬浮玻璃面板</span><span class="feature-item">深度与视差</span><span class="feature-item">环境反射</span><span class="feature-item">顶部高光</span><span class="feature-item">大圆角</span><span class="feature-item">大间距</span><span class="feature-item">沉静氛围</span>
                         </div>
@@ -7513,7 +7533,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Aurora 极光渐变</div>
+                        <h2 class="card-title">Aurora 极光渐变</h2>
                         <div class="card-subtitle">Aurora Gradient</div>
                     </div>
                     <div class="card-tags">
@@ -7522,7 +7542,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">流体光斑</span><span class="feature-item">柔和多色渐变</span><span class="feature-item">深色画布</span><span class="feature-item">文字衬底</span><span class="feature-item">缓慢漂移</span><span class="feature-item">大留白</span><span class="feature-item">高级氛围</span>
                         </div>
@@ -7567,7 +7587,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Art Deco 装饰艺术</div>
+                        <h2 class="card-title">Art Deco 装饰艺术</h2>
                         <div class="card-subtitle">Art Deco</div>
                     </div>
                     <div class="card-tags">
@@ -7576,7 +7596,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">金黑配色</span><span class="feature-item">扇形放射纹</span><span class="feature-item">细金线几何</span><span class="feature-item">对称构图</span><span class="feature-item">衬线标题</span><span class="feature-item">宽阔字距</span>
                         </div>
@@ -7625,7 +7645,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">AI 原生界面</div>
+                        <h2 class="card-title">AI 原生界面</h2>
                         <div class="card-subtitle">AI-Native / Copilot</div>
                     </div>
                     <div class="card-tags">
@@ -7634,7 +7654,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">对话优先</span><span class="feature-item">流式逐字输出</span><span class="feature-item">建议式操作芯片</span><span class="feature-item">内联辅助</span><span class="feature-item">来源标注</span><span class="feature-item">紫蓝强调</span><span class="feature-item">暂停/重播</span>
                         </div>
@@ -7683,7 +7703,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">复古桌面系统</div>
+                        <h2 class="card-title">复古桌面系统</h2>
                         <div class="card-subtitle">Retro macOS / Win95</div>
                     </div>
                     <div class="card-tags">
@@ -7692,7 +7712,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">窗口标题栏</span><span class="feature-item">3D 凸起边框</span><span class="feature-item">像素字体</span><span class="feature-item">灰白配色</span><span class="feature-item">彩色标题渐变</span><span class="feature-item">硬边阴影</span>
                         </div>
@@ -7740,7 +7760,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">8-bit 像素</div>
+                        <h2 class="card-title">8-bit 像素</h2>
                         <div class="card-subtitle">8-bit Pixel Art</div>
                     </div>
                     <div class="card-tags">
@@ -7749,7 +7769,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">有限色板</span><span class="feature-item">点阵字体</span><span class="feature-item">硬边像素</span><span class="feature-item">无抗锯齿</span><span class="feature-item">HUD 血条</span><span class="feature-item">复古游戏机</span>
                         </div>
@@ -7796,7 +7816,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">新中式/国潮</div>
+                        <h2 class="card-title">新中式/国潮</h2>
                         <div class="card-subtitle">Neo-Chinese</div>
                     </div>
                     <div class="card-tags">
@@ -7805,7 +7825,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">朱砂与黛蓝</span><span class="feature-item">宣纸米白</span><span class="feature-item">印章元素</span><span class="feature-item">衬线标题</span><span class="feature-item">现代留白</span><span class="feature-item">横竖对比</span>
                         </div>
@@ -7854,7 +7874,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">健康穿戴</div>
+                        <h2 class="card-title">健康穿戴</h2>
                         <div class="card-subtitle">Health Wearable</div>
                     </div>
                     <div class="card-tags">
@@ -7863,7 +7883,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">圆环进度</span><span class="feature-item">大数字</span><span class="feature-item">深色护眼</span><span class="feature-item">平静动效</span><span class="feature-item">隐私状态提示</span><span class="feature-item">高对比</span>
                         </div>
@@ -7910,7 +7930,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">电子墨水</div>
+                        <h2 class="card-title">电子墨水</h2>
                         <div class="card-subtitle">E-ink / Low-power</div>
                     </div>
                     <div class="card-tags">
@@ -7919,7 +7939,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">灰度层级</span><span class="feature-item">零动画</span><span class="feature-item">衬线正文</span><span class="feature-item">低对比柔和</span><span class="feature-item">阅读优先</span><span class="feature-item">极简装饰</span>
                         </div>
@@ -7963,7 +7983,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">适老化设计</div>
+                        <h2 class="card-title">适老化设计</h2>
                         <div class="card-subtitle">Senior Friendly</div>
                     </div>
                     <div class="card-tags">
@@ -7972,7 +7992,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">大字号正文</span><span class="feature-item">高对比</span><span class="feature-item">动词化按钮</span><span class="feature-item">超大触控区</span><span class="feature-item">低信息密度</span><span class="feature-item">明确反馈</span>
                         </div>
@@ -8015,7 +8035,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">全息镭射</div>
+                        <h2 class="card-title">全息镭射</h2>
                         <div class="card-subtitle">Holographic</div>
                     </div>
                     <div class="card-tags">
@@ -8024,7 +8044,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">虹彩渐变</span><span class="feature-item">金属光泽</span><span class="feature-item">角度变色</span><span class="feature-item">深色衬底</span><span class="feature-item">文字兜底层</span><span class="feature-item">限量感</span>
                         </div>
@@ -8068,7 +8088,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">奢侈品电商</div>
+                        <h2 class="card-title">奢侈品电商</h2>
                         <div class="card-subtitle">E-commerce Luxury</div>
                     </div>
                     <div class="card-tags">
@@ -8077,7 +8097,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">画廊级留白</span><span class="feature-item">优雅衬线</span><span class="feature-item">克制动效</span><span class="feature-item">中性色系</span><span class="feature-item">大图优先</span><span class="feature-item">低调价格</span>
                         </div>
@@ -8122,7 +8142,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">平静科技</div>
+                        <h2 class="card-title">平静科技</h2>
                         <div class="card-subtitle">Calm Technology</div>
                     </div>
                     <div class="card-tags">
@@ -8131,7 +8151,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">低打扰</span><span class="feature-item">边缘化呈现</span><span class="feature-item">只显必要变化</span><span class="feature-item">柔和色调</span><span class="feature-item">慢节奏</span><span class="feature-item">环境感知</span>
                         </div>
@@ -8178,7 +8198,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Ant Design</div>
+                        <h2 class="card-title">Ant Design</h2>
                         <div class="card-subtitle">中后台事实标准 · 蚂蚁集团 · 6px 圆角</div>
                     </div>
                     <div class="card-tags">
@@ -8187,7 +8207,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">6px 统一圆角</span><span class="feature-item">8px 栅格基线</span><span class="feature-item">语义色阶（成功/警告/危险/信息）</span><span class="feature-item">默认 32px 控件高度</span><span class="feature-item">表单校验与错误态明确</span><span class="feature-item">反馈有确定性</span>
                         </div>
@@ -8237,7 +8257,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Arco Design</div>
+                        <h2 class="card-title">Arco Design</h2>
                         <div class="card-subtitle">字节内部沉淀 · 2px 锐角 · 数据密集</div>
                     </div>
                     <div class="card-tags">
@@ -8246,7 +8266,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">2px 锐角圆角</span><span class="feature-item">完整 Design Token 体系</span><span class="feature-item">10 色语义色板</span><span class="feature-item">紧凑型数据表格</span><span class="feature-item">同源支持 React 与 Vue</span><span class="feature-item">可整体换肤</span>
                         </div>
@@ -8295,7 +8315,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">TDesign</div>
+                        <h2 class="card-title">TDesign</h2>
                         <div class="card-subtitle">腾讯多端一致 · 3px 圆角 · 克制</div>
                     </div>
                     <div class="card-tags">
@@ -8304,7 +8324,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">3px 圆角</span><span class="feature-item">桌面与移动同一套语言</span><span class="feature-item">偏灰的文字层级</span><span class="feature-item">组件覆盖面广</span><span class="feature-item">长时间使用不疲劳</span><span class="feature-item">暗色模式成套</span>
                         </div>
@@ -8351,7 +8371,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">Element Plus</div>
+                        <h2 class="card-title">Element Plus</h2>
                         <div class="card-subtitle">Vue 生态最常见后台皮肤 · 4px 软圆角</div>
                     </div>
                     <div class="card-tags">
@@ -8360,7 +8380,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">4px 软圆角</span><span class="feature-item">浅灰描边输入框</span><span class="feature-item">Vue 3 生态原生</span><span class="feature-item">组件默认值克制</span><span class="feature-item">主题变量可覆写</span><span class="feature-item">中后台开箱可用</span>
                         </div>
@@ -8405,7 +8425,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">GOV.UK 设计系统</div>
+                        <h2 class="card-title">GOV.UK 设计系统</h2>
                         <div class="card-subtitle">英国政府服务标准 · 无障碍标杆 · 零装饰</div>
                     </div>
                     <div class="card-tags">
@@ -8414,7 +8434,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">全直角零圆角</span><span class="feature-item">零阴影零装饰</span><span class="feature-item">3px 黄色焦点框</span><span class="feature-item">粗下划线链接</span><span class="feature-item">句子式大小写文案</span><span class="feature-item">WCAG 2.2 AA 强制</span>
                         </div>
@@ -8461,7 +8481,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-header">
                     <div>
-                        <div class="card-title">IBM Carbon</div>
+                        <h2 class="card-title">IBM Carbon</h2>
                         <div class="card-subtitle">IBM 企业级 · 零圆角 · 以边框分层</div>
                     </div>
                     <div class="card-tags">
@@ -8470,7 +8490,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                 </div>
                 <div class="card-body">
                     <div class="card-features">
-                        <h4>设计特点</h4>
+                        <h3 class="card-features-title">设计特点</h3>
                         <div class="feature-list">
                             <span class="feature-item">零圆角</span><span class="feature-item">以边框与色阶分层</span><span class="feature-item">不用投影</span><span class="feature-item">110ms 极短动效</span><span class="feature-item">双主题（White/Gray 10/90）</span><span class="feature-item">高密度数据表</span>
                         </div>
@@ -8585,7 +8605,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
     </div>
 
     <!-- Toast -->
-    <div class="toast" id="toast">已复制到剪贴板</div>
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">已复制到剪贴板</div>
 
     <script type="module" src="assets/app.js"></script>
 <script src="_lab/boot.js"></script></body>

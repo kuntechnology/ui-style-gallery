@@ -729,11 +729,13 @@ function copyPrompt(id) {
             btn.innerHTML = '✓ 已复制';
             setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '📋 复制提示词'; }, 2000);
         }
-    });
+    }).catch(() => showToast('复制失败，请检查浏览器剪贴板权限'));
 }
 
 function copyModalPrompt() {
-    navigator.clipboard.writeText(currentModalPrompt).then(() => showToast('完整提示词已复制到剪贴板', 'success'));
+    navigator.clipboard.writeText(currentModalPrompt)
+        .then(() => showToast('完整提示词已复制到剪贴板', 'success'))
+        .catch(() => showToast('复制失败，请检查浏览器剪贴板权限'));
 }
 
 /* ============================================================
@@ -795,7 +797,9 @@ function setupClipboard() {
             if (!id) return;
             if (btn.dataset.action === 'copy-one') {
                 const s = getStyle(id);
-                if (s) navigator.clipboard.writeText(s.aiPrompt || '').then(() => showToast('已复制 · ' + s.name, 'success'));
+                if (s) navigator.clipboard.writeText(s.aiPrompt || '')
+                    .then(() => showToast('已复制 · ' + s.name, 'success'))
+                    .catch(() => showToast('复制失败，请检查浏览器剪贴板权限'));
             } else if (btn.dataset.action === 'remove-one') {
                 removeFromClipboard(id);
             }
