@@ -27,5 +27,11 @@ export const SUBTITLES = {
   "scrapbook": "手作纸艺 · 反 AI 真实感",
   "liquid": "Apple WWDC 2025 · 下一个十年 iOS 范式",
   "solarpunk": "Cyber 的乐观对立面 · 阳光乌托邦",
-  "frutiger": "2003-2013 Vista 复刻 · TikTok 怀旧大爆发"
+  "frutiger": "2003-2013 Vista 复刻 · TikTok 怀旧大爆发",
+  "ant-design": "中后台事实标准 · 蚂蚁集团 · 6px 圆角",
+  "arco-design": "字节内部沉淀 · 2px 锐角 · 数据密集",
+  "tdesign": "腾讯多端一致 · 3px 圆角 · 克制",
+  "element-plus": "Vue 生态最常见后台皮肤 · 4px 软圆角",
+  "govuk": "英国政府服务标准 · 无障碍标杆 · 零装饰",
+  "carbon": "IBM 企业级 · 零圆角 · 以边框分层"
 };

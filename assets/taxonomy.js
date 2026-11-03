@@ -58,4 +58,12 @@ export const TAXONOMY = {
   holographic:       { paradigm: 'other',      tone: 'dark',  scenes: ['social', 'ecommerce'] },
   'luxury-ecommerce':{ paradigm: 'editorial',  tone: 'light', scenes: ['ecommerce'] },
   'calm-tech':       { paradigm: 'flat',       tone: 'muted', scenes: ['tool', 'social'] },
+
+  // ---- P3 · B 端设计系统族（企业级中后台，范式统一为扁平、浅色）----
+  'ant-design':      { paradigm: 'flat',       tone: 'light', scenes: ['saas', 'tool'] },
+  'arco-design':     { paradigm: 'flat',       tone: 'light', scenes: ['saas', 'tool'] },
+  tdesign:           { paradigm: 'flat',       tone: 'light', scenes: ['saas', 'tool'] },
+  'element-plus':    { paradigm: 'flat',       tone: 'light', scenes: ['saas', 'tool'] },
+  govuk:             { paradigm: 'flat',       tone: 'light', scenes: ['tool', 'finance'] },
+  carbon:            { paradigm: 'flat',       tone: 'light', scenes: ['saas', 'tool'] },
 };

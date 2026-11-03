@@ -62,9 +62,9 @@ const UI = globalThis.window.UI_GALLERY;
 
 /* ---------- 1. 数据完整性 ---------- */
 console.log('\n[1] 数据完整性');
-const TOTAL = 44;
+const TOTAL = 50;
 ok('STYLES 数量为 ' + TOTAL, UI.STYLES.length === TOTAL, '实际 ' + UI.STYLES.length);
-ok('新增（isNew）风格数为 16', UI.STYLES.filter((s) => s.isNew).length === 16, '实际 ' + UI.STYLES.filter((s) => s.isNew).length);
+ok('新增（isNew）风格数为 22', UI.STYLES.filter((s) => s.isNew).length === 22, '实际 ' + UI.STYLES.filter((s) => s.isNew).length);
 const REQUIRED = ['id','name','nameEn','era','category','tags','summary','description','features','tokens','bestFor','avoidFor','a11yNote','aiPrompt','demo','isNew','paradigm','tone','scenes'];
 ok('所有风格必备字段齐备', UI.STYLES.every((s) => REQUIRED.every((k) => s[k] !== undefined)));
 ok('id 唯一', new Set(UI.STYLES.map((s) => s.id)).size === UI.STYLES.length);

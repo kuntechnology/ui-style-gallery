@@ -211,5 +211,92 @@ export const EXTRA_PREVIEWS = {
       </div>
       <div style="font-size:10px;color:#8A8A8A;margin-top:2px;">仅在状态变化时提示，其余保持沉默</div>
     </div>`,
+
+  // R. Ant Design · 企业级中后台
+  'preview-ant-design': `
+    <div style="position:absolute;inset:0;background:#F5F5F5;padding:11px;box-sizing:border-box;">
+      <div style="background:#fff;border-radius:6px;padding:11px 12px;box-shadow:0 6px 16px rgba(0,0,0,.08);height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:12.5px;font-weight:600;color:#1F1F1F;">新建工单</div>
+        <div style="border:1px solid #D9D9D9;border-radius:6px;padding:5px 8px;font-size:11px;color:#8C8C8C;">请输入工单标题</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:auto;">
+          <span style="background:#1677FF;color:#fff;border-radius:6px;padding:4px 13px;font-size:11px;">提交</span>
+          <span style="border:1px solid #D9D9D9;border-radius:6px;padding:3px 10px;font-size:11px;color:#1F1F1F;">取消</span>
+          <span style="margin-left:auto;background:#F6FFED;border:1px solid #B7EB8F;color:#389E0D;border-radius:6px;padding:2px 7px;font-size:10px;">已通过</span>
+        </div>
+      </div>
+    </div>`,
+
+  // S. Arco Design · 2px 锐角数据台
+  'preview-arco-design': `
+    <div style="position:absolute;inset:0;background:#fff;display:flex;">
+      <div style="width:54px;background:#F7F8FA;border-right:1px solid #E5E6EB;padding:10px 7px;display:flex;flex-direction:column;gap:7px;">
+        <div style="height:5px;border-radius:2px;background:#165DFF;"></div>
+        <div style="height:5px;border-radius:2px;background:#E5E6EB;"></div>
+        <div style="height:5px;border-radius:2px;background:#E5E6EB;"></div>
+      </div>
+      <div style="flex:1;padding:10px 11px;display:flex;flex-direction:column;gap:7px;">
+        <div style="font-size:11px;font-weight:600;color:#1D2129;">任务列表</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#86909C;border-bottom:1px solid #E5E6EB;padding-bottom:4px;"><span>名称</span><span>状态</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#1D2129;"><span>灰度发布</span><span style="color:#00B42A;">完成</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#1D2129;"><span>容量评估</span><span style="color:#FF7D00;">进行中</span></div>
+        <div style="margin-top:auto;background:#165DFF;color:#fff;border-radius:2px;padding:4px 0;text-align:center;font-size:10.5px;">新建任务</div>
+      </div>
+    </div>`,
+
+  // T. TDesign · 3px 克制多端
+  'preview-tdesign': `
+    <div style="position:absolute;inset:0;background:#fff;padding:11px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;">
+      <div style="display:flex;gap:14px;font-size:11px;border-bottom:1px solid #E7E7E7;padding-bottom:6px;">
+        <span style="color:#0052D9;font-weight:600;border-bottom:2px solid #0052D9;padding-bottom:6px;margin-bottom:-7px;">基础设置</span>
+        <span style="color:#666666;">高级</span>
+      </div>
+      <div style="font-size:10px;color:#666666;">应用名称</div>
+      <div style="border:1px solid #DCDCDC;border-radius:3px;padding:5px 8px;font-size:11px;color:#1A1A1A;">数据同步服务</div>
+      <div style="display:flex;align-items:center;gap:7px;margin-top:auto;">
+        <span style="background:#0052D9;color:#fff;border-radius:3px;padding:4px 13px;font-size:11px;">保存</span>
+        <span style="border:1px solid #DCDCDC;border-radius:3px;padding:3px 10px;font-size:11px;color:#1A1A1A;">重置</span>
+        <span style="margin-left:auto;color:#00A870;font-size:10px;">● 运行中</span>
+      </div>
+    </div>`,
+
+  // U. Element Plus · 4px 软圆角
+  'preview-element-plus': `
+    <div style="position:absolute;inset:0;background:#F5F7FA;padding:11px;box-sizing:border-box;">
+      <div style="background:#fff;border-radius:4px;padding:12px;box-shadow:0 4px 12px rgba(0,0,0,.12);height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:12.5px;font-weight:600;color:#303133;">账号信息</div>
+        <div style="border:1px solid #DCDFE6;border-radius:4px;padding:5px 9px;font-size:11px;color:#A8ABB2;">admin@example.com</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:auto;">
+          <span style="background:#409EFF;color:#fff;border-radius:4px;padding:4px 13px;font-size:11px;">确定</span>
+          <span style="border:1px solid #DCDFE6;border-radius:4px;padding:3px 10px;font-size:11px;color:#606266;">取消</span>
+          <span style="margin-left:auto;background:#F0F9EB;border:1px solid #E1F3D8;color:#67C23A;border-radius:4px;padding:2px 7px;font-size:10px;">成功</span>
+        </div>
+      </div>
+    </div>`,
+
+  // V. GOV.UK · 零装饰公共服务
+  'preview-govuk': `
+    <div style="position:absolute;inset:0;background:#fff;padding:12px 13px;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;">
+      <div style="background:#0B0C0C;color:#fff;font-size:10.5px;font-weight:600;padding:4px 8px;">GOV.UK</div>
+      <div style="font-size:12px;font-weight:700;color:#0B0C0C;line-height:1.35;">申请补发驾驶执照</div>
+      <div style="font-size:10px;color:#0B0C0C;border:1px solid #0B0C0C;padding:3px 6px;">只填写当前有效的证件号码</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:auto;">
+        <span style="background:#00703C;color:#fff;font-size:11px;padding:5px 12px;border-bottom:2px solid #002D18;align-self:flex-start;">继续</span>
+        <span style="font-size:10px;color:#1D70B8;text-decoration:underline;text-decoration-thickness:2px;">返回上一步</span>
+      </div>
+    </div>`,
+
+  // W. IBM Carbon · 零圆角边框分层
+  'preview-carbon': `
+    <div style="position:absolute;inset:0;background:#fff;border:1px solid #E0E0E0;box-sizing:border-box;display:flex;flex-direction:column;">
+      <div style="background:#F4F4F4;border-bottom:1px solid #E0E0E0;padding:6px 10px;font-size:10.5px;font-weight:600;color:#161616;display:flex;justify-content:space-between;">
+        <span>资源清单</span><span style="color:#525252;">12 项</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid #E0E0E0;font-size:10px;color:#161616;"><span>compute-01</span><span style="color:#24A148;">运行中</span></div>
+      <div style="display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid #E0E0E0;font-size:10px;color:#161616;"><span>storage-07</span><span style="color:#525252;">空闲</span></div>
+      <div style="margin-top:auto;padding:9px 10px;display:flex;gap:7px;">
+        <span style="background:#0F62FE;color:#fff;padding:4px 12px;font-size:10.5px;">创建</span>
+        <span style="border:1px solid #8D8D8D;padding:3px 11px;font-size:10.5px;color:#161616;">导出</span>
+      </div>
+    </div>`,
 };
 
