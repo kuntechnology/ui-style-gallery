@@ -1,0 +1,34 @@
+name: Quality Gate
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-gate
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: 自检 + 静态预渲染一致性
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 运行自检（数据 / 筛选 / 排序 / tokens）
+        run: node tools/selftest.mjs
+
+      - name: 校验静态预渲染为最新（防止忘记重跑构建）
+        run: |
+          node tools/render-static.mjs
+          if ! git diff --exit-code -- index.html; then
+            echo "::error::index.html 与预渲染结果不一致，请在本地运行 node tools/render-static.mjs 后一并提交"
+            exit 1
+          fi
