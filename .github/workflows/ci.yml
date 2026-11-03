@@ -25,6 +25,9 @@ jobs:
       - name: 运行自检（数据 / 筛选 / 排序 / tokens）
         run: node tools/selftest.mjs
 
+      - name: 校验文字对比度（WCAG AA 4.5:1）
+        run: node tools/contrast.mjs
+
       - name: 校验静态预渲染为最新（防止忘记重跑构建）
         run: |
           node tools/render-static.mjs
