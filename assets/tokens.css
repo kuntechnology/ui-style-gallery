@@ -20,6 +20,16 @@
     /* ---- 强调色（用于分类角标 / 焦点环） ---- */
     --accent: #ec4899;
 
+    /* ---- 字体栈（系统字体，零网络请求） ----
+       顺序有讲究：system-ui 打头，让拉丁字符先被系统 UI 字体（SF Pro / Segoe UI /
+       HarmonyOS Sans）接管，汉字再逐级回落到 PingFang / MiSans / 雅黑 / Noto CJK。
+       若把 "PingFang SC" 放在最前，macOS 上的英文也会走苹方（拉丁字形偏窄偏平），是常见错误。
+       仅在此处定义一次；index.html 的内联 :root 不得重复定义同名变量。 */
+    --font-sans: system-ui, -apple-system, "Segoe UI Variable Text", "Segoe UI",
+        "PingFang SC", "Hiragino Sans GB", "MiSans", "HarmonyOS Sans SC",
+        "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans CJK SC",
+        "Source Han Sans SC", sans-serif;
+
     /* ---- 模糊尺度（毛玻璃 / 霓虹柔光） ---- */
     --blur-none: 0px;
     --blur-sm: 4px;

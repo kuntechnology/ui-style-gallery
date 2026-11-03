@@ -28,43 +28,11 @@
     <meta name="theme-color" content="#E0E5EC" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#1A1F2E" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://kuntechnology.github.io/ui-style-gallery/">
-    <!-- 字体：优先使用官方 CN 域（降低跨境时延）。若显示失败，可一键切回 .com 域 -->
-    <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- 字体源：优先 .cn（大陆更快）→ 失败自动回退 .com → 再失败使用系统字体栈 -->
-    <script>
-    (function () {
-        var Q = 'css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap';
-        var ORDER = ['https://fonts.googleapis.cn/' + Q, 'https://fonts.googleapis.com/' + Q];
-        var idx = 0;
-        function applied() {
-            try {
-                return document.fonts && document.fonts.check('16px "Noto Sans SC"') && document.fonts.check('16px Inter');
-            } catch (e) { return true; }
-        }
-        function load() {
-            if (idx >= ORDER.length) { document.documentElement.setAttribute('data-font', 'fallback'); return; }
-            var url = ORDER[idx++];
-            var link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = url;
-            link.onload = function () {
-                document.documentElement.setAttribute('data-font', url.indexOf('.cn/') > -1 ? 'cn' : 'com');
-                setTimeout(function () {
-                    if (!applied() && idx < ORDER.length) {
-                        if (link.parentNode) link.parentNode.removeChild(link);
-                        load();
-                    }
-                }, 2500);
-            };
-            link.onerror = load;
-            document.head.appendChild(link);
-        }
-        load();
-    })();
-    </script>
+    <!-- 字体：已移除 Google Fonts webfont（Inter + Noto Sans SC）。
+         实测其 CSS 单文件 464KB / gzip 125KB / 439 条 @font-face，是首屏最大的一笔开销，
+         之后还要再拉 Noto Sans SC 四个字重的子集；而本站 99% 是中文，系统栈观感几乎无损。
+         现改用系统字体栈（见 assets/tokens.css 的 --font-sans），零网络请求、无 FOUT。
+         回滚：git revert；原 .cn → .com 自动回退加载器见该提交的父版本。 -->
     <style>
         /* ==================== CSS Variables (Neumorphism) ==================== */
         :root {
@@ -74,6 +42,12 @@
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
+            /* 文字级语义色：仅供小字（分类标签等）使用，均已实测在 --neu-bg 上 ≥4.5:1。
+               上面那组鲜亮语义色只可用于圆点/边框等装饰，直接当文字色会不达标。 */
+            --primary-ink: #4338ca; /* 6.24:1 */
+            --success-ink: #065f46; /* 6.07:1 */
+            --warning-ink: #92400e; /* 5.60:1 */
+            --accent-ink: #be185d;  /* 4.77:1 */
             --neu-bg: #E0E5EC;
             --neu-bg-light: #E8EDF4;
             --neu-bg-dark: #D1D9E6;
@@ -83,7 +57,7 @@
             --bg-secondary: #E8EDF4;
             --bg-tertiary: #D6DCE6;
             --text-primary: #4A5568;
-            --text-secondary: #4F5868; /* 5.66:1 on #E0E5EC（原 #6B7A8F 仅 3.45:1） */
+            --text-secondary: #525C6E; /* 5.33:1 on #E0E5EC（原 #6B7A8F 仅 3.45:1） */
             --text-tertiary: #5A6577; /* 4.66:1 on #E0E5EC（原 #6F7B92 仅 3.37:1，旧注释声称达标是错的） */
             --border: #C8D1DE;
             --shadow-sm: 3px 3px 6px var(--neu-shadow-dark), -3px -3px 6px var(--neu-shadow-light);
@@ -116,6 +90,11 @@
             --text-secondary: #B8C2D1;
             --text-tertiary: #8893A8;
             --border: #353C4D;
+            /* 暗色下的文字级语义色（在 --neu-bg #1A1F2E 上均 ≥8:1） */
+            --primary-ink: #a5b4fc;
+            --success-ink: #6ee7b7;
+            --warning-ink: #fcd34d;
+            --accent-ink: #f9a8d4;
         }
 
         [data-theme="dark"] body::before {
@@ -185,7 +164,7 @@
         }
 
         body {
-            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+            font-family: var(--font-sans, system-ui, sans-serif);
             background: var(--neu-bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -892,25 +871,25 @@
 
         .tag-mainstream {
             background: var(--neu-bg);
-            color: var(--primary);
+            color: var(--primary-ink);
             box-shadow: var(--shadow-inset-sm);
         }
 
         .tag-industry {
             background: var(--neu-bg);
-            color: var(--success);
+            color: var(--success-ink);
             box-shadow: var(--shadow-inset-sm);
         }
 
         .tag-culture {
             background: var(--neu-bg);
-            color: var(--warning);
+            color: var(--warning-ink);
             box-shadow: var(--shadow-inset-sm);
         }
 
         .tag-creative {
             background: var(--neu-bg);
-            color: var(--accent);
+            color: var(--accent-ink);
             box-shadow: var(--shadow-inset-sm);
         }
 
@@ -3602,6 +3581,11 @@
         /* ============================================================
            P1 新增组件：筛选 / 排序 / 对比 / 列表视图 / Tokens 可视化
            ============================================================ */
+        /* 计数用等宽数字：换系统字体后，比例数字会让筛选时的数值左右跳动 */
+        .results-info strong {
+            font-variant-numeric: tabular-nums;
+            color: var(--text-primary);
+        }
         :root { --focus-ring: #2563eb; }
         :focus-visible {
             outline: 3px solid var(--focus-ring);

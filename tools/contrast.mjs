@@ -84,6 +84,16 @@ const TEXT_ROLES = [
     { key: 'text-tertiary', label: '三级文字', min: 4.5 },
 ];
 
+// 分类标签：小字号文字，背景是 --neu-bg 而非 --bg-primary，必须单独校验。
+// 鲜亮的语义色（--primary/--success/--warning/--accent）实测在浅底只有 1.70~3.53:1，
+// 只能用于圆点/边框，文字必须走对应的 -ink 变体。
+const TAG_ROLES = [
+    { key: 'primary-ink', label: '主流标签' },
+    { key: 'success-ink', label: '行业标签' },
+    { key: 'warning-ink', label: '文化标签' },
+    { key: 'accent-ink', label: '创意标签' },
+];
+
 let failures = 0;
 const warnings = [];
 
@@ -111,6 +121,21 @@ for (const theme of themes) {
         if (ok && role.target && ratio < role.target) {
             warnings.push(`${theme.name}/${role.label} ${ratio.toFixed(2)} 低于理想值 ${role.target}`);
         }
+    }
+
+    const tagBg = theme.tokens['neu-bg'] || bg;
+    console.log(`  标签文字（背景 --neu-bg ${tagBg}）`);
+    for (const role of TAG_ROLES) {
+        const fg = theme.tokens[role.key];
+        if (!fg) {
+            failures += 1;
+            console.log(`  ${role.label.padEnd(10)} —         缺失     ✗ 未定义 --${role.key}`);
+            continue;
+        }
+        const ratio = contrast(fg, tagBg);
+        const ok = ratio != null && ratio >= 4.5;
+        if (!ok) failures += 1;
+        console.log(`  ${role.label.padEnd(10)} ${fg}  ${(ratio == null ? 0 : ratio).toFixed(2).padStart(5)}   ${ok ? '✓ AA' : '✗ < 4.5'}`);
     }
 }
 
