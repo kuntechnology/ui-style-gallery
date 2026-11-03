@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   verify:
-    name: 自检 + 静态预渲染一致性
+    name: 自检 + 对比度 + 预渲染一致性
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +25,7 @@ jobs:
       - name: 运行自检（数据 / 筛选 / 排序 / tokens）
         run: node tools/selftest.mjs
 
-      - name: 校验文字对比度（WCAG AA 4.5:1）
+      - name: 校验文字对比度（WCAG AA 4.5:1，明暗两套 token）
         run: node tools/contrast.mjs
 
       - name: 校验静态预渲染为最新（防止忘记重跑构建）
@@ -35,3 +35,59 @@ jobs:
             echo "::error::index.html 与预渲染结果不一致，请在本地运行 node tools/render-static.mjs 后一并提交"
             exit 1
           fi
+
+  a11y:
+    name: axe 无障碍阻断（WCAG 2.0/2.1 A+AA）
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 启动本地静态服务器
+        run: |
+          npx --yes serve . -l 4173 &
+          npx --yes wait-on http://localhost:4173
+
+      # 为什么排除 .card-preview：
+      # 这 50 张卡片里的 mini 界面是「如实复刻各家设计规范」的示意图，
+      # 例如 Ant Design 主按钮 #1677FF 配白字在现实中就是 4.04:1、Element Plus
+      # 是 2.76:1。把它们调到 4.5:1 等于让参考本身失真，而这个站的用途正是对照
+      # 真实规范。这些 mockup 已加 role="img" + aria-label，对辅助技术是图片而非
+      # 文字内容；站点自身的功能 UI（导航、筛选、卡片正文、按钮、弹窗）不排除，
+      # 必须全绿。
+      - name: axe 扫描（critical / serious 阻断）
+        run: |
+          npx --yes @axe-core/cli http://localhost:4173 \
+            --exit \
+            --tags wcag2a,wcag2aa \
+            --exclude ".card-preview"
+
+  lighthouse:
+    name: Lighthouse 报告（不设阈值）
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 启动本地静态服务器
+        run: |
+          npx --yes serve . -l 4173 &
+          npx --yes wait-on http://localhost:4173
+
+      # 阈值写在仓库根的 lighthouserc.json 里（可 review，比一长串 CLI 参数清楚）：
+      #   performance / accessibility = warn（只提示）
+      #   seo / best-practices = error（硬门槛）
+      # 只出报告不把 perf/a11y 设成门槛的原因有二：
+      # 1) Lighthouse 的 a11y 分会把 .card-preview 里如实复刻的第三方配色算进去，
+      #    天然低于 0.95，拿它当门槛等于逼我们改坏参考图；
+      # 2) 性能分在本机能测但无法在仓库里稳定复现，未见基线就先设阈值，
+      #    只会训练大家忽略红灯。
+      # 无障碍的硬门槛由上面的 axe job 承担；等积累几次运行、有了稳定区间再收紧。
+      - name: Lighthouse CI
+        run: npx --yes @lhci/cli@0.14.x autorun

@@ -249,6 +249,9 @@ function openClipboardDrawer() {
     if (drawer) {
         drawer.classList.add('is-open');
         drawer.setAttribute('aria-hidden', 'false');
+        // inert 与 aria-hidden 必须同步：只标 aria-hidden 时，关闭的抽屉里
+        // 那排按钮仍留在 Tab 顺序里，键盘用户会聚焦到"看不见的控件"上
+        drawer.removeAttribute('inert');
     }
 }
 
@@ -259,6 +262,7 @@ function closeClipboardDrawer() {
     if (drawer) {
         drawer.classList.remove('is-open');
         drawer.setAttribute('aria-hidden', 'true');
+        drawer.setAttribute('inert', '');
     }
 }
 

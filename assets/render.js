@@ -41,7 +41,7 @@ export function cardHTML(style) {
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="${escapeHtml(style.name)} 风格界面预览">
                     <div class="${style.demo}">${demoMarkup}</div>
                 </div>
                 <div class="card-header">

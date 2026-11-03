@@ -173,8 +173,8 @@ export const EXTRA_PREVIEWS = {
     <div style="position:absolute;inset:0;background:#FFFFFF;padding:16px;display:flex;flex-direction:column;justify-content:space-between;color:#111111;">
       <div style="font-size:15px;font-weight:700;">早上好，王阿姨</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <button style="font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;border:none;background:#0B57D0;color:#FFFFFF;text-align:left;">👨⚕️ 联系我的医生</button>
-        <button style="font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;background:#FFFFFF;color:#111111;border:2px solid #111111;text-align:left;">💊 查看今天用药</button>
+        <span style="display:block;font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;border:none;background:#0B57D0;color:#FFFFFF;text-align:left;">👨⚕️ 联系我的医生</span>
+        <span style="display:block;font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;background:#FFFFFF;color:#111111;border:2px solid #111111;text-align:left;">💊 查看今天用药</span>
       </div>
       <div style="font-size:13px;color:#444444;">字体可放大至 200% 不横向滚动</div>
     </div>`,

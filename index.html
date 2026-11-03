@@ -348,7 +348,7 @@
 
         .btn-primary {
             background: var(--neu-bg);
-            color: var(--primary);
+            color: var(--primary-ink);
             font-weight: 600;
             box-shadow: var(--shadow-sm);
         }
@@ -676,7 +676,7 @@
         }
 
         .clipboard-action-btn:hover {
-            color: var(--primary);
+            color: var(--primary-ink);
         }
 
         .clipboard-action-btn:active {
@@ -812,7 +812,7 @@
         }
 
         .view-btn.active {
-            color: var(--primary);
+            color: var(--primary-ink);
             box-shadow: var(--shadow-inset-sm);
         }
 
@@ -945,7 +945,7 @@
 
         .feature-item::before {
             content: "•";
-            color: var(--primary);
+            color: var(--primary-ink);
             font-weight: 700;
         }
 
@@ -961,7 +961,7 @@
             flex: 1;
             padding: 0.75rem 1rem;
             background: var(--neu-bg);
-            color: var(--primary);
+            color: var(--primary-ink);
             border: none;
             border-radius: var(--radius-md);
             font-size: 0.875rem;
@@ -984,7 +984,7 @@
         }
 
         .copy-btn.copied {
-            color: var(--success);
+            color: var(--success-ink);
             box-shadow: var(--shadow-inset-sm);
         }
 
@@ -2317,7 +2317,7 @@
             background: transparent;
             border: none;
             border-bottom: 1px dashed currentColor;
-            color: var(--primary);
+            color: var(--primary-ink);
             font: inherit;
             cursor: pointer;
             padding: 0;
@@ -3615,7 +3615,8 @@
         /* ---- 内容区工具条 ---- */
         .content-tools { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .sort-control { display: inline-flex; align-items: center; gap: 8px; }
-        .sort-label { font-size: 13px; opacity: 0.7; }
+        /* 用令牌调深浅，而不是 opacity：opacity 会把文字与背景一起透，实测只有 3.5:1 */
+        .sort-label { font-size: 13px; color: var(--text-secondary); }
         .sort-select {
             min-height: 44px; padding: 0 14px; border-radius: 12px; font-size: 14px;
             border: 1px solid var(--border, rgba(0,0,0,0.12));
@@ -3628,19 +3629,19 @@
             display: inline-flex; align-items: center; gap: 6px;
             min-height: 36px; padding: 0 14px; border: none; border-radius: 9px; cursor: pointer;
             font-size: 13px; font-weight: 500; font-family: inherit;
-            background: transparent; color: inherit; opacity: 0.6;
+            background: transparent; color: var(--text-secondary);
             transition: background-color 0.18s ease, color 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
         }
-        .view-btn:hover { opacity: 0.95; }
-        .view-btn:focus-visible { outline: 2px solid var(--primary, #2563eb); outline-offset: 2px; }
-        .view-btn.active { background: var(--primary, #2563eb); color: #fff; opacity: 1; box-shadow: 0 2px 8px rgba(37,99,235,0.32); }
+        .view-btn:hover { color: var(--text-primary); }
+        .view-btn:focus-visible { outline: 2px solid var(--primary-ink); outline-offset: 2px; }
+        .view-btn.active { background: var(--primary-dark); color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,0.32); }
         .view-btn .view-ico { font-size: 15px; line-height: 1; }
         @media (max-width: 560px) { .view-btn .view-txt { display: none; } .view-btn { padding: 0 12px; } }
 
         /* ---- 多维筛选面板 ---- */
         .filter-panel { margin: 18px 0 8px; display: grid; gap: 12px; }
         .filter-group { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-        .filter-group-label { flex: 0 0 56px; font-size: 13px; font-weight: 600; opacity: 0.7; padding-top: 8px; }
+        .filter-group-label { flex: 0 0 56px; font-size: 13px; font-weight: 600; color: var(--text-secondary); padding-top: 8px; }
         .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
         .chip {
             min-height: 36px; padding: 6px 14px; border-radius: 999px; cursor: pointer;
@@ -3723,7 +3724,7 @@
             font-size: 0.6875rem; padding: 3px 12px; min-height: 26px; border-radius: 999px; cursor: pointer;
             border: 1px solid var(--border, rgba(0,0,0,0.14)); background: transparent; color: inherit;
         }
-        .card-prompt-copy:hover { color: var(--primary); border-color: var(--primary); }
+        .card-prompt-copy:hover { color: var(--primary-ink); border-color: var(--primary-ink); }
         .card-prompt-text {
             margin: 0; flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -4470,7 +4471,7 @@
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Apple/iOS 风格 风格界面预览">
                     <div class="preview-apple">
                 <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:0.75rem 0 1.25rem;">
                     <div class="apple-nav">
@@ -4568,7 +4569,7 @@ iOS, Apple, minimalist, clean, premium, elegant, frosted glass, rounded, SF Pro,
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Material Design 风格界面预览">
                     <div class="preview-material">
                 <div class="material-app-bar">
                     <div class="material-menu"></div>
@@ -4664,7 +4665,7 @@ Material Design, Material You, Google, M3, cards, elevation, dynamic color, acce
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Fluent Design 风格界面预览">
                     <div class="preview-fluent">
                 <div class="fluent-card">
                     <div class="fluent-header">
@@ -4763,7 +4764,7 @@ Fluent, Microsoft, Windows, Acrylic, Reveal, Segoe, modern, depth, motion, cross
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Neumorphism 风格界面预览">
                     <div class="preview-neumorphism">
                 <div class="neu-container">
                     <div class="neu-card neu-card-rich">
@@ -4856,7 +4857,7 @@ Neumorphism, soft UI, new skomorphism, extruded, tactile, soft shadows, minimal,
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Glassmorphism 风格界面预览">
                     <div class="preview-glass">
                 <div class="glass-card">
                     <div class="glass-title">Glassmorphism</div>
@@ -4940,7 +4941,7 @@ Glassmorphism, glass, frosted, blur, transparent, modern, glass effect, depth, l
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Flat Design 风格界面预览">
                     <div class="preview-flat">
                 <div class="flat-card">
                     <div class="flat-card-icon">📋</div>
@@ -5036,7 +5037,7 @@ Flat Design, flat, minimalist, clean, solid colors, no shadows, geometric, simpl
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Gradient Design 风格界面预览">
                     <div class="preview-gradient">
                 <div class="gradient-stack">
                     <div class="gradient-blob gradient-blob-1"></div>
@@ -5125,7 +5126,7 @@ Gradient, gradients, colorful, vibrant, mesh gradient, color transition, modern,
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Brutalism 风格界面预览">
                     <div class="preview-brutal">
                 <div class="brutal-card">
                     <div class="brutal-title">BRUTAL.</div>
@@ -5210,7 +5211,7 @@ Brutalism, brutal, raw, harsh, bold, industrial, web brutalism, unconventional, 
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Minimalism 风格界面预览">
                     <div class="preview-minimal">
                 <div class="minimal-title">LESS</div>
                 <div class="minimal-line"></div>
@@ -5294,7 +5295,7 @@ Minimalism, minimal, clean, white space, ultra minimal, luxury, premium, serene,
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Dark Mode 风格界面预览">
                     <div class="preview-dark">
                 <div class="dark-card">
                     <div class="dark-header">
@@ -5384,7 +5385,7 @@ Dark Mode, dark theme, night mode, dark UI, OLED, black, night-friendly, eye com
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="B2B SaaS 风格界面预览">
                     <div class="preview-saas">
                 <div class="saas-nav">
                     <div class="saas-logo"></div>
@@ -5512,7 +5513,7 @@ SaaS, dashboard, enterprise, B2B, admin panel, data visualization, metrics, KPIs
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Finance 风格界面预览">
                     <div class="preview-finance">
                 <div class="finance-header">
                     <div class="finance-title">资产总览</div>
@@ -5621,7 +5622,7 @@ Finance, banking, fintech, money, secure, trustworthy, professional, data visual
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="E-commerce 风格界面预览">
                     <div class="preview-ecommerce">
                 <div class="ecom-banner">
                     <div class="ecom-banner-text">🎉 限时 5 折  立即抢购</div>
@@ -5731,7 +5732,7 @@ E-commerce, shopping, retail, product, cart, checkout, sale, discount, store, on
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Social Media 风格界面预览">
                     <div class="preview-social">
                 <div class="social-story">
                     <div class="social-story-item"><div class="social-story-inner"></div></div>
@@ -5839,7 +5840,7 @@ Social, social media, community, feed, posts, stories, profile, followers, likes
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Gaming 风格界面预览">
                     <div class="preview-gaming">
                 <div class="gaming-particles">
                     <div class="gaming-particle"></div>
@@ -5942,7 +5943,7 @@ Gaming, game UI, esports, cyberpunk, sci-fi, neon, RGB, futuristic, dark theme, 
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Claymorphism 风格界面预览">
                     <div class="preview-clay">
                 <div class="clay-card">
                     <div class="clay-icon-row">
@@ -6038,7 +6039,7 @@ Claymorphism, clay, 3D, plastic, pastel, soft shadows, rounded, playful, toy, fr
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Bauhaus 风格界面预览">
                     <div class="preview-bauhaus">
                 <div class="bauhaus-stage">
                     <div class="bauhaus-number">01</div>
@@ -6130,7 +6131,7 @@ Bauhaus, Swiss design, International Style, constructivism, geometric, primary c
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Memphis 风格界面预览">
                     <div class="preview-memphis">
                 <div class="memphis-stage">
                     <div class="memphis-dots"></div>
@@ -6230,7 +6231,7 @@ Memphis Group, 80s, retro, Ettore Sottsass, terrazzo, postmodern, anti-design, c
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Cyberpunk 风格界面预览">
                     <div class="preview-cyber">
                 <div class="cyber-grid"></div>
                 <div class="cyber-sun"></div>
@@ -6326,7 +6327,7 @@ Cyberpunk, Synthwave, Outrun, Vaporwave, retro-future, neon, CRT scanlines, mage
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Zen 风格界面预览">
                     <div class="preview-zen">
                 <div class="zen-paper"></div>
                 <div class="zen-mountain"></div>
@@ -6425,7 +6426,7 @@ Japanese, Zen, Wabi-sabi, Enso, Ma, hanko, kaiseki, sumi-e, washi paper, vertica
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Skeuomorphism 风格界面预览">
                     <div class="preview-skeuo">
                 <div class="skeuo-frame">
                     <div class="skeuo-screen">▶ 2:34 / 4:12</div>
@@ -6524,7 +6525,7 @@ Skeuomorphism, skeuomorphic, iOS 6, leather, wood, brushed metal, stitching, bev
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Bento Grid 风格界面预览">
                     <div class="preview-bento">
                 <div class="bento-card bento-card-hero">
                     <span class="bento-tag">Active Users</span>
@@ -6636,7 +6637,7 @@ Bento Grid, modular, asymmetric, Apple Keynote, Vercel, Linear, Raycast, dashboa
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Editorial 风格界面预览">
                     <div class="preview-editorial">
                 <div class="editorial-top">
                     <span class="editorial-vol">Vol. XXVII</span>
@@ -6748,7 +6749,7 @@ Editorial, magazine, print, serif, Playfair, Cormorant Garamond, GT Sectra, drop
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Y3K 风格界面预览">
                     <div class="preview-y3k">
                 <div class="y3k-title">Y3K</div>
                 <div class="y3k-blob"></div>
@@ -6845,7 +6846,7 @@ Y3K, Y2K, retro-futurism, chrome, liquid metal, holographic, iridescent, nebula,
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Scrapbook 风格界面预览">
                     <div class="preview-scrapbook">
                 <div class="scrap-stamp">JUN<br>2026</div>
                 <div class="scrap-note">
@@ -6952,7 +6953,7 @@ Scrapbook, anti-design, handmade, washi tape, sticky note, kraft paper, rubber s
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Liquid Glass 风格界面预览">
                     <div class="preview-liquid">
                 <div class="liquid-bg-photo"></div>
                 <div class="liquid-orb"></div>
@@ -7062,7 +7063,7 @@ Liquid Glass, Apple WWDC 2025, iOS 26, macOS Tahoe, visionOS, material system, r
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Solarpunk 风格界面预览">
                     <div class="preview-solarpunk">
                 <div class="solar-sun"></div>
                 <div class="solar-leaf"></div>
@@ -7180,7 +7181,7 @@ Solarpunk, post-cyberpunk, climate optimism, sustainability, vertical garden, so
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Frutiger Aero 风格界面预览">
                     <div class="preview-frutiger">
                 <div class="aero-bubble aero-bubble-1"></div>
                 <div class="aero-bubble aero-bubble-2"></div>
@@ -7302,7 +7303,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Linear 深色 SaaS 风格界面预览">
                     <div class="preview-linear-dark">
     <div style="position:absolute;inset:0;background:#0B0B0F;color:#E6E6E9;padding:14px;display:flex;flex-direction:column;gap:10px;">
       <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#8B8B94;">
@@ -7367,7 +7368,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Vaporwave 蒸汽波 风格界面预览">
                     <div class="preview-vaporwave">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1A0033 0%,#3B0A5A 55%,#FF6EC7 100%);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;">
       <div style="position:absolute;left:0;right:0;top:50%;height:150px;background-image:linear-gradient(rgba(255,110,199,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,110,199,.6) 1px,transparent 1px);background-size:14px 14px;transform:perspective(120px) rotateX(58deg);transform-origin:top;"></div>
@@ -7417,7 +7418,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="终端/命令行 风格界面预览">
                     <div class="preview-terminal-cli">
     <div style="position:absolute;inset:0;background:#0C0C0C;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.95;color:#D0D0D0;">
       <div><span style="color:#4AF626;">➜</span> <span style="color:#6E6E6E;">~/app</span> npm run build</div>
@@ -7469,7 +7470,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="空间界面 风格界面预览">
                     <div class="preview-spatial">
     <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 28%,#2A2D3A,#0C0D12 70%);display:flex;align-items:center;justify-content:center;">
       <div style="width:74%;padding:16px;border-radius:24px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 50px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.45);color:#EDEFF5;text-align:center;">
@@ -7521,7 +7522,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Aurora 极光渐变 风格界面预览">
                     <div class="preview-aurora">
     <div style="position:absolute;inset:0;background:#0A0A1A;overflow:hidden;">
       <div class="pv-aurora-blob"></div>
@@ -7573,7 +7574,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Art Deco 装饰艺术 风格界面预览">
                     <div class="preview-art-deco">
     <div style="position:absolute;inset:0;background:#0E0E0E;display:flex;align-items:center;justify-content:center;overflow:hidden;">
       <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 130%, rgba(201,162,39,.22) 0deg 3deg, transparent 3deg 9deg);"></div>
@@ -7627,7 +7628,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="AI 原生界面 风格界面预览">
                     <div class="preview-ai-native">
     <div style="position:absolute;inset:0;background:#0D0D12;padding:14px;display:flex;flex-direction:column;justify-content:space-between;color:#EDEDF2;">
       <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#9AA0AE;">
@@ -7685,7 +7686,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="复古桌面系统 风格界面预览">
                     <div class="preview-retro-os">
     <div style="position:absolute;inset:0;background:#008080;padding:14px;display:flex;align-items:flex-start;">
       <div style="width:100%;background:#C0C0C0;border:2px solid #FFFFFF;border-right-color:#808080;border-bottom-color:#808080;box-shadow:1px 1px 0 #000000;font-size:11px;color:#000000;">
@@ -7743,7 +7744,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="8-bit 像素 风格界面预览">
                     <div class="preview-pixel">
     <div style="position:absolute;inset:0;background:#1A1C2C;padding:16px;display:flex;flex-direction:column;justify-content:space-between;font-family:ui-monospace,SFMono-Regular,monospace;">
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.08em;color:#F4F4F4;">
@@ -7800,7 +7801,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="新中式/国潮 风格界面预览">
                     <div class="preview-neo-chinese">
     <div style="position:absolute;inset:0;background:#F5F1E8;padding:16px;display:flex;flex-direction:column;justify-content:space-between;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;">
@@ -7856,7 +7857,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="健康穿戴 风格界面预览">
                     <div class="preview-health-wearable">
     <div style="position:absolute;inset:0;background:#0B1220;padding:16px;display:flex;flex-direction:column;justify-content:space-between;color:#E8EEF9;">
       <div style="font-size:11px;color:#8FA3BF;letter-spacing:.12em;">今日活动</div>
@@ -7914,7 +7915,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="电子墨水 风格界面预览">
                     <div class="preview-eink">
     <div style="position:absolute;inset:0;background:#EDEAE3;padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:#1F1F1F;font-family:Georgia,'Times New Roman',serif;">
       <div style="font-size:11px;letter-spacing:.16em;color:#6B675E;font-family:ui-sans-serif,system-ui;">E-INK · 电子墨水</div>
@@ -7970,13 +7971,13 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="适老化设计 风格界面预览">
                     <div class="preview-senior-friendly">
     <div style="position:absolute;inset:0;background:#FFFFFF;padding:16px;display:flex;flex-direction:column;justify-content:space-between;color:#111111;">
       <div style="font-size:15px;font-weight:700;">早上好，王阿姨</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <button style="font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;border:none;background:#0B57D0;color:#FFFFFF;text-align:left;">👨⚕️ 联系我的医生</button>
-        <button style="font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;background:#FFFFFF;color:#111111;border:2px solid #111111;text-align:left;">💊 查看今天用药</button>
+        <span style="display:block;font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;border:none;background:#0B57D0;color:#FFFFFF;text-align:left;">👨⚕️ 联系我的医生</span>
+        <span style="display:block;font-size:15px;font-weight:700;padding:12px 14px;border-radius:12px;background:#FFFFFF;color:#111111;border:2px solid #111111;text-align:left;">💊 查看今天用药</span>
       </div>
       <div style="font-size:13px;color:#444444;">字体可放大至 200% 不横向滚动</div>
     </div></div>
@@ -8023,7 +8024,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="全息镭射 风格界面预览">
                     <div class="preview-holographic">
     <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0E0B1A,#1B1030);display:flex;align-items:center;justify-content:center;overflow:hidden;">
       <div class="pv-holo"></div>
@@ -8075,7 +8076,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="奢侈品电商 风格界面预览">
                     <div class="preview-luxury-ecommerce">
     <div style="position:absolute;inset:0;background:#FAF8F4;padding:16px;display:flex;flex-direction:column;justify-content:space-between;">
       <div style="font-size:10px;letter-spacing:.3em;color:#8A8378;">M&nbsp;A&nbsp;I&nbsp;S&nbsp;O&nbsp;N</div>
@@ -8128,7 +8129,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="平静科技 风格界面预览">
                     <div class="preview-calm-tech">
     <div style="position:absolute;inset:0;background:#121212;padding:18px;display:flex;flex-direction:column;justify-content:center;gap:15px;color:#E5E5E5;">
       <div style="display:flex;align-items:center;gap:11px;font-size:12px;">
@@ -8182,7 +8183,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Ant Design 风格界面预览">
                     <div class="preview-ant-design">
     <div style="position:absolute;inset:0;background:#F5F5F5;padding:11px;box-sizing:border-box;">
       <div style="background:#fff;border-radius:6px;padding:11px 12px;box-shadow:0 6px 16px rgba(0,0,0,.08);height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;">
@@ -8238,7 +8239,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Arco Design 风格界面预览">
                     <div class="preview-arco-design">
     <div style="position:absolute;inset:0;background:#fff;display:flex;">
       <div style="width:54px;background:#F7F8FA;border-right:1px solid #E5E6EB;padding:10px 7px;display:flex;flex-direction:column;gap:7px;">
@@ -8297,7 +8298,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="TDesign 风格界面预览">
                     <div class="preview-tdesign">
     <div style="position:absolute;inset:0;background:#fff;padding:11px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;">
       <div style="display:flex;gap:14px;font-size:11px;border-bottom:1px solid #E7E7E7;padding-bottom:6px;">
@@ -8355,7 +8356,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="Element Plus 风格界面预览">
                     <div class="preview-element-plus">
     <div style="position:absolute;inset:0;background:#F5F7FA;padding:11px;box-sizing:border-box;">
       <div style="background:#fff;border-radius:4px;padding:12px;box-shadow:0 4px 12px rgba(0,0,0,.12);height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;">
@@ -8411,7 +8412,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="GOV.UK 设计系统 风格界面预览">
                     <div class="preview-govuk">
     <div style="position:absolute;inset:0;background:#fff;padding:12px 13px;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;">
       <div style="background:#0B0C0C;color:#fff;font-size:10.5px;font-weight:600;padding:4px 8px;">GOV.UK</div>
@@ -8465,7 +8466,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
                         <span class="compare-text" aria-hidden="true">对比</span>
                     </label>
                 </div>
-                <div class="card-preview">
+                <div class="card-preview" role="img" aria-label="IBM Carbon 风格界面预览">
                     <div class="preview-carbon">
     <div style="position:absolute;inset:0;background:#fff;border:1px solid #E0E0E0;box-sizing:border-box;display:flex;flex-direction:column;">
       <div style="background:#F4F4F4;border-bottom:1px solid #E0E0E0;padding:6px 10px;font-size:10.5px;font-weight:600;color:#161616;display:flex;justify-content:space-between;">
@@ -8558,7 +8559,7 @@ Frutiger Aero, Windows Vista, Windows 7, Aero glass, Segoe UI, iOS 1-6, iTunes 7
     <div class="clipboard-overlay" id="clipboardOverlay"></div>
 
     <!-- Clipboard Drawer -->
-    <aside class="clipboard-drawer" id="clipboardDrawer" aria-hidden="true">
+    <aside class="clipboard-drawer" id="clipboardDrawer" aria-hidden="true" inert>
         <div class="clipboard-header">
             <div class="clipboard-title">
                 <span>📋 我的提示词剪贴板</span>
