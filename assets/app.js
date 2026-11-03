@@ -39,6 +39,8 @@ let clipboardItems = (function () {
     }
 })();
 let currentModalPrompt = '';
+/* 打开弹窗前的焦点元素，关闭时还原（键盘用户不至于被扔回页面顶部） */
+let lastFocus = null;
 
 /* ============================================================
    主题 / Toast
@@ -657,9 +659,14 @@ function copyCssVars(id) {
         .catch(() => showToast('复制失败，请重试'));
 }
 
-function openModal(id) {
+function openModal(id, opts = {}) {
     const style = getStyle(id);
     if (!style) return;
+    const overlayEl = document.getElementById('modalOverlay');
+    // 只在「从关闭态打开」时记录触发元素；popstate 复用时不能覆盖，否则焦点会落到弹窗内部节点
+    if (!opts.fromHistory && !(overlayEl && overlayEl.classList.contains('active'))) {
+        lastFocus = document.activeElement || null;
+    }
     currentModalPrompt = style.aiPrompt || '';
     const titleEl = document.getElementById('modalTitle');
     if (titleEl) titleEl.textContent = style.name;
@@ -705,16 +712,35 @@ function openModal(id) {
         if (closeBtn) closeBtn.focus();
     }
     document.body.style.overflow = 'hidden';
-    if (history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#style-' + id);
-    else location.hash = 'style-' + id;
+    // 打开详情时压入一条历史记录：这样浏览器返回键能关掉弹窗，而不是直接退出本站。
+    // push:false 用于「由 URL / popstate 驱动」的打开，避免反复压栈。
+    if (opts.push !== false) {
+        if (history.pushState) history.pushState({ modal: id }, '', location.pathname + location.search + '#style-' + id);
+        else location.hash = 'style-' + id;
+    }
 }
 
-function closeModal() {
+function closeModal(opts = {}) {
     const overlay = document.getElementById('modalOverlay');
     if (!overlay) return;
+    const wasOpen = overlay.classList.contains('active');
     overlay.classList.remove('active');
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+
+    // 焦点还原到打开它的元素（卡片或 ⋯ 按钮）；元素可能已被筛选隐藏，故容错
+    if (lastFocus && typeof lastFocus.focus === 'function') {
+        try { lastFocus.focus(); } catch (e) { /* 已从 DOM 移除，忽略 */ }
+        lastFocus = null;
+    }
+
+    // 由 popstate 驱动的关闭，URL 浏览器已经改好，不再动历史
+    if (opts.fromHistory || !wasOpen) return;
+    if (history.state && history.state.modal) {
+        // 弹掉自己压入的那条，避免历史里留下「已关闭 + #style-x」的死链
+        history.back();
+        return;
+    }
     if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
 }
 
@@ -744,14 +770,27 @@ function copyModalPrompt() {
 function applyHash() {
     const m = /^#style-([\w-]+)$/.exec(location.hash || '');
     if (m && byId.has(m[1])) {
-        openModal(m[1]);
+        openModal(m[1], { fromHistory: true, push: false });
         const card = document.getElementById('style-' + m[1]);
         if (card) card.scrollIntoView({ block: 'center' });
     }
 }
 
+/* 浏览器前进/后退：有 #style-x 就打开，没有就关闭 */
+function onPopState() {
+    const overlay = document.getElementById('modalOverlay');
+    const isOpen = !!(overlay && overlay.classList.contains('active'));
+    const m = /^#style-([\w-]+)$/.exec(location.hash || '');
+    if (m && byId.has(m[1])) {
+        if (!isOpen) openModal(m[1], { fromHistory: true, push: false });
+    } else if (isOpen) {
+        closeModal({ fromHistory: true });
+    }
+}
+
 function setupHashRouting() {
     window.addEventListener('hashchange', applyHash);
+    window.addEventListener('popstate', onPopState);
     applyHash();
 }
 

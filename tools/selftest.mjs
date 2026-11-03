@@ -36,10 +36,11 @@ Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: {
 }});
 Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { clipboard: { writeText: () => Promise.resolve() } } });
 globalThis.location = { hash: '', pathname: '/ui-style-gallery/', search: '', href: 'https://x/' };
-globalThis.history = { replaceState() {} };
+globalThis.history = { state: null, replaceState() {}, pushState() {}, back() {} };
 globalThis.document = {
   documentElement: { attrs: {}, setAttribute(k,v){ this.attrs[k] = v; }, getAttribute(k){ return this.attrs[k] ?? null; } },
-  body: { style: {}, appendChild(){}, removeChild(){}, classList:{add(){},remove(){}} },
+  activeElement: null,
+  body: { style: {}, appendChild(){}, removeChild(){}, classList:{add(){},remove(){},toggle(){}} },
   getElementById: (id) => els[id] || (els[id] = makeEl(id)),
   querySelector: () => null,
   querySelectorAll: () => [],
